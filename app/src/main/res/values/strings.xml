@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Rubik\'s cube trainer</string>
+    <string name="username">Username</string>
+    <string name="go">Go!</string>
+    <string name="scan_your_own_cube">Scan your own cube</string>
+    <string name="play_in_the_app">Play in the app</string>
+    <string name="back">Back</string>
+</resources>
