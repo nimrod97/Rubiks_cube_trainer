@@ -38,22 +38,12 @@ public class LoginActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String loginText = editText.getText().toString();
-
-                // we add the information we want to send in
-                // a form. each string we want to send should
-                // have a name. in our case we sent the
-                // loginText with a name 'sample'
                 RequestBody formbody
                         = new FormBody.Builder()
                         .add("name", loginText)
                         .build();
-
-                // while building request
-                // we give our form
-                // as a parameter to post()
-                Request request = new Request.Builder().url("http://10.100.102.16:5000/create_username")
+                Request request = new Request.Builder().url("http://10.100.102.9:5000/create_username")
                         .post(formbody)
                         .build();
                 okHttpClient.newCall(request).enqueue(new Callback() {
@@ -76,9 +66,10 @@ public class LoginActivity extends AppCompatActivity {
                             public void run() {
                                 try {
                                     Toast.makeText(getApplicationContext(), response.body().string(), Toast.LENGTH_SHORT).show();
-                                    Intent intent=new Intent(LoginActivity.this,PlayingOptionsActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, PlayingOptionsActivity.class);
+                                    response.close();
                                     startActivity(intent);
-                                    finish();
+//                                    finish();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -86,7 +77,65 @@ public class LoginActivity extends AppCompatActivity {
                         });
                     }
                 });
+
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Toast.makeText(getApplicationContext(), "can't go back from here!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    //    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String loginText = editText.getText().toString();
+//                RequestBody formbody
+//                        = new FormBody.Builder()
+//                        .add("name", loginText)
+//                        .build();
+//                Request request = new Request.Builder().url("http://10.100.102.9:5000/create_username")
+//                        .post(formbody)
+//                        .build();
+//                okHttpClient.newCall(request).enqueue(new Callback() {
+//                    @Override
+//                    public void onFailure(
+//                            @NotNull Call call,
+//                            @NotNull IOException e) {
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                    }
+//
+//                    @Override
+//                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                try {
+//                                    Toast.makeText(getApplicationContext(), response.body().string(), Toast.LENGTH_SHORT).show();
+//                                    Intent intent = new Intent(LoginActivity.this, PlayingOptionsActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        });
+//                    }
+//                });
+//
+//            }
+//        });
+//    }
 }

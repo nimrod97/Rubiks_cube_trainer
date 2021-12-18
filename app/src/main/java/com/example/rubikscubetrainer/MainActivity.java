@@ -20,7 +20,6 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    // declare attribute for textview
     private TextView pagenameTextView;
 
     @Override
@@ -28,19 +27,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         pagenameTextView = findViewById(R.id.pagename);
-
-        // creating a client
         OkHttpClient okHttpClient = new OkHttpClient();
-
-        // building a request
-        Request request = new Request.Builder().url("http://10.100.102.16:5000/").build();
-//        Request request = new Request.Builder().url("http://172.19.3.9:5000/").build();
-
-        // making call asynchronously
-
+        Request request = new Request.Builder().url("http://10.100.102.9:5000/").build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
-            // called if server is unreachable
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 runOnUiThread(new Runnable() {
                     @Override
@@ -50,10 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-
             @Override
-            // called if we get a
-            // response from the server
             public void onResponse(
                     @NotNull Call call,
                     @NotNull Response response)
@@ -65,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                response.close();
                 startActivity(intent);
                 finish();
             }
