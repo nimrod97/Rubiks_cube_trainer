@@ -2,16 +2,29 @@ package com.example.rubikscubetrainer;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
+import android.media.FaceDetector;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -33,7 +46,7 @@ public class ScanningActivity extends AppCompatActivity {
     private Button backFace;
     private Button bottomFace;
     private OkHttpClient okHttpClient;
-    public String current_sending_face=null;
+    public String current_sending_face = null;
 
 
     @Override
@@ -47,7 +60,7 @@ public class ScanningActivity extends AppCompatActivity {
         rightFace = findViewById(R.id.right);
         backFace = findViewById(R.id.back);
         bottomFace = findViewById(R.id.bottom);
-        ActivityResultLauncher <Intent> startActivityForResult = registerForActivityResult(
+        ActivityResultLauncher<Intent> startActivityForResult = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     new Thread(new Runnable() {
@@ -56,28 +69,58 @@ public class ScanningActivity extends AppCompatActivity {
                             if (result.getResultCode() == AppCompatActivity.RESULT_OK) {
                                 Intent data = result.getData();
                                 assert data != null;
-                                Bundle extras= data.getExtras();
-                                Bitmap imageBitmap = (Bitmap)extras.get("data");
-                                ByteArrayOutputStream baos=new ByteArrayOutputStream();
-                                imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                                byte[] imageByte=baos.toByteArray();
-                                String img_arr= Base64.encodeToString(imageByte,Base64.DEFAULT);
+                                Bundle extras = data.getExtras();
+                                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                                byte[] RGB_values = rgbValuesFromBitmap(imageBitmap);
+                                String img_arr = Base64.encodeToString(RGB_values, Base64.DEFAULT);
                                 RequestBody formbody
                                         = new FormBody.Builder()
                                         .add(current_sending_face, img_arr)
                                         .build();
-                                Request request = new Request.Builder().url("http://10.100.102.9:5000/process_face")
+                                Request request = new Request.Builder().url("http://10.100.102.25:5000/process_face")
                                         .post(formbody)
                                         .build();
                                 okHttpClient.newCall(request).enqueue(new Callback() {
                                     @Override
                                     public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
 
                                     }
 
                                     @Override
                                     public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    String res = response.body().string();
+                                                    if (res.equals("scan again!"))
+                                                        Toast.makeText(getApplicationContext(), "scan again!", Toast.LENGTH_SHORT).show();
+                                                    else {
+                                                        // create the face according to the returned json
+                                                        // in format {face : list of colors} in order:
+                                                        // for example for face looks like: 1  2  3
+                                                        //                                  4  5  6
+                                                        //                                  7  8  9
+                                                        // the colors order will be:
+                                                        // 1,4,7,2,5,8,3,6,9
+                                                        JSONObject jsonObject = new JSONObject(res);
+                                                        String faceType = jsonObject.getString("face");
+                                                        JSONArray colors = jsonObject.getJSONArray("colors");
+                                                        callSuccessScan(faceType);
+                                                        // creating new face according to the colors
+                                                        //Face face=new Face(faceType,colors).....
+                                                    }
+                                                } catch (IOException | JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        });
                                     }
                                 });
                             }
@@ -90,7 +133,7 @@ public class ScanningActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                current_sending_face="top";
+                current_sending_face = "top";
                 startActivityForResult.launch(intent);
 
             }
@@ -99,7 +142,7 @@ public class ScanningActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                current_sending_face="left";
+                current_sending_face = "left";
                 startActivityForResult.launch(intent);
             }
         });
@@ -107,7 +150,7 @@ public class ScanningActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                current_sending_face="front";
+                current_sending_face = "front";
                 startActivityForResult.launch(intent);
             }
         });
@@ -115,7 +158,7 @@ public class ScanningActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                current_sending_face="right";
+                current_sending_face = "right";
                 startActivityForResult.launch(intent);
             }
         });
@@ -123,7 +166,7 @@ public class ScanningActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                current_sending_face="back";
+                current_sending_face = "back";
                 startActivityForResult.launch(intent);
             }
         });
@@ -131,14 +174,70 @@ public class ScanningActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                current_sending_face="bottom";
+                current_sending_face = "bottom";
                 startActivityForResult.launch(intent);
             }
         });
 
     }
 
+    private byte[] rgbValuesFromBitmap(Bitmap bitmap) {
+        ColorMatrix colorMatrix = new ColorMatrix();
+        ColorFilter colorFilter = new ColorMatrixColorFilter(
+                colorMatrix);
+        Bitmap argbBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(argbBitmap);
 
+        Paint paint = new Paint();
+
+        paint.setColorFilter(colorFilter);
+        canvas.drawBitmap(bitmap, 0, 0, paint);
+
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int componentsPerPixel = 3;
+        int totalPixels = width * height;
+        int totalBytes = totalPixels * componentsPerPixel;
+
+        byte[] rgbValues = new byte[totalBytes];
+        @ColorInt int[] argbPixels = new int[totalPixels];
+        argbBitmap.getPixels(argbPixels, 0, width, 0, 0, width, height);
+        for (int i = 0; i < totalPixels; i++) {
+            @ColorInt int argbPixel = argbPixels[i];
+            int red = Color.red(argbPixel);
+            int green = Color.green(argbPixel);
+            int blue = Color.blue(argbPixel);
+            rgbValues[i * componentsPerPixel + 0] = (byte) red;
+            rgbValues[i * componentsPerPixel + 1] = (byte) green;
+            rgbValues[i * componentsPerPixel + 2] = (byte) blue;
+        }
+
+        return rgbValues;
+    }
+
+    private void callSuccessScan(String faceType) {
+        switch (faceType) {
+            case "top":
+                topFace.setText("top\ncompleted!");
+                break;
+            case "left":
+                leftFace.setText("left\ncompleted!");
+                break;
+            case "front":
+                frontFace.setText("front\ncompleted!");
+                break;
+            case "right":
+                rightFace.setText("right\ncompleted!");
+                break;
+            case "back":
+                backFace.setText("back\ncompleted!");
+                break;
+            case "bottom":
+                bottomFace.setText("bottom\ncompleted!");
+                break;
+        }
+    }
 
 
 }

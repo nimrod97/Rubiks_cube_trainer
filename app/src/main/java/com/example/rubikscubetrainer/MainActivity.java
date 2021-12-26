@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pagenameTextView = findViewById(R.id.pagename);
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url("http://10.100.102.9:5000/").build();
+        Request request = new Request.Builder().url("http://10.100.102.25:5000/").build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -51,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                // for debugging, needs to be changed
+                Intent intent= new Intent(MainActivity.this, PlayingOptionsActivity.class);
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 response.close();
                 startActivity(intent);
                 finish();
