@@ -99,8 +99,8 @@ public class ScanningActivity extends AppCompatActivity {
                                             public void run() {
                                                 try {
                                                     String res = response.body().string();
-                                                    if (res.equals("scan again!"))
-                                                        Toast.makeText(getApplicationContext(), "scan again!", Toast.LENGTH_SHORT).show();
+                                                    if (res.contains("scan"))
+                                                        Toast.makeText(getApplicationContext(), res, Toast.LENGTH_SHORT).show();
                                                     else {
                                                         // create the face according to the returned json
                                                         // in format {face : list of colors} in order:
