@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                         = new FormBody.Builder()
                         .add("name", loginText)
                         .build();
-                Request request = new Request.Builder().url("http://10.100.102.9:5000/create_username")
+                Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/create_username")
                         .post(formbody)
                         .build();
                 okHttpClient.newCall(request).enqueue(new Callback() {

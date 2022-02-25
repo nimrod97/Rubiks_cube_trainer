@@ -8,7 +8,6 @@ import android.graphics.ColorFilter;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.media.FaceDetector;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -26,7 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -45,8 +43,10 @@ public class ScanningActivity extends AppCompatActivity {
     private Button rightFace;
     private Button backFace;
     private Button bottomFace;
+    private Button continueButton;
     private OkHttpClient okHttpClient;
     public String current_sending_face = null;
+    public int numOfScan;
 
 
     @Override
@@ -60,6 +60,8 @@ public class ScanningActivity extends AppCompatActivity {
         rightFace = findViewById(R.id.right);
         backFace = findViewById(R.id.back);
         bottomFace = findViewById(R.id.bottom);
+        continueButton=findViewById(R.id.Continue);
+        this.numOfScan=0;
         ActivityResultLauncher<Intent> startActivityForResult = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -77,7 +79,7 @@ public class ScanningActivity extends AppCompatActivity {
                                         = new FormBody.Builder()
                                         .add(current_sending_face, img_arr)
                                         .build();
-                                Request request = new Request.Builder().url("http://10.100.102.25:5000/process_face")
+                                Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/process_face")
                                         .post(formbody)
                                         .build();
                                 okHttpClient.newCall(request).enqueue(new Callback() {
@@ -178,6 +180,21 @@ public class ScanningActivity extends AppCompatActivity {
                 startActivityForResult.launch(intent);
             }
         });
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (numOfScan==6){
+                    Intent intent = new Intent(ScanningActivity.this, PlayingWithScannedCube.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"scan all the faces before continue",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
 
@@ -217,6 +234,7 @@ public class ScanningActivity extends AppCompatActivity {
     }
 
     private void callSuccessScan(String faceType) {
+        numOfScan++;
         switch (faceType) {
             case "top":
                 topFace.setText("top\ncompleted!");
