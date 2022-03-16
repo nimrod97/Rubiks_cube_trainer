@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.rubikscubetrainer.GLView
+
+        android:id="@+id/glview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.example.rubikscubetrainer.GLView>
+
+    <ImageView
+        android:id="@+id/undo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="22dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/btn_undo_icon"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/shuffle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginLeft="320dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:text="shuffle"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/solve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="168dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="155dp"
+        android:clickable="true"
+        android:text="Solve"
+        android:textAlignment="center" />
+
+
+</RelativeLayout>

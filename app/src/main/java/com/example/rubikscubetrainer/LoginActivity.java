@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                                 try {
                                     Toast.makeText(getApplicationContext(), response.body().string(), Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, PlayingOptionsActivity.class);
+                                    intent.putExtra("username", editText.getText().toString());
                                     response.close();
                                     startActivity(intent);
 //                                    finish();

@@ -26,6 +26,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -45,6 +47,7 @@ public class ScanningActivity extends AppCompatActivity {
     private Button bottomFace;
     private Button continueButton;
     private OkHttpClient okHttpClient;
+    public static Map<String, JSONArray> faces = new HashMap<>(); // map each type of face to his colors
     public String current_sending_face = null;
     public int numOfScan;
 
@@ -114,9 +117,7 @@ public class ScanningActivity extends AppCompatActivity {
                                                         JSONObject jsonObject = new JSONObject(res);
                                                         String faceType = jsonObject.getString("face");
                                                         JSONArray colors = jsonObject.getJSONArray("colors");
-                                                        callSuccessScan(faceType);
-                                                        // creating new face according to the colors
-                                                        //Face face=new Face(faceType,colors).....
+                                                        callSuccessScan(faceType, colors);
                                                     }
                                                 } catch (IOException | JSONException e) {
                                                     e.printStackTrace();
@@ -137,6 +138,7 @@ public class ScanningActivity extends AppCompatActivity {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 current_sending_face = "top";
                 startActivityForResult.launch(intent);
+
 
             }
         });
@@ -233,26 +235,32 @@ public class ScanningActivity extends AppCompatActivity {
         return rgbValues;
     }
 
-    private void callSuccessScan(String faceType) {
+    private void callSuccessScan(String faceType, JSONArray colors) {
         numOfScan++;
         switch (faceType) {
             case "top":
                 topFace.setText("top\ncompleted!");
+                faces.put("top", colors);
                 break;
             case "left":
                 leftFace.setText("left\ncompleted!");
+                faces.put("left", colors);
                 break;
             case "front":
                 frontFace.setText("front\ncompleted!");
+                faces.put("front", colors);
                 break;
             case "right":
                 rightFace.setText("right\ncompleted!");
+                faces.put("right", colors);
                 break;
             case "back":
                 backFace.setText("back\ncompleted!");
+                faces.put("back", colors);
                 break;
             case "bottom":
                 bottomFace.setText("bottom\ncompleted!");
+                faces.put("bottom", colors);
                 break;
         }
     }

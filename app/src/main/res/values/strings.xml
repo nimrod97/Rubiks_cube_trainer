@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Rubik\'s cube trainer</string>
     <string name="username">Username</string>
     <string name="go">Go!</string>
+    <string name="ok">OK</string>
     <string name="scan_your_own_cube">Scan your own cube</string>
     <string name="play_in_the_app">Play in the app</string>
     <string name="Continue">continue</string>
@@ -11,4 +13,7 @@
     <string name="front">Front</string>
     <string name="left">Left</string>
     <string name="back">Back</string>
+    <string name="name">Name</string>
+    <string name="log_in">Log in</string>
+    <string name="login_page">Login page</string>
 </resources>
