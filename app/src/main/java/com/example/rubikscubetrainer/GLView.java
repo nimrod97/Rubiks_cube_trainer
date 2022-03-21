@@ -13,7 +13,6 @@ import com.example.rubikscubetrainer.matrix.MatrixTrackingGL;
 import javax.microedition.khronos.opengles.GL;
 
 public class GLView extends GLSurfaceView {
-	private static final String LOG_TAG = GLView.class.getSimpleName();
 	private GLRenderer glrenderer;
 	private float x0 = 0.0f;
 	private float y0 = 0.0f;

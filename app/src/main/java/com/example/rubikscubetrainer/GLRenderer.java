@@ -18,18 +18,17 @@ import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
 public class GLRenderer implements GLSurfaceView.Renderer {
-    private static final String LOG_TAG = GLRenderer.class.getSimpleName();
     public Cube cube;
     public static GLRenderer instance;
     private float cubeX = 0.0f;
     private float cubeY = 0.0f;
     private float cubeZ = 0.0f;
-    public float tx, ty; // Touch coords
-    private float sHeight;
+//    public float tx, ty; // Touch coords
+//    private float sHeight;
 
     //-------------------ARCBALL--------------------------
-    private float[] mModelview = new float[16];
-    private float[] mProjection = new float[16];
+//    private float[] mModelview = new float[16];
+//    private float[] mProjection = new float[16];
     private Matrix4f LastRot = new Matrix4f();
     private Matrix4f ThisRot = new Matrix4f();
     private final Object matrixLock = new Object();
@@ -75,8 +74,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         arcBall.click(MousePt);    // Update Start Vector And Prepare For Dragging
     }
 
-    void drag(Point2f MousePt)       // Perform Motion Updates Here
-    {
+    void drag(Point2f MousePt) {       // Perform Motion Updates Here
         Quat4f ThisQuat = new Quat4f();
 
         // Update End Vector And Get Rotation As Quaternion
@@ -89,29 +87,29 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        float[] lightAmbient = {1.0f, 1.0f, 1.0f, 1.0f};
-        float[] lightDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
-        float[] matSpecular = {1.0f, 1.0f, 1.0f, 1.0f};
-        float[] matShines = {5.0f};
-        float[] matAmbient = {1.0f, 1.0f, 1.0f, 1.0f};
-        float[] matDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
-        float[] lightPost = {0.0f, 5.0f, 10.0f, 1.0f};
-        gl.glClearColor(0.8f, 0.8f, 0.8f, 1.0f);  // Set color's clear-value to black
-        gl.glClearDepthf(1.0f);            // Set depth's clear-value to farthest
+//        float[] lightAmbient = {1.0f, 1.0f, 1.0f, 1.0f};
+//        float[] lightDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
+//        float[] matSpecular = {1.0f, 1.0f, 1.0f, 1.0f};
+//        float[] matShines = {5.0f};
+//        float[] matAmbient = {1.0f, 1.0f, 1.0f, 1.0f};
+//        float[] matDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
+//        float[] lightPost = {0.0f, 5.0f, 10.0f, 1.0f};
+        gl.glClearColor(0.8f, 0.8f, 0.8f, 1.0f);  // Set the background's color
+//        gl.glClearDepthf(1.0f);            // Set depth's clear-value to farthest
         gl.glEnable(GL10.GL_DEPTH_TEST);   // Enables depth-buffer for hidden surface removal
-        gl.glDepthFunc(GL10.GL_LEQUAL);    // The type of depth testing to do
-        gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_NICEST);  // nice perspective view
-        gl.glShadeModel(GL10.GL_SMOOTH);   // Enable smooth shading of color
+//        gl.glDepthFunc(GL10.GL_LEQUAL);    // The type of depth testing to do
+//        gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_NICEST);  // nice perspective view
+//        gl.glShadeModel(GL10.GL_SMOOTH);   // Enable smooth shading of color
         // enable smooth shading
 
-        gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_SPECULAR, matSpecular, 0);
-        gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_SHININESS, matShines, 0);
-        gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_AMBIENT, matAmbient, 0);
+//        gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_SPECULAR, matSpecular, 0);
+//        gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_SHININESS, matShines, 0);
+//        gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_AMBIENT, matAmbient, 0);
         //   gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_DIFFUSE, matDiffuse, 0);
-        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, lightPost, 0);
-        gl.glEnable(GL10.GL_LIGHTING);
-        gl.glEnable(GL10.GL_LIGHT0);
-        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_AMBIENT, lightAmbient, 0);
+//        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, lightPost, 0);
+//        gl.glEnable(GL10.GL_LIGHTING);
+//        gl.glEnable(GL10.GL_LIGHT0);
+//        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_AMBIENT, lightAmbient, 0);
         //  gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_DIFFUSE, lightDiffuse, 0);
         textures = new GLTextures(gl, context);
         textures.add(WHITE);
@@ -131,8 +129,6 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-        if (height == 0) height = 1;   // To prevent divide by zero
-
         aspect = (float) width / height;
         nScreenWidth = width;
         nScreenHeight = height;
@@ -167,7 +163,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     }
 
 
-    float[] cl = new float[4];
+//    float[] cl = new float[4];
     public int nScreenWidth, nScreenHeight;
     public float fFOV = 45f;
     public float aspect;
@@ -184,7 +180,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
         gl.glLoadIdentity();                  // Reset The Current Modelview Matrix
         mg.getCurrentState(gl);
-        gl.glTranslatef(0.0f, 0.0f, -2.8f * cube.getCubeSize());
+        gl.glTranslatef(0.0f, 0.0f, -3.5f * cube.getCubeSize());
 
         gl.glMultMatrixf(matrix, 0);        // NEW: Apply Dynamic Transform
         gl.glTranslatef(cubeX, cubeY, cubeZ);

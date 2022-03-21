@@ -1,13 +1,14 @@
 package com.example.rubikscubetrainer;
 
-import android.util.Log;
-
 import org.json.JSONException;
 
+import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Stack;
 import java.util.Vector;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -16,15 +17,13 @@ public class Cube {
 
 	private int mode; // GL_SELECT - selection mode
 	private float speed; // speed of rotating
-	private float rangle; // current angle of rotation
+	private float rotateAngle; // current angle of rotation
 	private float sizeOfQuad;
 	private float sizeGl; // the size of +side projection on any axis
 	private char status; //  N - normal status, R - rotating, A - autorotating,  C - canceling moves
 	private boolean isClockWise;
 	private int rotSide;
-	private int rotatedSideOwner; // side owner
-	private int rotaredSideFace; // second is the face
-	private int sizeOfCube;
+	private int dimOfCube; // the dimension of the cube
 	private Vector<Integer> sides;
 	protected Vector<Part> parts;
 	private Vector<Vector<Float>> dxyz; // translating of parts. has size (HZ,3)
@@ -33,9 +32,8 @@ public class Cube {
 	private Vector<Vector<Integer>> faceThird;  // ---- //
 	private Vector<Vector<Pair<Integer, Integer>>> swaps; // swaping parts during i rotating
 	private Vector<Pair<Integer, Integer>> oSides; // rotating sides that contain i-part
-	private Vector<Pair<Integer, Boolean>> movingSides;
-	private Vector<Pair<Integer, Boolean>> madeMoves;
-	private Rectangle rect;
+	private Vector<Pair<Integer, Boolean>> movingSides; // the moves that we want to do
+	private Stack<Pair<Integer, Boolean>> madeMoves; // the moves that have been made
 	protected GLTextures textures;
 
 	public Vector<Part> getParts() {
@@ -81,11 +79,12 @@ public class Cube {
 //		sizeGl=1.0f;
 		sizeGl = (sizeOfQuad * size) / 2.0f;
 		// Fill White side[0]
-		float dx = 0.0f, dy = 0.0f, dz = sizeGl;
+		float dx, dy, dz;
 		Vector<Float> txyz = new Vector<Float>(3); // temporary
 		dxyz = new Vector<Vector<Float>>();
 		// now we fill the distance of translation for every quad;
-		// White Side
+		// Front Side
+		dz  = sizeGl;
 		for (dy = sizeGl - sizeOfQuad; dy >= -sizeGl; dy -= sizeOfQuad)
 			for (dx = -sizeGl; dx <= sizeGl - sizeOfQuad; dx += sizeOfQuad) {
 				txyz.add(0, dx);
@@ -94,7 +93,7 @@ public class Cube {
 				dxyz.add(new Vector<Float>(txyz));
 				txyz.clear();
 			}
-		// Red Side
+		// Left Side
 		dx = -sizeGl;
 		for (dy = sizeGl - sizeOfQuad; dy >= -sizeGl; dy -= sizeOfQuad)
 			for (dz = -sizeGl; dz <= sizeGl - sizeOfQuad; dz += sizeOfQuad) {
@@ -104,7 +103,7 @@ public class Cube {
 				dxyz.add(new Vector<Float>(txyz));
 				txyz.clear();
 			}
-		// Yellow Side
+		// Back Side
 		dz = -sizeGl;
 		for (dy = sizeGl - sizeOfQuad; dy >= -sizeGl; dy -= sizeOfQuad)
 			for (dx = sizeGl; dx >= -sizeGl + sizeOfQuad; dx -= sizeOfQuad) {
@@ -114,7 +113,7 @@ public class Cube {
 				dxyz.add(new Vector<Float>(txyz));
 				txyz.clear();
 			}
-		// Orange Side
+		// Right Side
 		dx = sizeGl;
 		for (dy = sizeGl - sizeOfQuad; dy >= -sizeGl; dy -= sizeOfQuad)
 			for (dz = sizeGl; dz >= -sizeGl + sizeOfQuad; dz -= sizeOfQuad) {
@@ -124,7 +123,7 @@ public class Cube {
 				dxyz.add(new Vector<Float>(txyz));
 				txyz.clear();
 			}
-		// Green Side
+		// Bottom Side
 		dy = sizeGl;
 		for (dz = -sizeGl + sizeOfQuad; dz <= sizeGl; dz += sizeOfQuad)
 			for (dx = -sizeGl; dx <= sizeGl - sizeOfQuad; dx += sizeOfQuad) {
@@ -134,7 +133,7 @@ public class Cube {
 				dxyz.add(new Vector<Float>(txyz));
 				txyz.clear();
 			}
-		// Blue side
+		// Top side
 		dy = -sizeGl;
 		for (dz = sizeGl - sizeOfQuad; dz >= -sizeGl; dz -= sizeOfQuad)
 			for (dx = -sizeGl; dx <= sizeGl - sizeOfQuad; dx += sizeOfQuad) {
@@ -173,8 +172,6 @@ public class Cube {
 				new Rectangle(quad, textures.getTextureIdforResource(GLRenderer.ORANGE));
 		for (int i = 0; i < size * size; i++)
 			parts.add(new Part(MyOpenGL.blue, id++, rectOrange));
-
-
 	}
 
 	private void createFaces(int size) {
@@ -186,23 +183,24 @@ public class Cube {
 	protected void createFirstFace(int size) {
 		faceFirst = new Vector<Vector<Integer>>();
 		Vector<Integer> tmp = new Vector<Integer>();
-		for (int i = 0; i < size * size; i++) {
-			tmp.add(size * size + i);
+		int doubleSize = size * size;
+		for (int i = 0; i < doubleSize; i++) {
+			tmp.add(doubleSize + i);
 		}
 		for (int j = 0; j < size; j++) {
 			for (int i = 0; i < size; i++) {
 				tmp.add(size * i + j);
-				tmp.add(j + 4 * size * size + size * i);
-				tmp.add(j + 5 * size * size + size * i);
-				tmp.add(2 * size * size + size * i + size - 1 - j);
+				tmp.add(j + 4 * doubleSize + size * i);
+				tmp.add(j + 5 * doubleSize + size * i);
+				tmp.add(2 * doubleSize + size * i + size - 1 - j);
 			}
 			if (j != size - 1) {
 				faceFirst.add(new Vector<Integer>(tmp));
 				tmp.clear();
 			}
 		}
-		for (int i = 0; i < size * size; i++) {
-			tmp.add(3 * size * size + i);
+		for (int i = 0; i < doubleSize; i++) {
+			tmp.add(3 * doubleSize + i);
 		}
 		faceFirst.add(new Vector<Integer>(tmp));
 		tmp.clear();
@@ -211,23 +209,24 @@ public class Cube {
 	protected void createSecondFace(int size) {
 		Vector<Integer> tmp = new Vector<Integer>();
 		faceSecond = new Vector<Vector<Integer>>();
-		for (int i = 0; i < size * size; i++) {
-			tmp.add(4 * size * size + i);
+		int doubleSize = size * size;
+		for (int i = 0; i < doubleSize; i++) {
+			tmp.add(4 * doubleSize + i);
 		}
 		for (int j = 0; j < size; j++) {
 			for (int i = 0; i < size; i++) {
 				tmp.add(size * j + i);
-				tmp.add(size * size + size * j + i);
-				tmp.add(2 * size * size + size * j + i);
-				tmp.add(3 * size * size + size * j + i);
+				tmp.add(doubleSize + size * j + i);
+				tmp.add(2 * doubleSize + size * j + i);
+				tmp.add(3 * doubleSize + size * j + i);
 			}
 			if (j != size - 1) {
 				faceSecond.add(new Vector<Integer>(tmp));
 				tmp.clear();
 			}
 		}
-		for (int i = 0; i < size * size; i++) {
-			tmp.add(5 * size * size + i);
+		for (int i = 0; i < doubleSize; i++) {
+			tmp.add(5 * doubleSize + i);
 		}
 		faceSecond.add(new Vector<Integer>(tmp));
 		tmp.clear();
@@ -236,23 +235,24 @@ public class Cube {
 	protected void createThirdFace(int size) {
 		Vector<Integer> tmp = new Vector<Integer>();
 		faceThird = new Vector<Vector<Integer>>();
-		for (int i = 0; i < size * size; i++) {
+		int doubleSize = size * size;
+		for (int i = 0; i < doubleSize; i++) {
 			tmp.add(i);
 		}
 		for (int j = 0; j < size; j++) {
 			for (int i = 0; i < size; i++) {
-				tmp.add(4 * size * size + size * (size - j - 1) + i);
-				tmp.add(3 * size * size + size * i + j);
-				tmp.add(size * size + size - 1 - j + size * i);
-				tmp.add(5 * size * size + size * j + i);
+				tmp.add(4 * doubleSize + size * (size - j - 1) + i);
+				tmp.add(3 * doubleSize + size * i + j);
+				tmp.add(doubleSize + size - 1 - j + size * i);
+				tmp.add(5 * doubleSize + size * j + i);
 			}
 			if (j != size - 1) {
 				faceThird.add(new Vector<Integer>(tmp));
 				tmp.clear();
 			}
 		}
-		for (int i = 0; i < size * size; i++) {
-			tmp.add(2 * size * size + i);
+		for (int i = 0; i < doubleSize; i++) {
+			tmp.add(2 * doubleSize + i);
 		}
 		faceThird.add(new Vector<Integer>(tmp));
 		tmp.clear();
@@ -262,28 +262,29 @@ public class Cube {
 		Vector<Pair<Integer, Integer>> tmp = new Vector<Pair<Integer, Integer>>();
 		//-----------------First type of rotating swaps-----------------//
 		//first we should rotate matrix of the main side on 90 degrees
+		int doubleSize = size * size;
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++) {
 				tmp.add(
-						new Pair(1 * size * size + size * j + i,
-								1 * size * size + size * i + size - j - 1)
+						new Pair(1 * doubleSize + size * j + i,
+								1 * doubleSize + size * i + size - j - 1)
 				);
 			}
 		// then swap middle parts
 		for (int j = 0; j < size; j++) {
 			for (int i = 0; i < size; i++) {
 				tmp.add(
-						new Pair(4 * size * size + i * size + j,
-								0 * size * size + i * size + j)
+						new Pair(4 * doubleSize + i * size + j,
+								0 * doubleSize + i * size + j)
 				);
-				tmp.add(new Pair(0 * size * size + i * size + j,
-						5 * size * size + i * size + j)
+				tmp.add(new Pair(0 * doubleSize + i * size + j,
+						5 * doubleSize + i * size + j)
 				);
-				tmp.add(new Pair(5 * size * size + i * size + j,
-						2 * size * size + size * size - 1 - i * size - j)
+				tmp.add(new Pair(5 * doubleSize + i * size + j,
+						2 * doubleSize + doubleSize - 1 - i * size - j)
 				);
-				tmp.add(new Pair(2 * size * size + size * size - 1 - i * size - j,
-						4 * size * size + i * size + j)
+				tmp.add(new Pair(2 * doubleSize + doubleSize - 1 - i * size - j,
+						4 * doubleSize + i * size + j)
 				);
 
 			}
@@ -296,8 +297,8 @@ public class Cube {
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++) {
 				tmp.add(
-						new Pair(3 * size * size + size * i + size - j - 1,
-								3 * size * size + size * j + i)
+						new Pair(3 * doubleSize + size * i + size - j - 1,
+								3 * doubleSize + size * j + i)
 				);
 			}
 		swaps.add(new Vector<Pair<Integer, Integer>>(tmp));
@@ -307,26 +308,27 @@ public class Cube {
 	protected void createSecondTypeSwap(int size) {
 		Vector<Pair<Integer, Integer>> tmp = new Vector<Pair<Integer, Integer>>();
 		//-----------------Second type of rotating swaps-----------------//
+		int doubleSize = size * size;
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++) {
 				tmp.add(
-						new Pair(4 * size * size + size * i + size - j - 1,
-								4 * size * size + size * j + i)
+						new Pair(4 * doubleSize + size * i + size - j - 1,
+								4 * doubleSize + size * j + i)
 				);
 			}
 		for (int j = 0; j < size; j++) {
 			for (int i = 0; i < size; i++) {
-				tmp.add(new Pair(0 * size * size + i + j * size,
-						3 * size * size + i + j * size)
+				tmp.add(new Pair(0 * doubleSize + i + j * size,
+						3 * doubleSize + i + j * size)
 				);
-				tmp.add(new Pair(3 * size * size + i + j * size,
-						2 * size * size + i + j * size)
+				tmp.add(new Pair(3 * doubleSize + i + j * size,
+						2 * doubleSize + i + j * size)
 				);
-				tmp.add(new Pair(2 * size * size + i + j * size,
-						1 * size * size + i + j * size)
+				tmp.add(new Pair(2 * doubleSize + i + j * size,
+						1 * doubleSize + i + j * size)
 				);
-				tmp.add(new Pair(1 * size * size + i + j * size,
-						0 * size * size + i + j * size)
+				tmp.add(new Pair(1 * doubleSize + i + j * size,
+						0 * doubleSize + i + j * size)
 				);
 			}
 			if (j != size - 1) {
@@ -337,8 +339,8 @@ public class Cube {
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++) {
 				tmp.add(
-						new Pair(5 * size * size + size * j + i,
-								5 * size * size + size * i + size - j - 1)
+						new Pair(5 * doubleSize + size * j + i,
+								5 * doubleSize + size * i + size - j - 1)
 				);
 			}
 		swaps.add(new Vector<Pair<Integer, Integer>>(tmp));
@@ -348,30 +350,31 @@ public class Cube {
 	protected void createThirdTypeSwap(int size) {
 		Vector<Pair<Integer, Integer>> tmp = new Vector<Pair<Integer, Integer>>();
 		//-----------------Third type of rotating swaps-----------------//
+		int doubleSize = size * size;
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++) {
 				tmp.add(
-						new Pair(0 * size * size + size * i + size - j - 1,
-								0 * size * size + size * j + i)
+						new Pair(0 * doubleSize + size * i + size - j - 1,
+								0 * doubleSize + size * j + i)
 				);
 			}
 		for (int j = 0; j < size; j++) {
 			for (int i = 0; i < size; i++) {
-				tmp.add(new Pair(3 * size * size + i * size + j,
-						4 * size * size + (size - j - 1) * size + i)
+				tmp.add(new Pair(3 * doubleSize + i * size + j,
+						4 * doubleSize + (size - j - 1) * size + i)
 				);
 				/*
 				 I didn`t really understand why i need swap(),
 				 but without it it works incorrectly
 				*/
-				tmp.add(new Pair(5 * size * size + j * size + size - i - 1,
-						3 * size * size + i * size + j)
+				tmp.add(new Pair(5 * doubleSize + j * size + size - i - 1,
+						3 * doubleSize + i * size + j)
 				);
-				tmp.add(new Pair(1 * size * size + (size - i - 1) * size + size - j - 1,
-						5 * size * size + j * size + size - i - 1)
+				tmp.add(new Pair(1 * doubleSize + (size - i - 1) * size + size - j - 1,
+						5 * doubleSize + j * size + size - i - 1)
 				);
-				tmp.add(new Pair(4 * size * size + (size - j - 1) * size + i,
-						1 * size * size + (size - i - 1) * size + size - j - 1)
+				tmp.add(new Pair(4 * doubleSize + (size - j - 1) * size + i,
+						1 * doubleSize + (size - i - 1) * size + size - j - 1)
 				);
 			}
 			if (j != size - 1) {
@@ -382,8 +385,8 @@ public class Cube {
 		for (int i = 0; i < size; i++)
 			for (int j = 0; j < size; j++) {
 				tmp.add(
-						new Pair(2 * size * size + size * j + i,
-								2 * size * size + size * i + size - j - 1)
+						new Pair(2 * doubleSize + size * j + i,
+								2 * doubleSize + size * i + size - j - 1)
 				);
 			}
 		swaps.add(new Vector<Pair<Integer, Integer>>(tmp));
@@ -397,110 +400,39 @@ public class Cube {
 		createThirdTypeSwap(size);
 	}
 
-	protected void drawType_1(GL10 gl) {
-		int nOfSide = 0;
-		int curSide = rotSide % sizeOfCube;
-		for (int i = 0; i < faceFirst.size(); i++) {
+	protected void drawType(GL10 gl, Vector<Vector<Integer>> face, int hzside) {
+		int curSide = rotSide % dimOfCube;
+		for (int i = 0; i < face.size(); i++) {
 			if (i == curSide) {
 				gl.glPushMatrix();
-				gl.glRotatef(rangle, 1.0f, 0.0f, 0.0f);
-			}
-			for (int j = 0; j < faceFirst.get(i).size(); j++) {
-				gl.glPushMatrix();
-				int current = faceFirst.get(i).get(j);
-				gl.glTranslatef(dxyz.get(current).get(0), dxyz.get(current).get(1), dxyz.get(current).get(2));
-				nOfSide = current / sizeOfCube / sizeOfCube;
-				gl.glRotatef(calcRX(nOfSide), 1.0f, 0.0f, 0.0f);
-				gl.glRotatef(calcRY(nOfSide), 0.0f, 1.0f, 0.0f);
-				gl.glRotatef(calcRZ(nOfSide), 0.0f, 0.0f, 1.0f);
-				parts.get(current).draw(gl);
-				gl.glPopMatrix();
-			}
-			if (i == curSide) {
-				if (isClockWise) rangle += speed;
-				else rangle -= speed;
-				if (Math.abs(rangle) >= 90) {
-					endRotate();
-					if (status == 'A' || status == 'C') {
-						if (movingSides.size() != 0)
-							beginRotate(movingSides.get(movingSides.size() - 1).getFirst(),
-									movingSides.get(movingSides.size() - 1).getSecond());
-						else
-							status = 'N';
-					}
+				switch (hzside) {
+					case 0:
+						gl.glRotatef(rotateAngle, 1.0f, 0.0f, 0.0f);
+						break;
+					case 1:
+						gl.glRotatef(rotateAngle, 0.0f, 1.0f, 0.0f);
+						break;
+					case 2:
+						gl.glRotatef(rotateAngle, 0.0f, 0.0f, 1.0f);
+						break;
 				}
-				gl.glPopMatrix();
 			}
-		}
-	}
-
-	protected void drawType_2(GL10 gl) {
-		int nOfSide = 0;
-		int curSide = rotSide % sizeOfCube;
-		for (int i = 0; i < faceSecond.size(); i++) {
-			if (i == curSide) {
-				gl.glPushMatrix();
-				gl.glRotatef(rangle, 0.0f, 1.0f, 0.0f);
-			}
-			for (int j = 0; j < faceSecond.get(i).size(); j++) {
-				gl.glPushMatrix();
-				int current = faceSecond.get(i).get(j);
-				gl.glTranslatef(dxyz.get(current).get(0), dxyz.get(current).get(1),
-						dxyz.get(current).get(2));
-				nOfSide = current / sizeOfCube / sizeOfCube;
-				gl.glRotatef(calcRX(nOfSide), 1.0f, 0.0f, 0.0f);
-				gl.glRotatef(calcRY(nOfSide), 0.0f, 1.0f, 0.0f);
-				gl.glRotatef(calcRZ(nOfSide), 0.0f, 0.0f, 1.0f);
-				parts.get(current).draw(gl);
-				gl.glPopMatrix();
+			for (int j = 0; j < face.get(i).size(); j++) {
+				int current = face.get(i).get(j);
+				int nOfSide = current / dimOfCube / dimOfCube;
+				rotateGL(gl, nOfSide, current);
 			}
 			if (i == curSide) {
-				if (isClockWise) rangle += speed;
-				else rangle -= speed;
-				if (Math.abs(rangle) >= 90) {
+				if (isClockWise) rotateAngle += speed;
+				else rotateAngle -= speed;
+				if (Math.abs(rotateAngle) >= 90) {
 					endRotate();
 					if (status == 'A' || status == 'C') {
-						if (movingSides.size() != 0)
-							beginRotate(movingSides.get(movingSides.size() - 1).getFirst(),
-									movingSides.get(movingSides.size() - 1).getSecond());
-						else
-							status = 'N';
-					}
-				}
-				gl.glPopMatrix();
-			}
-		}
-	}
-
-	protected void drawType_3(GL10 gl) {
-		int nOfSide = 0;
-		int curSide = rotSide % sizeOfCube;
-		for (int i = 0; i < faceThird.size(); i++) {
-			if (i == curSide) {
-				gl.glPushMatrix();
-				gl.glRotatef(rangle, 0.0f, 0.0f, 1.0f);
-			}
-			for (int j = 0; j < faceThird.get(i).size(); j++) {
-				gl.glPushMatrix();
-				int current = faceThird.get(i).get(j);
-				gl.glTranslatef(dxyz.get(current).get(0), dxyz.get(current).get(1),
-						dxyz.get(current).get(2));
-				nOfSide = current / sizeOfCube / sizeOfCube;
-				gl.glRotatef(calcRX(nOfSide), 1.0f, 0.0f, 0.0f);
-				gl.glRotatef(calcRY(nOfSide), 0.0f, 1.0f, 0.0f);
-				gl.glRotatef(calcRZ(nOfSide), 0.0f, 0.0f, 1.0f);
-				parts.get(current).draw(gl);
-				gl.glPopMatrix();
-			}
-			if (i == curSide) {
-				if (isClockWise) rangle += speed;
-				else rangle -= speed;
-				if (Math.abs(rangle) >= 90) {
-					endRotate();
-					if (status == 'A' || status == 'C') {
-						if (movingSides.size() != 0)
-							beginRotate(movingSides.get(movingSides.size() - 1).getFirst(),
-									movingSides.get(movingSides.size() - 1).getSecond());
+						int s = movingSides.size();
+						if (s != 0) {
+							Pair<Integer, Boolean> p = movingSides.get(s - 1);
+							beginRotate(p.getFirst(), p.getSecond());
+						}
 						else
 							status = 'N';
 					}
@@ -511,11 +443,13 @@ public class Cube {
 	}
 
 	protected void endRotate() {
-		if (status != 'A' && status != 'C') status = 'N';
+		if (status != 'A' && status != 'C') {
+			status = 'N';
+		}
 		if (status != 'C') {
 			madeMoves.add(new Pair(rotSide, isClockWise));
 		}
-		rangle = 0;
+		rotateAngle = 0;
 		rotate(rotSide, isClockWise);
 		rotSide = -1;
 	}
@@ -537,7 +471,7 @@ public class Cube {
 	}
 
 	protected boolean isClockWiseDirection(Vector<Integer> setOfSides, int choosenSide) {
-		if (choosenSide >= 0 && choosenSide <= sizeOfCube - 1) {
+		if (choosenSide >= 0 && choosenSide <= dimOfCube - 1) {
 			if (sides.get(setOfSides.get(0)) == sides.get(setOfSides.get(1))) {
 				if (sides.get(setOfSides.get(0)) != 2)
 					return (setOfSides.get(0) < setOfSides.get(1));
@@ -551,7 +485,7 @@ public class Cube {
 				else return false;
 			}
 		}
-		if (choosenSide >= sizeOfCube && choosenSide <= 2 * sizeOfCube - 1) {
+		if (choosenSide >= dimOfCube && choosenSide <= 2 * dimOfCube - 1) {
 			if (sides.get(setOfSides.get(0)) == sides.get(setOfSides.get(1))) {
 				if (sides.get(setOfSides.get(0)) != 2)
 					return (setOfSides.get(0) < setOfSides.get(1));
@@ -565,7 +499,7 @@ public class Cube {
 				else return false;
 			}
 		}
-		if (choosenSide >= 2 * sizeOfCube && choosenSide <= 3 * sizeOfCube - 1) {
+		if (choosenSide >= 2 * dimOfCube && choosenSide <= 3 * dimOfCube - 1) {
 			if (sides.get(setOfSides.get(0)) == sides.get(setOfSides.get(1))) {
 				if (sides.get(setOfSides.get(0)) != 1 && sides.get(setOfSides.get(0)) != 5)
 					return (setOfSides.get(0) > setOfSides.get(1));
@@ -585,7 +519,7 @@ public class Cube {
 
 	/* =================public declarations====================== */
 	public int getCubeSize() {
-		return sizeOfCube;
+		return dimOfCube;
 	}
 
 	protected float[] quad =
@@ -599,134 +533,87 @@ public class Cube {
 
 	public Cube(GLTextures textures) throws JSONException {
 		this.textures = textures;
-		sizeOfCube = 3;
+		dimOfCube = 3;
 		status = 'N';
 		speed = 10.0f;
 		mode = GL10.GL_MODELVIEW;
 		sides = new Vector<Integer>();
 		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < sizeOfCube * sizeOfCube; j++) {
+			for (int j = 0; j < dimOfCube * dimOfCube; j++) {
 				//tmp.add(current++);
 				sides.add(i);
 			}
 			//	sidesIDColors.push_back(tmp);
 			//tmp.clear();
 		}
-		madeMoves = new Vector<Pair<Integer, Boolean>>();
+		madeMoves = new Stack<Pair<Integer, Boolean>>();
 		movingSides = new Vector<Pair<Integer, Boolean>>();
 		// fill parts with parameters
-		createFaces(sizeOfCube);
-		createSwaps(sizeOfCube);
-		fillParts(sizeOfCube);
-		fillDXYZ(sizeOfCube);
-		fillOSides(sizeOfCube);
+		createFaces(dimOfCube);
+		createSwaps(dimOfCube);
+		fillParts(dimOfCube);
+		fillDXYZ(dimOfCube);
+		fillOSides(dimOfCube);
 	}
 
-	private float calcRX(int side) {
-		float rx = 0.0f;
-		float ry = 0.0f;
-		float rz = 0.0f;
+	private Dictionary<Character, Float> calcRotation(int side) {
+		Dictionary<Character, Float> angles = new Hashtable<>();
+		angles.put('x', 0.0f);
+		angles.put('y', 0.0f);
+		angles.put('z', 0.0f);
 		switch (side) {
 			case 0: // white
 				break;
 			case 1: // red
-				ry = -90.0f;
+				angles.put('y', -90.0f);
 				break;
 			case 2: // yellow
-				ry = 180.0f;
+				angles.put('y', 180.0f);
 				break;
 			case 3: // orange
-				ry = 90.0f;
+				angles.put('y', 90.0f);
 				break;
 			case 4: // green
-				rx = -90.0f;
+				angles.put('x', -90.0f);
 				break;
 			case 5: // blue
-				rx = 90.0f;
+				angles.put('x', 90.0f);
 				break;
 		}
-		return rx;
+		return angles;
 	}
 
-	private float calcRY(int side) {
-		float rx = 0.0f;
-		float ry = 0.0f;
-		float rz = 0.0f;
-		switch (side) {
-			case 0: // white
-				break;
-			case 1: // red
-				ry = -90.0f;
-				break;
-			case 2: // yellow
-				ry = 180.0f;
-				break;
-			case 3: // orange
-				ry = 90.0f;
-				break;
-			case 4: // green
-				rx = -90.0f;
-				break;
-			case 5: // blue
-				rx = 90.0f;
-				break;
-		}
-		return ry;
-	}
-
-	private float calcRZ(int side) {
-		float rx = 0.0f;
-		float ry = 0.0f;
-		float rz = 0.0f;
-		switch (side) {
-			case 0: // white
-				break;
-			case 1: // red
-				ry = -90.0f;
-				break;
-			case 2: // yellow
-				ry = 180.0f;
-				break;
-			case 3: // orange
-				ry = 90.0f;
-				break;
-			case 4: // green
-				rx = -90.0f;
-				break;
-			case 5: // blue
-				rx = 90.0f;
-				break;
-		}
-		return rz;
+	private void rotateGL(GL10 gl, int side, int current) {
+		Vector<Float> coordinates = dxyz.get(current);
+		gl.glPushMatrix();
+		gl.glTranslatef(coordinates.get(0), coordinates.get(1), coordinates.get(2));
+		Dictionary<Character, Float> angles = calcRotation(side);
+		gl.glRotatef(angles.get('x'), 1.0f, 0.0f, 0.0f);
+		gl.glRotatef(angles.get('y'), 0.0f, 1.0f, 0.0f);
+		gl.glRotatef(angles.get('z'), 0.0f, 0.0f, 1.0f);
+		parts.get(current).draw(gl, mode);
+		gl.glPopMatrix();
 	}
 
 	public void drawCube(GL10 gl, int mode) {
 		setMode(mode);
-		int nOfSide = 0;
 		if (status == 'N') {
 			for (int i = 0; i < dxyz.size(); i++) {
-				gl.glPushMatrix();
-				gl.glTranslatef(dxyz.elementAt(i).elementAt(0), dxyz.elementAt(i).elementAt(1),
-						dxyz.elementAt(i).elementAt(2));
-				nOfSide = i / sizeOfCube / sizeOfCube;
-				gl.glRotatef(calcRX(nOfSide), 1.0f, 0.0f, 0.0f);
-				gl.glRotatef(calcRY(nOfSide), 0.0f, 1.0f, 0.0f);
-				gl.glRotatef(calcRZ(nOfSide), 0.0f, 0.0f, 1.0f);
-				parts.elementAt(i).draw(gl, mode);
-				gl.glPopMatrix();
+				int nOfSide = i / dimOfCube / dimOfCube;
+				rotateGL(gl, nOfSide, i);
 			}
 		}
 		if (status == 'R' || status == 'A' || status == 'C') {
-			int hzside = rotSide / sizeOfCube;
+			int hzside = rotSide / dimOfCube;
 			switch (hzside) {
 				case 0:
-					drawType_1(gl);
+					drawType(gl, faceFirst, 0);
 					break;
 				case 1:
-					drawType_2(gl);
+					drawType(gl, faceSecond, 1);
 					break;
 				case 2:
-					drawType_3(gl);
+					drawType(gl, faceThird, 2);
 					break;
 			}
 		}
@@ -763,7 +650,7 @@ public class Cube {
 			} else {
 				status = 'R';
 			}
-			rangle = 0;
+			rotateAngle = 0;
 			rotSide = side;
 			this.isClockWise = isClockWise;
 		}
@@ -794,7 +681,6 @@ public class Cube {
 				}
 			}
 		}
-		//	Log.i("f&&s", String.format("%d,%d",f,s));
 		if (f == -1) return false;
 		setOfSides.clear();
 		setOfSides.add(f);
@@ -837,7 +723,6 @@ public class Cube {
 					&& oSides.get(setOfSides.get(i)).getSecond() != iSide)
 				setOfSides.remove(i);
 		}
-		Log.i("Side", String.valueOf(iSide));
 		if (setOfSides.size() >= 2) {
 			beginRotate(iSide, isClockWiseDirection(setOfSides, iSide));
 		}
@@ -853,7 +738,7 @@ public class Cube {
 		movingSides = new Vector<Pair<Integer, Boolean>>();
 		movingSides.clear();
 		for (int i = 0; i < numberOfMoves; i++) {
-			int curS = (int) (Math.random() * (sizeOfCube * 3 - 1));
+			int curS = (int) (Math.random() * (dimOfCube * 3 - 1));
 			int hz = (int) (Math.random() * 2);
 			boolean res = (hz == 1);
 			movingSides.add(new Pair(curS, res));
@@ -866,8 +751,9 @@ public class Cube {
 			status = 'C';
 			int k = madeMoves.size();
 			for (int i = k - number; i < k; i++) {
-				movingSides.add(new Pair(madeMoves.get(i).getFirst(), !madeMoves.get(i).getSecond()));
-				madeMoves.remove(madeMoves.size() - 1);
+				Pair p = madeMoves.pop();
+				Pair newP = new Pair(p.getFirst(), !(Boolean)p.getSecond());
+				movingSides.add(newP);
 			}
 			beginRotate(movingSides.lastElement().getFirst(), movingSides.lastElement().getSecond());
 		}

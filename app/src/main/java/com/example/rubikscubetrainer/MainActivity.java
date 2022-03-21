@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // for debugging, needs to be changed
 //                Intent intent= new Intent(MainActivity.this, PlayingOptionsActivity.class);
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, CubeGLActivity.class);
                 response.close();
                 startActivity(intent);
                 finish();

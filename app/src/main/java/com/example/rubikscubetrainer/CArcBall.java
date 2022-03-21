@@ -1,6 +1,8 @@
 package com.example.rubikscubetrainer;
 
-
+/*
+The class is in charge to rotate the cube
+ */
 class CArcBall {
     private static final float Epsilon = 1.0e-5f;
 

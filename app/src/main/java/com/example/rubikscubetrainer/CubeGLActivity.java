@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentActivity;
 
 
 public class CubeGLActivity extends FragmentActivity {
-    private static final String LOG_TAG = CubeGLActivity.class.getSimpleName();
     private GLView glview;
     private ImageView undoBtn;
     private Button shuffleBtn;
