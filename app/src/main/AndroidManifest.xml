@@ -22,22 +22,22 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.NoTitleBar" />
 
-<!--        <activity-->
-<!--            android:name=".PlayingWithScannedCube"-->
-<!--            android:exported="false"-->
-<!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
-<!--        <activity-->
-<!--            android:name=".ScanningActivity"-->
-<!--            android:exported="false"-->
-<!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
-<!--        <activity-->
-<!--            android:name=".PlayingOptionsActivity"-->
-<!--            android:exported="false"-->
-<!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
-<!--        <activity-->
-<!--            android:name=".LoginActivity"-->
-<!--            android:exported="false"-->
-<!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
+        <activity
+            android:name=".PlayingWithScannedCube"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".ScanningActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".PlayingOptionsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
