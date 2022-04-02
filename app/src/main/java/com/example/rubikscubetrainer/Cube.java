@@ -446,7 +446,7 @@ public class Cube {
 		if (status != 'A' && status != 'C') {
 			status = 'N';
 		}
-		if (status != 'C') {
+		if (status != 'C' && status != 'A') {
 			madeMoves.add(new Pair(rotSide, isClockWise));
 		}
 		rotateAngle = 0;

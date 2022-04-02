@@ -1,4 +1,4 @@
-package com.example.rubikscubetrainer;
+package com.example.rubikscubetrainer.scanning;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,6 +20,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.rubikscubetrainer.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,6 +84,7 @@ public class ScanningActivity extends AppCompatActivity {
                                         = new FormBody.Builder()
                                         .add(current_sending_face, img_arr)
                                         .build();
+//                                Request request = new Request.Builder().url("http://10.100.102.19:5000/process_face")
                                 Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/process_face")
                                         .post(formbody)
                                         .build();

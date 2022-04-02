@@ -1,4 +1,11 @@
-package com.example.rubikscubetrainer;
+package com.example.rubikscubetrainer.scanning;
+
+import com.example.rubikscubetrainer.Cube;
+import com.example.rubikscubetrainer.GLRenderer;
+import com.example.rubikscubetrainer.GLTextures;
+import com.example.rubikscubetrainer.MyOpenGL;
+import com.example.rubikscubetrainer.Part;
+import com.example.rubikscubetrainer.Rectangle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,7 +19,7 @@ import java.util.Vector;
 
 public class ScannedCube extends Cube {
     private Map<String, JSONArray> faces;
-
+    public static List<String> allColors;
     public ScannedCube(GLTextures textures) throws JSONException {
         super(textures);
     }
@@ -55,7 +62,7 @@ public class ScannedCube extends Cube {
             colorsBottom[j] = (String) faces.get("bottom").get(i);
             j++;
         }
-        List<String> allColors = new ArrayList<>(Arrays.asList(colorsFront));
+        allColors = new ArrayList<>(Arrays.asList(colorsFront));
         allColors.addAll(Arrays.asList(colorsLeft));
         allColors.addAll(Arrays.asList(colorsBack));
         allColors.addAll(Arrays.asList(colorsRight));
@@ -112,4 +119,5 @@ public class ScannedCube extends Cube {
         }
 
     }
+
 }
