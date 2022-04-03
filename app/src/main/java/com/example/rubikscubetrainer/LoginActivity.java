@@ -123,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                     response.close();
 
-//                                    finish();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }

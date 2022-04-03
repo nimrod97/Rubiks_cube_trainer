@@ -34,7 +34,7 @@ public class SavedCube extends Cube {
                 texturesID[i] = textures.getTextureIdforResource(GLRenderer.BLUE);
             else if (colors[i].contains("yellow"))
                 texturesID[i] = textures.getTextureIdforResource(GLRenderer.YELLOW);
-            else
+            else if (colors[i].contains("orange"))
                 texturesID[i] = textures.getTextureIdforResource(GLRenderer.ORANGE);
         }
         int id = 1;

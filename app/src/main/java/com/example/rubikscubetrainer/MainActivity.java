@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                Intent intent = new Intent(MainActivity.this, CubeGLActivity.class);
+//                Intent intent = new Intent(MainActivity.this, PlayingOptionsActivity.class);
                 response.close();
                 startActivity(intent);
                 finish();

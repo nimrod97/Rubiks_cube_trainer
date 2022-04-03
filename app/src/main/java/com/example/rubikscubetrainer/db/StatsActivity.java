@@ -28,5 +28,19 @@ public class StatsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        otherGames.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StatsActivity.this, LastGamesOfOthers.class);
+                startActivity(intent);
+            }
+        });
+        mostPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StatsActivity.this, MostPlay.class);
+                startActivity(intent);
+            }
+        });
     }
 }

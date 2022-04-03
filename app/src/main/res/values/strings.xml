@@ -15,7 +15,7 @@
     <string name="back">Back</string>
     <string name="name">Name</string>
     <string name="log_in">Log in</string>
-    <string name="login_page">Login page</string>
+    <string name="login_page"><u><b>Login page</b></u></string>
     <string name="title_activity_login2">LoginActivity2</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -27,4 +27,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="cube">cube</string>
+    <string name="title_activity_most_play">MostPlay</string>
+    <string name="username_table"><u><b>Username</b></u></string>
+    <string name="number_of_games_table"><u><b>Number of games</b></u></string>
 </resources>

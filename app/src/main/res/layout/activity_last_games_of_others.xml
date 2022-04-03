@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
-    tools:context=".db.MyLastGames"
+    tools:context=".db.LastGamesOfOthers"
     android:background="@color/white">
 
 
@@ -31,7 +31,7 @@
         android:textSize="15sp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintHorizontal_bias="0.109"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,20 @@
         android:id="@+id/second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="168dp"
+        android:text=""
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fifth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
         android:text=""
         android:textSize="15sp"
         android:textColor="@color/black"
@@ -49,10 +62,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/fifth"
+        android:id="@+id/sixth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
+        android:layout_marginTop="580dp"
+        android:text=""
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/seventh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="664dp"
         android:text=""
         android:textSize="15sp"
         android:textColor="@color/black"
@@ -112,6 +138,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="484dp"
+        android:layout_marginEnd="4dp"
+        android:text="@string/cube"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_sixth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="580dp"
+        android:layout_marginEnd="4dp"
+        android:text="@string/cube"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_seventh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="664dp"
         android:layout_marginEnd="4dp"
         android:text="@string/cube"
         android:visibility="invisible"
