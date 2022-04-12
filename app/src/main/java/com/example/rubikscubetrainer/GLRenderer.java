@@ -128,8 +128,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if (this.mode == 0)
-            cube.startRandomRotating(20);
+//        if (this.mode == 0)
+//            cube.startRandomRotating(20);
     }
 
     @Override
@@ -170,7 +170,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     }
 
 
-//    float[] cl = new float[4];
+    //    float[] cl = new float[4];
     public int nScreenWidth, nScreenHeight;
     public float fFOV = 45f;
     public float aspect;
@@ -388,5 +388,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
     public Cube getCube() {
         return cube;
+    }
+
+    public void solve() {
+        cube.beginRotate("D'");
     }
 }

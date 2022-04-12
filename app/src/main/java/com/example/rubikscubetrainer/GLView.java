@@ -82,4 +82,8 @@ public class GLView extends GLSurfaceView {
 	public GLRenderer getGlrenderer() {
 		return glrenderer;
 	}
+
+	public void solve() {
+		glrenderer.solve();
+	}
 }

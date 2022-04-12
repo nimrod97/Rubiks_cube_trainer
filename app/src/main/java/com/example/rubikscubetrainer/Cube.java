@@ -639,13 +639,70 @@ public class Cube {
 		parts.get(id).setSelected(false);
 	}
 
+	public void beginRotate(String step) {
+		int side = -1;
+		boolean isClockWise = true;
+		switch(step) {
+			case "L":
+				side = 0;
+				isClockWise = true;
+				break;
+			case "L'":
+				side = 0;
+				isClockWise = false;
+				break;
+			case "R":
+				side = 2;
+				isClockWise = false;
+				break;
+			case "R'":
+				side = 2;
+				isClockWise = true;
+				break;
+			case "U":
+				side = 3;
+				isClockWise = false;
+				break;
+			case "U'":
+				side = 3;
+				isClockWise = true;
+				break;
+			case "D":
+				side = 5;
+				isClockWise = true;
+				break;
+			case "D'":
+				side = 5;
+				isClockWise = false;
+				break;
+			case "F":
+				side = 6;
+				isClockWise = false;
+				break;
+			case "F'":
+				side = 6;
+				isClockWise = true;
+				break;
+			case "B":
+				side = 8;
+				isClockWise = true;
+				break;
+			case "B'":
+				side = 8;
+				isClockWise = false;
+				break;
+		}
+		beginRotate(side, isClockWise);
+	}
+
+
 	public void beginRotate(int side, boolean isClockWise) {
-		if (status != 'R') {
-			if (status == 'A') {
-				status = 'A';
-				movingSides.remove(movingSides.size() - 1);
-			} else if (status == 'C') {
-				status = 'C';
+		if (status != 'R' && side > -1 && side < 9) {
+			if (status == 'A' || status == 'C') {
+//				status = 'A';
+//				movingSides.remove(movingSides.size() - 1);
+//			} else if (status == 'C') {
+//				status = 'C';
 				movingSides.remove(movingSides.size() - 1);
 			} else {
 				status = 'R';
@@ -747,9 +804,9 @@ public class Cube {
 	}
 
 	public void cancelMoves(int number) {
-		if (madeMoves.size() != 0 && status == 'N') {
+		int k = madeMoves.size();
+		if (k != 0 && status == 'N') {
 			status = 'C';
-			int k = madeMoves.size();
 			for (int i = k - number; i < k; i++) {
 				Pair p = madeMoves.pop();
 				Pair newP = new Pair(p.getFirst(), !(Boolean)p.getSecond());
