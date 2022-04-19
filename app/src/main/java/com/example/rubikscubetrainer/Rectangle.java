@@ -8,18 +8,18 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class Rectangle {
     private FloatBuffer vertexBuffer;  // Buffer for vertex-array
-    private float[] color;
+//    private float[] color;
     private int textureId;
     private FloatBuffer mCoordsBuffer;
 
-    public Rectangle(float[] vertices, float[] color) {
-        ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 4);
-        vbb.order(ByteOrder.nativeOrder()); // Use native byte order
-        vertexBuffer = vbb.asFloatBuffer(); // Convert from byte to float
-        vertexBuffer.put(vertices);         // Copy data into buffer
-        vertexBuffer.position(0);           // Rewind
-        setColor(color);
-    }
+//    public Rectangle(float[] vertices, float[] color) {
+//        ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 4);
+//        vbb.order(ByteOrder.nativeOrder()); // Use native byte order
+//        vertexBuffer = vbb.asFloatBuffer(); // Convert from byte to float
+//        vertexBuffer.put(vertices);         // Copy data into buffer
+//        vertexBuffer.position(0);           // Rewind
+//        setColor(color);
+//    }
 
     public Rectangle(float[] vertices, int textureId) {
         this(vertices);
@@ -40,12 +40,14 @@ public class Rectangle {
         vertexBuffer = vbb.asFloatBuffer(); // Convert from byte to float
         vertexBuffer.put(vertices);         // Copy data into buffer
         vertexBuffer.position(0);           // Rewind
-        setColor(color);
+//        setColor(color);
     }
 
-    public void setColor(float[] color) {
-        this.color = color;
-    }
+    public int getTextureId() { return this.textureId; }
+
+//    public void setColor(float[] color) {
+//        this.color = color;
+//    }
 
     public void draw(GL10 gl) {
 //	      gl.glFrontFace(GL10.GL_CCW);    // Front face in counter-clockwise orientation

@@ -258,6 +258,13 @@ public class Cube {
 		tmp.clear();
 	}
 
+	protected void createSwaps(int size) {
+		swaps = new Vector<Vector<Pair<Integer, Integer>>>();
+		createFirstTypeSwap(size);
+		createSecondTypeSwap(size);
+		createThirdTypeSwap(size);
+	}
+
 	protected void createFirstTypeSwap(int size) {
 		Vector<Pair<Integer, Integer>> tmp = new Vector<Pair<Integer, Integer>>();
 		//-----------------First type of rotating swaps-----------------//
@@ -391,13 +398,6 @@ public class Cube {
 			}
 		swaps.add(new Vector<Pair<Integer, Integer>>(tmp));
 		tmp.clear();
-	}
-
-	protected void createSwaps(int size) {
-		swaps = new Vector<Vector<Pair<Integer, Integer>>>();
-		createFirstTypeSwap(size);
-		createSecondTypeSwap(size);
-		createThirdTypeSwap(size);
 	}
 
 	protected void drawType(GL10 gl, Vector<Vector<Integer>> face, int hzside) {
@@ -814,6 +814,48 @@ public class Cube {
 			}
 			beginRotate(movingSides.lastElement().getFirst(), movingSides.lastElement().getSecond());
 		}
+	}
+
+	private StringBuilder buildFaceString(int index) {
+		StringBuilder str = new StringBuilder();
+
+		for (int i = index; i < index + dimOfCube * dimOfCube; i++) {
+			Part p = parts.get(i);
+			int textureID = p.getRectangle().getTextureId();
+			if (textureID == textures.getTextureIdforResource(GLRenderer.WHITE)) {
+				str.append('F');
+			} else if (textureID == textures.getTextureIdforResource(GLRenderer.GREEN)) {
+				str.append('R');
+			} else if (textureID == textures.getTextureIdforResource(GLRenderer.RED)) {
+				str.append('U');
+			} else if (textureID == textures.getTextureIdforResource(GLRenderer.BLUE)) {
+				str.append('L');
+			} else if (textureID == textures.getTextureIdforResource(GLRenderer.ORANGE)) {
+				str.append('D');
+			} else if (textureID == textures.getTextureIdforResource(GLRenderer.YELLOW)) {
+				str.append('B');
+			}
+		}
+		return str;
+	}
+
+	public String getStringRepresentation() {
+		StringBuilder frontString = buildFaceString(0);
+		StringBuilder leftString = buildFaceString(9);
+		StringBuilder backString = buildFaceString(18);
+		StringBuilder rightString = buildFaceString(27);
+		StringBuilder upString = buildFaceString(36);
+		StringBuilder downString = buildFaceString(45);
+
+		StringBuilder cubeString = new StringBuilder();
+		cubeString.append(upString);
+		cubeString.append(rightString);
+		cubeString.append(frontString);
+		cubeString.append(downString);
+		cubeString.append(leftString);
+		cubeString.append(backString);
+//		String cubeString = upString + rightString + frontString + downString + leftString + backString;
+		return cubeString.toString();
 	}
 }
 

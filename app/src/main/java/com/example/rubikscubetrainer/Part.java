@@ -19,6 +19,16 @@ public class Part implements Comparable<Part> {
 	public float[][] polygon = new float[4][3];
 	private FloatBuffer mCoordsBuffer;
 
+//	private float[] color;
+//	//	public Vector sides; // contain sides-owners
+//	private float[] quad =
+//			{
+//					0.0f, 0.0f, 0.0f,
+//					1.0f, 0.0f, 0.0f,
+//					0.0f, 1.0f, 0.0f,
+//					1.0f, 1.0f, 0.0f
+//			};
+
 	public boolean isSelected() {
 		return selected;
 	}
@@ -27,12 +37,14 @@ public class Part implements Comparable<Part> {
 		this.selected = selected;
 	}
 
+	public Rectangle getRectangle() { return this.rect; }
+
 	public void setRectangle(Rectangle rect) {
 		this.rect = rect;
 	}
 
 	public Part(float[] _color, int id, Rectangle rect) {
-		color = _color;
+//		color = _color;
 		matrix = new float[16];
 		this.rect = rect;
 		//rect = new Rectangle(quad, color);
@@ -53,23 +65,13 @@ public class Part implements Comparable<Part> {
 	float[] cl = new float[4];
 
 
-	public void setColor(float[] color) {
-		this.color = color;
-	}
+//	public void setColor(float[] color) {
+//		this.color = color;
+//	}
 
-	private float[] color;
-	//	public Vector sides; // contain sides-owners
-	private float[] quad =
-			{
-					0.0f, 0.0f, 0.0f,
-					1.0f, 0.0f, 0.0f,
-					0.0f, 1.0f, 0.0f,
-					1.0f, 1.0f, 0.0f
-			};
-
-	public void draw(GL10 gl) {
-		draw(gl, 0);
-	}
+//	public void draw(GL10 gl) {
+//		draw(gl, 0);
+//	}
 
 	private void processCoords(GL10 gl) {
 

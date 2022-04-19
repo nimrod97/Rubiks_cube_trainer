@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import com.example.rubikscubetrainer.db.SavedCube;
 import com.example.rubikscubetrainer.matrix.MatrixGrabber;
 import com.example.rubikscubetrainer.scanning.ScannedCube;
+//import com.example.rubikscubetrainer.twophasealgorithm.Search;
 
 import org.json.JSONException;
 
@@ -18,6 +19,8 @@ import java.util.Vector;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
+
+//import org.kociemba.twophase.*;
 
 public class GLRenderer implements GLSurfaceView.Renderer {
     private Cube cube;
@@ -391,6 +394,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     }
 
     public void solve() {
-        cube.beginRotate("D'");
+//        String cubeString = cube.getStringRepresentation();
+
+//        String result = Search.solution("UUUUUUUUUFFFRRRRRRLLLFFFFFFDDDDDDDDDBBBLLLLLLRRRBBBBBB", 24, 5000, false);
+//        System.out.println(result);
     }
 }
