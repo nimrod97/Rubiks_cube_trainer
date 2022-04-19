@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import com.example.rubikscubetrainer.db.SavedCube;
 import com.example.rubikscubetrainer.matrix.MatrixGrabber;
 import com.example.rubikscubetrainer.scanning.ScannedCube;
-//import com.example.rubikscubetrainer.twophasealgorithm.Search;
+import com.example.rubikscubetrainer.twophasealgorithm.Search;
 
 import org.json.JSONException;
 
@@ -396,7 +396,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     public void solve() {
 //        String cubeString = cube.getStringRepresentation();
 
-//        String result = Search.solution("UUUUUUUUUFFFRRRRRRLLLFFFFFFDDDDDDDDDBBBLLLLLLRRRBBBBBB", 24, 5000, false);
-//        System.out.println(result);
+        String result = Search.solution("UUUUUUUUUFFFRRRRRRLLLFFFFFFDDDDDDDDDBBBLLLLLLRRRBBBBBB", 24, 5000, false);
+        System.out.println(result);
     }
 }
