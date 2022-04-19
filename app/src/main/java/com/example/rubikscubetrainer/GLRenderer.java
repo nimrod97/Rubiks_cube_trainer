@@ -10,7 +10,6 @@ import android.view.MotionEvent;
 import com.example.rubikscubetrainer.db.SavedCube;
 import com.example.rubikscubetrainer.matrix.MatrixGrabber;
 import com.example.rubikscubetrainer.scanning.ScannedCube;
-import com.example.rubikscubetrainer.twophasealgorithm.Search;
 
 import org.json.JSONException;
 
@@ -20,7 +19,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
-//import org.kociemba.twophase.*;
+import org.kociemba.twophase.*;
 
 public class GLRenderer implements GLSurfaceView.Renderer {
     private Cube cube;
