@@ -7,8 +7,6 @@ import android.view.MotionEvent;
 
 import com.example.rubikscubetrainer.matrix.MatrixTrackingGL;
 
-import java.io.IOException;
-
 import javax.microedition.khronos.opengles.GL;
 
 public class GLView extends GLSurfaceView {
@@ -84,7 +82,7 @@ public class GLView extends GLSurfaceView {
 		return glrenderer;
 	}
 
-	public void solve() throws IOException {
+	public void solve() {
 		glrenderer.solve();
 	}
 }

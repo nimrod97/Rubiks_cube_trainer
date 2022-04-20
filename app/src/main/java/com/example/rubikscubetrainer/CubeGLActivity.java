@@ -51,11 +51,7 @@ public class CubeGLActivity extends FragmentActivity {
         solveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
                     glview.solve();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
         OkHttpClient okHttpClient = new OkHttpClient();
