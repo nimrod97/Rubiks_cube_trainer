@@ -40,8 +40,8 @@ public class ScannedCube extends Cube {
             colorsLeft[j] = (String) faces.get("left").get(i);
             colorsBack[j] = (String) faces.get("back").get(i);
             colorsRight[j] = (String) faces.get("right").get(i);
-            colorsTop[j] = (String) faces.get("up").get(i);
-            colorsBottom[j] = (String) faces.get("down").get(i);
+            colorsTop[j] = (String) faces.get("top").get(i);
+            colorsBottom[j] = (String) faces.get("bottom").get(i);
             j++;
         }
         for (int i = 1; i < 9; i += 3) {
@@ -49,8 +49,8 @@ public class ScannedCube extends Cube {
             colorsLeft[j] = (String) faces.get("left").get(i);
             colorsBack[j] = (String) faces.get("back").get(i);
             colorsRight[j] = (String) faces.get("right").get(i);
-            colorsTop[j] = (String) faces.get("up").get(i);
-            colorsBottom[j] = (String) faces.get("down").get(i);
+            colorsTop[j] = (String) faces.get("top").get(i);
+            colorsBottom[j] = (String) faces.get("bottom").get(i);
             j++;
         }
         for (int i = 2; i < 9; i += 3) {
@@ -58,8 +58,8 @@ public class ScannedCube extends Cube {
             colorsLeft[j] = (String) faces.get("left").get(i);
             colorsBack[j] = (String) faces.get("back").get(i);
             colorsRight[j] = (String) faces.get("right").get(i);
-            colorsTop[j] = (String) faces.get("up").get(i);
-            colorsBottom[j] = (String) faces.get("down").get(i);
+            colorsTop[j] = (String) faces.get("top").get(i);
+            colorsBottom[j] = (String) faces.get("bottom").get(i);
             j++;
         }
         allColors = new ArrayList<>(Arrays.asList(colorsFront));

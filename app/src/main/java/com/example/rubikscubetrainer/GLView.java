@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 
 import com.example.rubikscubetrainer.matrix.MatrixTrackingGL;
 
+import java.io.IOException;
+
 import javax.microedition.khronos.opengles.GL;
 
 public class GLView extends GLSurfaceView {
@@ -27,7 +29,6 @@ public class GLView extends GLSurfaceView {
 			mode = 2;
 		else
 			mode = 0;
-//		if (context.getClass().toString().endsWith("ScannedCubeFromDB"))
 
 		if (glrenderer != null) return;
 		glrenderer = new GLRenderer(getResources().getDisplayMetrics().widthPixels,
@@ -83,7 +84,7 @@ public class GLView extends GLSurfaceView {
 		return glrenderer;
 	}
 
-	public void solve() {
+	public void solve() throws IOException {
 		glrenderer.solve();
 	}
 }

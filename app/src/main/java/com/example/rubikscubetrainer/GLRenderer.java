@@ -6,20 +6,29 @@ import android.content.DialogInterface;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.example.rubikscubetrainer.db.SavedCube;
 import com.example.rubikscubetrainer.matrix.MatrixGrabber;
 import com.example.rubikscubetrainer.scanning.ScannedCube;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.Vector;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
-import org.kociemba.twophase.*;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class GLRenderer implements GLSurfaceView.Renderer {
     private Cube cube;
@@ -27,6 +36,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     private float cubeX = 0.0f;
     private float cubeY = 0.0f;
     private float cubeZ = 0.0f;
+    private OkHttpClient okHttpClient;
+
 //    public float tx, ty; // Touch coords
 //    private float sHeight;
 
@@ -64,6 +75,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         this.context = context;
         instance = this;
         this.mode = mode;
+        okHttpClient = new OkHttpClient();
+
     }
 
     void reset() {
@@ -393,9 +406,28 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     }
 
     public void solve() {
-//        String cubeString = cube.getStringRepresentation();
+        String cubeString = cube.getStringRepresentation();
+        String[] result = new String[1];
+        RequestBody formbody = new FormBody.Builder()
+                .add("cubeString", cubeString)
+                .add("username", LoginActivity.username.getText().toString())
+                .build();
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solve")
+//        Request request = new Request.Builder().url("http://10.100.102.26:5000/solve")
+                .post(formbody)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Toast.makeText(context, "server down", Toast.LENGTH_SHORT).show();
+            }
 
-        String result = Search.solution("UUUUUUUUUFFFRRRRRRLLLFFFFFFDDDDDDDDDBBBLLLLLLRRRBBBBBB", 24, 5000, false);
-        System.out.println(result);
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                result[0] = response.body().string();
+                response.close();
+            }
+        });
+
     }
 }

@@ -51,32 +51,36 @@ public class CubeGLActivity extends FragmentActivity {
         solveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                glview.solve();
+                try {
+                    glview.solve();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        RequestBody formbody = new FormBody.Builder()
-//                .add("username", LoginActivity.username.getText().toString())
-//                .build();
-////                Request request=new Request.Builder().url("http://10.100.102.19:5000/save_cube_state")
-//        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
-//                .post(formbody)
-//                .build();
-//        okHttpClient.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-//            }
-//        });
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody formbody = new FormBody.Builder()
+                .add("username", LoginActivity.username.getText().toString())
+                .build();
+//                Request request=new Request.Builder().url("http://10.100.102.26:5000/save_cube_state")
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
+                .post(formbody)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            }
+        });
 
     }
 
