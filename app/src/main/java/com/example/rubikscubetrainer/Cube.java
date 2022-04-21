@@ -816,23 +816,23 @@ public class Cube {
 		}
 	}
 
-	private StringBuilder buildFaceString(int index) {
+	private StringBuilder buildFaceString(int index, int frontColor, int leftColor, int backColor,
+										  int rightColor, int upColor, int downColor) {
 		StringBuilder str = new StringBuilder();
-
 		for (int i = index; i < index + dimOfCube * dimOfCube; i++) {
 			Part p = parts.get(i);
 			int textureID = p.getRectangle().getTextureId();
-			if (textureID == textures.getTextureIdforResource(GLRenderer.WHITE)) {
+			if (textureID == frontColor) {
 				str.append('F');
-			} else if (textureID == textures.getTextureIdforResource(GLRenderer.GREEN)) {
+			} else if (textureID == rightColor) {
 				str.append('R');
-			} else if (textureID == textures.getTextureIdforResource(GLRenderer.RED)) {
+			} else if (textureID == upColor) {
 				str.append('U');
-			} else if (textureID == textures.getTextureIdforResource(GLRenderer.BLUE)) {
+			} else if (textureID == leftColor) {
 				str.append('L');
-			} else if (textureID == textures.getTextureIdforResource(GLRenderer.ORANGE)) {
+			} else if (textureID == downColor) {
 				str.append('D');
-			} else if (textureID == textures.getTextureIdforResource(GLRenderer.YELLOW)) {
+			} else if (textureID == backColor) {
 				str.append('B');
 			}
 		}
@@ -840,12 +840,20 @@ public class Cube {
 	}
 
 	public String getStringRepresentation() {
-		StringBuilder frontString = buildFaceString(0);
-		StringBuilder leftString = buildFaceString(9);
-		StringBuilder backString = buildFaceString(18);
-		StringBuilder rightString = buildFaceString(27);
-		StringBuilder upString = buildFaceString(36);
-		StringBuilder downString = buildFaceString(45);
+		// find the color of each face according to the center part of the pace
+		int frontColor = parts.get(4).getRectangle().getTextureId();
+		int leftColor = parts.get(13).getRectangle().getTextureId();
+		int backColor = parts.get(22).getRectangle().getTextureId();
+		int rightColor = parts.get(31).getRectangle().getTextureId();
+		int upColor = parts.get(40).getRectangle().getTextureId();
+		int downColor = parts.get(49).getRectangle().getTextureId();
+
+		StringBuilder frontString = buildFaceString(0, frontColor, leftColor, backColor, rightColor, upColor, downColor);
+		StringBuilder leftString = buildFaceString(9, frontColor, leftColor, backColor, rightColor, upColor, downColor);
+		StringBuilder backString = buildFaceString(18, frontColor, leftColor, backColor, rightColor, upColor, downColor);
+		StringBuilder rightString = buildFaceString(27, frontColor, leftColor, backColor, rightColor, upColor, downColor);
+		StringBuilder upString = buildFaceString(36, frontColor, leftColor, backColor, rightColor, upColor, downColor);
+		StringBuilder downString = buildFaceString(45, frontColor, leftColor, backColor, rightColor, upColor, downColor);
 
 		StringBuilder cubeString = new StringBuilder();
 		cubeString.append(upString);
@@ -854,7 +862,6 @@ public class Cube {
 		cubeString.append(downString);
 		cubeString.append(leftString);
 		cubeString.append(backString);
-//		String cubeString = upString + rightString + frontString + downString + leftString + backString;
 		return cubeString.toString();
 	}
 }

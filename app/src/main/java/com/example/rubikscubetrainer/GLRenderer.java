@@ -428,6 +428,13 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                 response.close();
             }
         });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(cubeString);
+        System.out.println(result[0]);
 
     }
 }
