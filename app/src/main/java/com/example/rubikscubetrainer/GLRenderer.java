@@ -143,8 +143,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-//        if (this.mode == 0)
-//            cube.startRandomRotating(20);
+        if (this.mode == 0)
+            cube.startRandomRotating(20);
     }
 
     @Override
@@ -412,8 +412,8 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                 .add("cubeString", cubeString)
                 .add("username", LoginActivity.username.getText().toString())
                 .build();
-//        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solve")
-        Request request = new Request.Builder().url("http://10.100.102.26:5000/solve")
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solve")
+//        Request request = new Request.Builder().url("http://10.100.102.26:5000/solve")
                 .post(formbody)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {

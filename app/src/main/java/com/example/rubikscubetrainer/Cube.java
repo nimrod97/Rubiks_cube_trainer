@@ -715,17 +715,16 @@ public class Cube {
 				side = 8;
 				isClockWise = true;
 		}
+		beginRotate(side, isClockWise);
 		// if the step contains the char 2 we need to perform the step twice
 		if (step.contains("2")) {
-			beginRotate(side, isClockWise);
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			beginRotate(side, isClockWise);
-		} else
-			beginRotate(side, isClockWise);
+		}
 
 	}
 
