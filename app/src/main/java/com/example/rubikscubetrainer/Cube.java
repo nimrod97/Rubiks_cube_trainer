@@ -651,6 +651,10 @@ public class Cube {
 				side = 0;
 				isClockWise = false;
 				break;
+			case "L2":
+				side = 0;
+				isClockWise = true;
+				break;
 			case "R":
 				side = 2;
 				isClockWise = false;
@@ -658,6 +662,10 @@ public class Cube {
 			case "R'":
 				side = 2;
 				isClockWise = true;
+				break;
+			case "R2":
+				side = 2;
+				isClockWise = false;
 				break;
 			case "U":
 				side = 3;
@@ -667,6 +675,10 @@ public class Cube {
 				side = 3;
 				isClockWise = true;
 				break;
+			case "U2":
+				side = 3;
+				isClockWise = false;
+				break;
 			case "D":
 				side = 5;
 				isClockWise = true;
@@ -674,6 +686,10 @@ public class Cube {
 			case "D'":
 				side = 5;
 				isClockWise = false;
+				break;
+			case "D2":
+				side = 5;
+				isClockWise = true;
 				break;
 			case "F":
 				side = 6;
@@ -683,6 +699,10 @@ public class Cube {
 				side = 6;
 				isClockWise = true;
 				break;
+			case "F2":
+				side = 6;
+				isClockWise = false;
+				break;
 			case "B":
 				side = 8;
 				isClockWise = true;
@@ -691,8 +711,20 @@ public class Cube {
 				side = 8;
 				isClockWise = false;
 				break;
+			case "B2":
+				side = 8;
+				isClockWise = true;
 		}
 		beginRotate(side, isClockWise);
+		// if the step contains the char 2 we need to perform the step twice
+		if (step.contains("2")) {
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			beginRotate(side, isClockWise);
+		}
 	}
 
 

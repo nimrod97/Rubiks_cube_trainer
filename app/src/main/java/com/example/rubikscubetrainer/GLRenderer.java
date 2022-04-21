@@ -426,6 +426,17 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 result[0] = response.body().string();
                 response.close();
+                if (!result[0].equals("error")) {
+                    String[] steps = result[0].split(" ");
+                    for (String s: steps) {
+                        cube.beginRotate(s);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             }
         });
         try {
@@ -435,6 +446,5 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         }
         System.out.println(cubeString);
         System.out.println(result[0]);
-
     }
 }
