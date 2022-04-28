@@ -715,6 +715,7 @@ public class Cube {
 				side = 8;
 				isClockWise = true;
 		}
+
 		beginRotate(side, isClockWise);
 		// if the step contains the char 2 we need to perform the step twice
 		if (step.contains("2")) {
@@ -873,7 +874,7 @@ public class Cube {
 	}
 
 	public String getStringRepresentation() {
-		// find the color of each face according to the center part of the pace
+		// find the color of each face according to the center part of the face
 		int frontColor = parts.get(4).getRectangle().getTextureId();
 		int leftColor = parts.get(13).getRectangle().getTextureId();
 		int backColor = parts.get(22).getRectangle().getTextureId();

@@ -22,61 +22,49 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class LastGamesOfOthers extends AppCompatActivity {
-
+public class SolvedByMyself extends AppCompatActivity {
     private TextView first;
     private TextView second;
     private TextView third;
     private TextView fourth;
     private TextView fifth;
-    private TextView sixth;
-    private TextView seventh;
     private Button first_btn;
     private Button second_btn;
     private Button third_btn;
     private Button fourth_btn;
     private Button fifth_btn;
-    private Button sixth_btn;
-    private Button seventh_btn;
     public static String[] colorsFirst;
     public static String[] colorsSecond;
     public static String[] colorsThird;
     public static String[] colorsFourth;
     public static String[] colorsFifth;
-    public static String[] colorsSixth;
-    public static String[] colorsSeventh;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_last_games_of_others);
+        setContentView(R.layout.activity_solved_by_myself);
         first = findViewById(R.id.first);
         second = findViewById(R.id.second);
         third = findViewById(R.id.third);
         fourth = findViewById(R.id.fourth);
         fifth = findViewById(R.id.fifth);
-        sixth = findViewById(R.id.sixth);
-        seventh = findViewById(R.id.seventh);
         first_btn = findViewById(R.id.button_first);
         second_btn = findViewById(R.id.button_second);
         third_btn = findViewById(R.id.button_third);
         fourth_btn = findViewById(R.id.button_fourth);
         fifth_btn = findViewById(R.id.button_fifth);
-        sixth_btn = findViewById(R.id.button_sixth);
-        seventh_btn = findViewById(R.id.button_seventh);
         String username = LoginActivity.username.getText().toString();
         OkHttpClient okHttpClient = new OkHttpClient();
-//        Request request = new Request.Builder().url("http://10.100.102.24:5000/lastGamesOfOthers?username=" + username).build();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/lastGamesOfOthers?username=" + username).build();
-
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself?username=" + username).build();
+//        Request request = new Request.Builder().url("http://10.100.102.24:5000/solved_by_myself?username=" + username).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(LastGamesOfOthers.this, "server down", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SolvedByMyself.this, "server down", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -89,85 +77,55 @@ public class LastGamesOfOthers extends AppCompatActivity {
                         try {
                             String res = response.body().string();
                             response.close();
-                            if (!res.equals("error") && !res.equals("")) {
+                            if (!res.equals("")) {
                                 String[] ordered = res.split("\n");
                                 for (int i = 0; i < ordered.length; i++) {
                                     if (i == 0) {
-                                        if (ordered[i].contains("colors")) {
-                                            first_btn.setVisibility(View.VISIBLE);
-                                            colorsFirst = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        first_btn.setVisibility(View.VISIBLE);
+                                        colorsFirst = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        first.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
-
+                                        first.setText(temp[0] + '\n' + temp[1] + '\n');
                                     } else if (i == 1) {
-                                        if (ordered[i].contains("colors")) {
-                                            second_btn.setVisibility(View.VISIBLE);
-                                            colorsSecond = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        second_btn.setVisibility(View.VISIBLE);
+                                        colorsSecond = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        second.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        second.setText(temp[0] + '\n' + temp[1] + '\n');
                                     } else if (i == 2) {
-                                        if (ordered[i].contains("colors")) {
-                                            third_btn.setVisibility(View.VISIBLE);
-                                            colorsThird = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        third_btn.setVisibility(View.VISIBLE);
+                                        colorsThird = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        third.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        third.setText(temp[0] + '\n' + temp[1] + '\n');
                                     } else if (i == 3) {
-                                        if (ordered[i].contains("scanned cube colors")) {
-                                            fourth_btn.setVisibility(View.VISIBLE);
-                                            colorsFourth = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        fourth_btn.setVisibility(View.VISIBLE);
+                                        colorsFourth = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        fourth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
-                                    } else if (i == 4) {
-                                        if (ordered[i].contains("scanned cube colors")) {
-                                            fifth_btn.setVisibility(View.VISIBLE);
-                                            colorsFifth = ordered[i].split("colors")[1].split(",");
-                                        }
-                                        ordered[i] = ordered[i].replace("'", "");
-                                        ordered[i] = ordered[i].replace("{", "");
-                                        ordered[i] = ordered[i].replace("}", "");
-                                        String[] temp = ordered[i].split(",");
-                                        fifth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
-                                    } else if (i == 5) {
-                                        if (ordered[i].contains("scanned cube colors")) {
-                                            sixth_btn.setVisibility(View.VISIBLE);
-                                            colorsSixth = ordered[i].split("colors")[1].split(",");
-                                        }
-                                        ordered[i] = ordered[i].replace("'", "");
-                                        ordered[i] = ordered[i].replace("{", "");
-                                        ordered[i] = ordered[i].replace("}", "");
-                                        String[] temp = ordered[i].split(",");
-                                        sixth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        fourth.setText(temp[0] + '\n' + temp[1] + '\n');
                                     } else {
-                                        if (ordered[i].contains("scanned cube colors")) {
-                                            seventh_btn.setVisibility(View.VISIBLE);
-                                            colorsSeventh = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        fifth_btn.setVisibility(View.VISIBLE);
+                                        colorsFifth = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        seventh.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        fifth.setText(temp[0] + '\n' + temp[1] + '\n');
                                     }
                                 }
 
                             } else
-                                Toast.makeText(LastGamesOfOthers.this, "empty list", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SolvedByMyself.this, "empty list", Toast.LENGTH_SHORT).show();
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -181,7 +139,7 @@ public class LastGamesOfOthers extends AppCompatActivity {
         first_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LastGamesOfOthers.this, CubeFromDB.class);
+                Intent intent = new Intent(SolvedByMyself.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsFirst);
                 startActivity(intent);
             }
@@ -189,7 +147,7 @@ public class LastGamesOfOthers extends AppCompatActivity {
         second_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LastGamesOfOthers.this, CubeFromDB.class);
+                Intent intent = new Intent(SolvedByMyself.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsSecond);
                 startActivity(intent);
             }
@@ -197,7 +155,7 @@ public class LastGamesOfOthers extends AppCompatActivity {
         third_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LastGamesOfOthers.this, CubeFromDB.class);
+                Intent intent = new Intent(SolvedByMyself.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsThird);
                 startActivity(intent);
 
@@ -206,7 +164,7 @@ public class LastGamesOfOthers extends AppCompatActivity {
         fourth_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LastGamesOfOthers.this, CubeFromDB.class);
+                Intent intent = new Intent(SolvedByMyself.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsFourth);
                 startActivity(intent);
             }
@@ -214,28 +172,12 @@ public class LastGamesOfOthers extends AppCompatActivity {
         fifth_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LastGamesOfOthers.this, CubeFromDB.class);
+                Intent intent = new Intent(SolvedByMyself.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsFifth);
                 startActivity(intent);
             }
         });
-        sixth_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LastGamesOfOthers.this, CubeFromDB.class);
-                intent.putExtra("colors", colorsSixth);
-                startActivity(intent);
-            }
-        });
-        seventh_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LastGamesOfOthers.this, CubeFromDB.class);
-                intent.putExtra("colors", colorsSeventh);
-                startActivity(intent);
-            }
-        });
-
 
     }
+
 }

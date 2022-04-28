@@ -1,21 +1,28 @@
 package com.example.rubikscubetrainer;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.rubikscubetrainer.db.SavedCube;
 import com.example.rubikscubetrainer.matrix.MatrixGrabber;
+import com.example.rubikscubetrainer.scanning.PlayingWithScannedCube;
 import com.example.rubikscubetrainer.scanning.ScannedCube;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -30,13 +37,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class GLRenderer implements GLSurfaceView.Renderer {
+public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     private Cube cube;
     public static GLRenderer instance;
     private float cubeX = 0.0f;
     private float cubeY = 0.0f;
     private float cubeZ = 0.0f;
     private OkHttpClient okHttpClient;
+    private boolean saveCubeFlag = false;
 
 //    public float tx, ty; // Touch coords
 //    private float sHeight;
@@ -143,8 +151,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if (this.mode == 0)
+
+        if (this.mode == 0) {
             cube.startRandomRotating(20);
+        }
     }
 
     @Override
@@ -213,11 +223,18 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 
     private boolean isDragged = false;
 
+
     public void setMode(int mode) {
         this.mode = mode;
     }
 
+    public boolean isSaveCubeFlag() {
+        return saveCubeFlag;
+    }
+
     public void handleTouch(MotionEvent event) {
+        if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB"))
+            solvedByMyself();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 selectParts(event.getX(), event.getY());
@@ -226,6 +243,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                     isDragged = true;
                 } else if (mode == 1) {
                     changeColor(selectedParts.get(0));
+                } else if (mode == 0 && !saveCubeFlag) {
+                    saveCubeState();
+                    saveCubeFlag = true;
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -235,10 +255,115 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                     drag(new Point2f(event.getX(), event.getY()));
                 break;
             case MotionEvent.ACTION_UP:
+                if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB"))
+                    solvedByMyself();
                 isDragged = false;
                 deselectParts();
                 break;
         }
+
+    }
+
+    public void solvedByMyself() {
+        if (mode == 0) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    CubeGLActivity.solveAloneGreeting.setVisibility(View.VISIBLE);
+                    CubeGLActivity.solveBtn.setVisibility(View.INVISIBLE);
+                    CubeGLActivity.replayBtn.setVisibility(View.VISIBLE);
+                    CubeGLActivity.shuffleBtn.setVisibility(View.INVISIBLE);
+                    CubeGLActivity.undoBtn.setVisibility(View.INVISIBLE);
+                }
+            });
+
+        } else if (mode == 1) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    PlayingWithScannedCube.solveAloneGreeting.setVisibility(View.VISIBLE);
+                    PlayingWithScannedCube.solveBtn.setVisibility(View.INVISIBLE);
+                    PlayingWithScannedCube.replayBtn.setVisibility(View.VISIBLE);
+                    PlayingWithScannedCube.undoBtn.setVisibility(View.INVISIBLE);
+                }
+            });
+        }
+        RequestBody formbody = new FormBody.Builder()
+                .add("username", LoginActivity.username.getText().toString())
+                .build();
+//        Request request = new Request.Builder().url("http://10.100.102.24:5000/solved_by_myself")
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself")
+                .post(formbody)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, "server down", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                response.close();
+            }
+        });
+
+    }
+
+    public void saveCubeState() {
+        List<String> colors = new ArrayList<>();
+        List<Part> p = cube.getParts();
+        for (int i = 0; i < p.size(); i++) {
+            switch (p.get(i).getRectangle().getTextureId()) {
+                case 1:
+                    colors.add("white");
+                    break;
+                case 2:
+                    colors.add("yellow");
+                    break;
+                case 3:
+                    colors.add("blue");
+                    break;
+                case 4:
+                    colors.add("green");
+                    break;
+                case 5:
+                    colors.add("red");
+                    break;
+                default:
+                    colors.add("orange");
+                    break;
+            }
+        }
+        RequestBody formbody = new FormBody.Builder()
+                .add("username", LoginActivity.username.getText().toString())
+                .add("generatedColors", String.join(",", colors))
+                .add("override", "false")
+                .build();
+//        Request request = new Request.Builder().url("http://10.100.102.24:5000/save_cube_state")
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
+                .post(formbody)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) {
+                response.close();
+            }
+        });
     }
 
     public void changeColor(int partId) {
@@ -405,39 +530,4 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         return cube;
     }
 
-    public void solve() {
-        String cubeString = cube.getStringRepresentation();
-        String[] result = new String[1];
-        RequestBody formbody = new FormBody.Builder()
-                .add("cubeString", cubeString)
-                .add("username", LoginActivity.username.getText().toString())
-                .build();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solve")
-//        Request request = new Request.Builder().url("http://10.100.102.26:5000/solve")
-                .post(formbody)
-                .build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Toast.makeText(context, "server down", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                result[0] = response.body().string();
-                response.close();
-                if (!result[0].equals("error")) {
-                    String[] steps = result[0].split(" ");
-                    for (String s: steps) {
-                        cube.beginRotate(s);
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        });
-    }
 }

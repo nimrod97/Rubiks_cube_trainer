@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.rubikscubetrainer.LoginActivity;
 import com.example.rubikscubetrainer.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +21,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MyLastGames extends AppCompatActivity {
+public class ToughestCubes extends AppCompatActivity {
     private TextView first;
     private TextView second;
     private TextView third;
@@ -39,11 +38,10 @@ public class MyLastGames extends AppCompatActivity {
     public static String[] colorsFourth;
     public static String[] colorsFifth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_last_games);
+        setContentView(R.layout.activity_toughest_cubes);
         first = findViewById(R.id.first);
         second = findViewById(R.id.second);
         third = findViewById(R.id.third);
@@ -54,17 +52,16 @@ public class MyLastGames extends AppCompatActivity {
         third_btn = findViewById(R.id.button_third);
         fourth_btn = findViewById(R.id.button_fourth);
         fifth_btn = findViewById(R.id.button_fifth);
-        String username = LoginActivity.username.getText().toString();
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/myLastGames?username=" + username).build();
-//        Request request = new Request.Builder().url("http://10.100.102.24:5000/myLastGames?username=" + username).build();
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/toughest_cubes").build();
+//        Request request = new Request.Builder().url("http://10.100.102.24:5000/toughest_cubes").build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MyLastGames.this, "server down", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ToughestCubes.this, "server down", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -77,54 +74,39 @@ public class MyLastGames extends AppCompatActivity {
                         try {
                             String res = response.body().string();
                             response.close();
-                            if (!res.equals("error") && !res.equals("")) {
+                            if (!res.equals("")) {
                                 String[] ordered = res.split("\n");
                                 for (int i = 0; i < ordered.length; i++) {
                                     if (i == 0) {
                                         first_btn.setVisibility(View.VISIBLE);
-                                        colorsFirst = ordered[i].split("colors")[1].split(",");
-                                        ordered[i] = ordered[i].replace("'", "");
-                                        ordered[i] = ordered[i].replace("{", "");
-                                        ordered[i] = ordered[i].replace("}", "");
-                                        String[] temp = ordered[i].split(",");
-                                        first.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        colorsFirst = ordered[i].split(";")[0].split(",");
+                                        String numOfSteps = ordered[i].split(";")[1];
+                                        first.setText(numOfSteps);
                                     } else if (i == 1) {
                                         second_btn.setVisibility(View.VISIBLE);
-                                        colorsSecond = ordered[i].split("colors")[1].split(",");
-                                        ordered[i] = ordered[i].replace("'", "");
-                                        ordered[i] = ordered[i].replace("{", "");
-                                        ordered[i] = ordered[i].replace("}", "");
-                                        String[] temp = ordered[i].split(",");
-                                        second.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        colorsSecond = ordered[i].split(";")[0].split(",");
+                                        String numOfSteps = ordered[i].split(";")[1];
+                                        second.setText(numOfSteps);
                                     } else if (i == 2) {
                                         third_btn.setVisibility(View.VISIBLE);
-                                        colorsThird = ordered[i].split("colors")[1].split(",");
-                                        ordered[i] = ordered[i].replace("'", "");
-                                        ordered[i] = ordered[i].replace("{", "");
-                                        ordered[i] = ordered[i].replace("}", "");
-                                        String[] temp = ordered[i].split(",");
-                                        third.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        colorsThird = ordered[i].split(";")[0].split(",");
+                                        String numOfSteps = ordered[i].split(";")[1];
+                                        third.setText(numOfSteps);
                                     } else if (i == 3) {
                                         fourth_btn.setVisibility(View.VISIBLE);
-                                        colorsFourth = ordered[i].split("colors")[1].split(",");
-                                        ordered[i] = ordered[i].replace("'", "");
-                                        ordered[i] = ordered[i].replace("{", "");
-                                        ordered[i] = ordered[i].replace("}", "");
-                                        String[] temp = ordered[i].split(",");
-                                        fourth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        colorsFourth = ordered[i].split(";")[0].split(",");
+                                        String numOfSteps = ordered[i].split(";")[1];
+                                        fourth.setText(numOfSteps);
                                     } else {
                                         fifth_btn.setVisibility(View.VISIBLE);
-                                        colorsFifth = ordered[i].split("colors")[1].split(",");
-                                        ordered[i] = ordered[i].replace("'", "");
-                                        ordered[i] = ordered[i].replace("{", "");
-                                        ordered[i] = ordered[i].replace("}", "");
-                                        String[] temp = ordered[i].split(",");
-                                        fifth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        colorsFifth = ordered[i].split(";")[0].split(",");
+                                        String numOfSteps = ordered[i].split(";")[1];
+                                        fifth.setText(numOfSteps);
                                     }
                                 }
 
                             } else
-                                Toast.makeText(MyLastGames.this, "empty list", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ToughestCubes.this, "empty list", Toast.LENGTH_SHORT).show();
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -139,7 +121,7 @@ public class MyLastGames extends AppCompatActivity {
         first_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyLastGames.this, CubeFromDB.class);
+                Intent intent = new Intent(ToughestCubes.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsFirst);
                 startActivity(intent);
             }
@@ -147,7 +129,7 @@ public class MyLastGames extends AppCompatActivity {
         second_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyLastGames.this, CubeFromDB.class);
+                Intent intent = new Intent(ToughestCubes.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsSecond);
                 startActivity(intent);
             }
@@ -155,7 +137,7 @@ public class MyLastGames extends AppCompatActivity {
         third_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyLastGames.this, CubeFromDB.class);
+                Intent intent = new Intent(ToughestCubes.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsThird);
                 startActivity(intent);
 
@@ -164,7 +146,7 @@ public class MyLastGames extends AppCompatActivity {
         fourth_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyLastGames.this, CubeFromDB.class);
+                Intent intent = new Intent(ToughestCubes.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsFourth);
                 startActivity(intent);
             }
@@ -172,11 +154,12 @@ public class MyLastGames extends AppCompatActivity {
         fifth_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyLastGames.this, CubeFromDB.class);
+                Intent intent = new Intent(ToughestCubes.this, CubeFromDB.class);
                 intent.putExtra("colors", colorsFifth);
                 startActivity(intent);
             }
         });
+
 
     }
 }

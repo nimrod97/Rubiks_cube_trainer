@@ -20,7 +20,7 @@ public class SavedCube extends Cube {
 
     @Override
     public void fillParts(int size) {
-        this.colors = ScannedCubeFromDB.colors;
+        this.colors = CubeFromDB.colors;
         parts = new Vector<Part>();
         int[] texturesID = new int[54];
         for (int i = 0; i < colors.length; i++) {

@@ -18,23 +18,32 @@
         android:theme="@style/Theme.RubiksCubeTrainer"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".db.ToughestCubes"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".db.SolvedByMyself"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".CubeGLActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".db.MostPlay"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".db.LastGamesOfOthers"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".db.ScannedCubeFromDB"
+            android:name=".db.CubeFromDB"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -75,6 +84,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

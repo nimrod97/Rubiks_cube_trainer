@@ -113,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void run() {
                                 try {
                                     String r = response.body().string();
+                                    response.close();
                                     if (r.equals("ok")) {
                                         v.setVisibility(View.INVISIBLE);
                                         Intent intent = new Intent(LoginActivity.this, PlayingOptionsActivity.class);
@@ -121,7 +122,6 @@ public class LoginActivity extends AppCompatActivity {
                                     } else {
                                         Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT).show();
                                     }
-                                    response.close();
 
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                         .add("username", u)
                         .add("password", p)
                         .build();
-//                Request request= new Request.Builder().url("http://10.100.102.19:5000/login")
+//                Request request= new Request.Builder().url("http://10.100.102.24:5000/login")
                 Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/login")
                         .post(formbody)
                         .build();

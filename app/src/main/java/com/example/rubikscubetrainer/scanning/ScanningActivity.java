@@ -107,6 +107,7 @@ public class ScanningActivity extends AppCompatActivity {
                                             public void run() {
                                                 try {
                                                     String res = response.body().string();
+                                                    response.close();
                                                     if (res.contains("scan"))
                                                         Toast.makeText(getApplicationContext(), res, Toast.LENGTH_SHORT).show();
                                                     else {

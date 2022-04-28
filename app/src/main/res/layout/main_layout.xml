@@ -13,10 +13,25 @@
 
     </com.example.rubikscubetrainer.GLView>
 
+    <Button
+        android:id="@+id/replay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="159dp"
+        android:layout_marginTop="690dp"
+        android:layout_marginRight="155dp"
+        android:clickable="true"
+        android:text="Replay"
+        android:textAlignment="center"
+        android:visibility="invisible" />
+
     <ImageView
         android:id="@+id/undo_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="18dp"
@@ -28,12 +43,12 @@
 
     <Button
         android:id="@+id/shuffle"
-        android:layout_width="wrap_content"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="false"
-        android:layout_marginLeft="320dp"
+        android:layout_marginLeft="303dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:text="shuffle"
@@ -46,12 +61,46 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="168dp"
+        android:layout_marginLeft="162dp"
         android:layout_marginTop="18dp"
         android:layout_marginRight="155dp"
         android:clickable="true"
         android:text="Solve"
         android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/solve_notations"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="17dp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="5sp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/solve_alone_greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="725dp"
+        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeMinTextSize="5sp"
+        android:autoSizeTextType="uniform"
+        android:text="Congratulations! you solved the cube without any help!"
+        android:textColor="@color/black"
+        android:visibility="invisible" />
 
 
 </RelativeLayout>

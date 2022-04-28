@@ -13,6 +13,8 @@ public class StatsActivity extends AppCompatActivity {
     private Button myGames;
     private Button otherGames;
     private Button mostPlay;
+    private Button solvedByMyself;
+    private Button toughestCubes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,8 @@ public class StatsActivity extends AppCompatActivity {
         myGames = findViewById(R.id.myLastGame);
         otherGames = findViewById(R.id.gamesOfOthers);
         mostPlay = findViewById(R.id.mostPlaying);
+        solvedByMyself = findViewById(R.id.solved_myself);
+        toughestCubes = findViewById(R.id.toughest_cubes);
         myGames.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +43,20 @@ public class StatsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StatsActivity.this, MostPlay.class);
+                startActivity(intent);
+            }
+        });
+        solvedByMyself.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StatsActivity.this, SolvedByMyself.class);
+                startActivity(intent);
+            }
+        });
+        toughestCubes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StatsActivity.this, ToughestCubes.class);
                 startActivity(intent);
             }
         });

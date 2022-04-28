@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     @NotNull Response response)
                     throws IOException {
                 pagenameTextView.setText(response.body().string());
+                response.close();
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
 //                Intent intent = new Intent(MainActivity.this, PlayingOptionsActivity.class);
-                response.close();
                 startActivity(intent);
                 finish();
             }

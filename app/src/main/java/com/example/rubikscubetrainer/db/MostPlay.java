@@ -38,7 +38,7 @@ public class MostPlay extends AppCompatActivity {
         num2 = findViewById(R.id.num2);
         num3 = findViewById(R.id.num3);
         OkHttpClient okHttpClient = new OkHttpClient();
-//        Request request = new Request.Builder().url("http://10.100.102.19:5000/mostPlay").build();
+//        Request request = new Request.Builder().url("http://10.100.102.24:5000/mostPlay").build();
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/mostPlay").build();
 
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -53,44 +53,44 @@ public class MostPlay extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(
-                    @NotNull Call call,
-                    @NotNull Response response) throws IOException {
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
                             String res = response.body().string();
-                            String[] ordered = res.split("\n");
-                            for (int i = 0; i < ordered.length; i++) {
-                                if (i == 0) {
-                                    String[] temp = ordered[i].split(",");
-                                    first.setText("1. " + temp[0]);
-                                    num1.setText(temp[1]);
-                                    first.setTextSize(30);
-                                    first.setTypeface(Typeface.DEFAULT_BOLD);
-                                    num1.setTextSize(30);
+                            response.close();
+                            if (!res.equals("error")) {
+                                String[] ordered = res.split("\n");
+                                for (int i = 0; i < ordered.length; i++) {
+                                    if (i == 0) {
+                                        String[] temp = ordered[i].split(",");
+                                        first.setText("1. " + temp[0]);
+                                        num1.setText(temp[1]);
+                                        first.setTextSize(30);
+                                        first.setTypeface(Typeface.DEFAULT_BOLD);
+                                        num1.setTextSize(30);
 
-                                } else if (i == 1) {
-                                    String[] temp = ordered[i].split(",");
-                                    second.setText("2. " + temp[0]);
-                                    num2.setText(temp[1]);
-                                    second.setTextSize(30);
-                                    second.setTypeface(Typeface.DEFAULT_BOLD);
-                                    num2.setTextSize(30);
-                                } else {
-                                    String[] temp = ordered[i].split(",");
-                                    third.setText("3. " + temp[0]);
-                                    num3.setText(temp[1]);
-                                    third.setTextSize(30);
-                                    third.setTypeface(Typeface.DEFAULT_BOLD);
-                                    num3.setTextSize(30);
+                                    } else if (i == 1) {
+                                        String[] temp = ordered[i].split(",");
+                                        second.setText("2. " + temp[0]);
+                                        num2.setText(temp[1]);
+                                        second.setTextSize(30);
+                                        second.setTypeface(Typeface.DEFAULT_BOLD);
+                                        num2.setTextSize(30);
+                                    } else {
+                                        String[] temp = ordered[i].split(",");
+                                        third.setText("3. " + temp[0]);
+                                        num3.setText(temp[1]);
+                                        third.setTextSize(30);
+                                        third.setTypeface(Typeface.DEFAULT_BOLD);
+                                        num3.setTextSize(30);
+                                    }
+
                                 }
 
-                            }
-                            response.close();
-
-
+                            } else
+                                Toast.makeText(MostPlay.this, "empty list", Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
