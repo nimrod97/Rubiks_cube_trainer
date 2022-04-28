@@ -37,7 +37,6 @@ public class CubeGLActivity extends FragmentActivity {
     public static TextView solveAloneGreeting;
     private OkHttpClient okHttpClient;
     private int size;
-    private boolean solveFlag = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +66,7 @@ public class CubeGLActivity extends FragmentActivity {
         solveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                glview.getGlrenderer().setSolveFlag(true);
                 String override = "true";
                 if (!glview.getGlrenderer().isSaveCubeFlag())//the user didn't touch the cube and pressed solve
                     override = "false";
@@ -196,8 +196,6 @@ public class CubeGLActivity extends FragmentActivity {
 
                     }
                 });
-
-
             }
         });
         replayBtn.setOnClickListener(new View.OnClickListener() {

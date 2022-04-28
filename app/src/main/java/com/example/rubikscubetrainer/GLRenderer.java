@@ -45,6 +45,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     private float cubeZ = 0.0f;
     private OkHttpClient okHttpClient;
     private boolean saveCubeFlag = false;
+    private boolean solveFlag = false;
 
 //    public float tx, ty; // Touch coords
 //    private float sHeight;
@@ -228,12 +229,16 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
         this.mode = mode;
     }
 
+    public void setSolveFlag(boolean flag) {
+        this.solveFlag = flag;
+    }
+
     public boolean isSaveCubeFlag() {
         return saveCubeFlag;
     }
 
     public void handleTouch(MotionEvent event) {
-        if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB"))
+        if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag)
             solvedByMyself();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -255,7 +260,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     drag(new Point2f(event.getX(), event.getY()));
                 break;
             case MotionEvent.ACTION_UP:
-                if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB"))
+                if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag)
                     solvedByMyself();
                 isDragged = false;
                 deselectParts();
