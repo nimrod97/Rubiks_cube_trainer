@@ -74,21 +74,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/button_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/cube"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_fourth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="356dp"
+        android:layout_marginTop="172dp"
         android:layout_marginEnd="16dp"
         android:text="@string/cube"
         android:visibility="invisible"
@@ -99,7 +88,7 @@
         android:id="@+id/button_fifth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="468dp"
+        android:layout_marginTop="488dp"
         android:layout_marginEnd="16dp"
         android:text="@string/cube"
         android:visibility="invisible"
@@ -110,7 +99,7 @@
         android:id="@+id/button_third"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="276dp"
         android:layout_marginEnd="16dp"
         android:text="@string/cube"
         android:visibility="invisible"
@@ -118,10 +107,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_second"
+        android:id="@+id/button_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/cube"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_fourth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="376dp"
         android:layout_marginEnd="16dp"
         android:text="@string/cube"
         android:visibility="invisible"

@@ -201,7 +201,7 @@ public class CubeGLActivity extends FragmentActivity {
         replayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CubeGLActivity.this, CubeGLActivity.class);
+                Intent intent = new Intent(CubeGLActivity.this, PlayingOptionsActivity.class);
                 startActivity(intent);
                 finish();
             }

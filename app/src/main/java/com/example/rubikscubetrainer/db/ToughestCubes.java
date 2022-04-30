@@ -79,29 +79,49 @@ public class ToughestCubes extends AppCompatActivity {
                                 for (int i = 0; i < ordered.length; i++) {
                                     if (i == 0) {
                                         first_btn.setVisibility(View.VISIBLE);
-                                        colorsFirst = ordered[i].split(";")[0].split(",");
-                                        String numOfSteps = ordered[i].split(";")[1];
-                                        first.setText(numOfSteps);
+                                        String[] temp = ordered[i].split(";");
+                                        colorsFirst = temp[0].split(",");
+                                        String numOfSteps = temp[1];
+                                        String user = temp[2];
+                                        String gameTime = temp[3];
+                                        String isScanned = temp[4];
+                                        first.setText(numOfSteps + '\n' + user + '\n' + gameTime + '\n' + isScanned);
                                     } else if (i == 1) {
                                         second_btn.setVisibility(View.VISIBLE);
-                                        colorsSecond = ordered[i].split(";")[0].split(",");
-                                        String numOfSteps = ordered[i].split(";")[1];
-                                        second.setText(numOfSteps);
+                                        String[] temp = ordered[i].split(";");
+                                        colorsSecond = temp[0].split(",");
+                                        String numOfSteps = temp[1];
+                                        String user = temp[2];
+                                        String gameTime = temp[3];
+                                        String isScanned = temp[4];
+                                        second.setText(numOfSteps + '\n' + user + '\n' + gameTime + '\n' + isScanned);
                                     } else if (i == 2) {
                                         third_btn.setVisibility(View.VISIBLE);
-                                        colorsThird = ordered[i].split(";")[0].split(",");
-                                        String numOfSteps = ordered[i].split(";")[1];
-                                        third.setText(numOfSteps);
+                                        String[] temp = ordered[i].split(";");
+                                        colorsThird = temp[0].split(",");
+                                        String numOfSteps = temp[1];
+                                        String user = temp[2];
+                                        String gameTime = temp[3];
+                                        String isScanned = temp[4];
+                                        third.setText(numOfSteps + '\n' + user + '\n' + gameTime + '\n' + isScanned);
                                     } else if (i == 3) {
                                         fourth_btn.setVisibility(View.VISIBLE);
-                                        colorsFourth = ordered[i].split(";")[0].split(",");
-                                        String numOfSteps = ordered[i].split(";")[1];
-                                        fourth.setText(numOfSteps);
+                                        String[] temp = ordered[i].split(";");
+                                        colorsFourth = temp[0].split(",");
+                                        String numOfSteps = temp[1];
+                                        String user = temp[2];
+                                        String gameTime = temp[3];
+                                        String isScanned = temp[4];
+                                        fourth.setText(numOfSteps + '\n' + user + '\n' + gameTime + '\n' + isScanned);
                                     } else {
                                         fifth_btn.setVisibility(View.VISIBLE);
-                                        colorsFifth = ordered[i].split(";")[0].split(",");
-                                        String numOfSteps = ordered[i].split(";")[1];
-                                        fifth.setText(numOfSteps);
+                                        String[] temp = ordered[i].split(";");
+                                        colorsFifth = temp[0].split(",");
+                                        String numOfSteps = temp[1];
+                                        String user = temp[2];
+                                        String gameTime = temp[3];
+                                        String isScanned = temp[4];
+                                        fifth.setText(numOfSteps + '\n' + user + '\n' + gameTime + '\n' + isScanned);
                                     }
                                 }
 

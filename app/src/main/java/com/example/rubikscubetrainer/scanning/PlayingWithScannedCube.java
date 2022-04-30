@@ -1,5 +1,6 @@
 package com.example.rubikscubetrainer.scanning;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.rubikscubetrainer.GLView;
 import com.example.rubikscubetrainer.LoginActivity;
+import com.example.rubikscubetrainer.PlayingOptionsActivity;
 import com.example.rubikscubetrainer.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -55,11 +57,11 @@ public class PlayingWithScannedCube extends FragmentActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                instructionText.setText("");
+                instructionText.setVisibility(View.INVISIBLE);
                 v.setVisibility(View.GONE);
                 solveBtn.setVisibility(View.VISIBLE);
                 undoBtn.setVisibility(View.VISIBLE);
-                glview.setMode(0);
+                glview.setMode(3);
                 // saving the colors of the faces in the order: front,left,back,right,top,bottom faces in the db
                 RequestBody formbody = new FormBody.Builder()
                         .add("colorsVector", String.join(",", ScannedCube.allColors))
@@ -97,6 +99,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
         solveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                glview.getGlrenderer().setSolveFlag(true);
                 String cubeString = glview.getGlrenderer().getCube().getStringRepresentation();
                 String[] result = new String[1];
                 RequestBody formbody = new FormBody.Builder()
@@ -175,6 +178,14 @@ public class PlayingWithScannedCube extends FragmentActivity {
                 });
 
 
+            }
+        });
+        replayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlayingWithScannedCube.this, PlayingOptionsActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
