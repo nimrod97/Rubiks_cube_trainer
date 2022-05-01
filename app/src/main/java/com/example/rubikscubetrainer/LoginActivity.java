@@ -170,7 +170,6 @@ public class LoginActivity extends AppCompatActivity {
                                     if (r.equals("correct") ||
                                             r.startsWith("created")) {
                                         Intent intent = new Intent(LoginActivity.this, PlayingOptionsActivity.class);
-                                        intent.putExtra("username", username.getText().toString());
                                         startActivity(intent);
                                     } else
                                         Toast.makeText(getApplicationContext(), r, Toast.LENGTH_SHORT).show();

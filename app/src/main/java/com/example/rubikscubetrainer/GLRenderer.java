@@ -46,6 +46,8 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     private OkHttpClient okHttpClient;
     private boolean saveCubeFlag = false;
     private boolean solveFlag = false;
+    private boolean solvedByMyselfFlag = false;
+
 
 //    public float tx, ty; // Touch coords
 //    private float sHeight;
@@ -239,7 +241,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     }
 
     public void handleTouch(MotionEvent event) {
-        if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1)
+        if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && !solvedByMyselfFlag)
             solvedByMyself();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -261,7 +263,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     drag(new Point2f(event.getX(), event.getY()));
                 break;
             case MotionEvent.ACTION_UP:
-                if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1)
+                if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && !solvedByMyselfFlag)
                     solvedByMyself();
                 isDragged = false;
                 deselectParts();
@@ -271,6 +273,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     }
 
     public void solvedByMyself() {
+        solvedByMyselfFlag = true;
         if (mode == 0) {
             runOnUiThread(new Runnable() {
                 @Override
@@ -294,31 +297,29 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                 }
             });
         }
-        if (mode == 0 || mode == 3) {
-            RequestBody formbody = new FormBody.Builder()
-                    .add("username", LoginActivity.username.getText().toString())
-                    .build();
+        RequestBody formbody = new FormBody.Builder()
+                .add("username", LoginActivity.username.getText().toString())
+                .build();
 //        Request request = new Request.Builder().url("http://10.100.102.24:5000/solved_by_myself")
-            Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself")
-                    .post(formbody)
-                    .build();
-            okHttpClient.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(context, "server down", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself")
+                .post(formbody)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, "server down", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
 
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    response.close();
-                }
-            });
-        }
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                response.close();
+            }
+        });
 
     }
 

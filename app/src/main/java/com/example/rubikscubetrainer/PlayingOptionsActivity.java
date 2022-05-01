@@ -28,7 +28,7 @@ public class PlayingOptionsActivity extends AppCompatActivity {
         scan = findViewById(R.id.scan_button);
         play = findViewById(R.id.play_in_the_app_button);
         stats = findViewById(R.id.stats_button);
-        username = getIntent().getStringExtra("username");
+        username = LoginActivity.username.getText().toString();
         text = findViewById(R.id.username);
         text.setText("Welcome, " + username + "!");
         scan.setOnClickListener(new View.OnClickListener() {
