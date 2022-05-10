@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -240,8 +239,12 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
         return saveCubeFlag;
     }
 
+    public void setSaveCubeFlag(boolean flag) {
+        this.saveCubeFlag = flag;
+    }
+
     public void handleTouch(MotionEvent event) {
-        if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && !solvedByMyselfFlag)
+        if (cube.getCubeRepresentationByFaces().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && !solvedByMyselfFlag)
             solvedByMyself();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -263,7 +266,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     drag(new Point2f(event.getX(), event.getY()));
                 break;
             case MotionEvent.ACTION_UP:
-                if (cube.getStringRepresentation().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && !solvedByMyselfFlag)
+                if (cube.getCubeRepresentationByFaces().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && !solvedByMyselfFlag)
                     solvedByMyself();
                 isDragged = false;
                 deselectParts();
@@ -283,6 +286,9 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     CubeGLActivity.replayBtn.setVisibility(View.VISIBLE);
                     CubeGLActivity.shuffleBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.undoBtn.setVisibility(View.INVISIBLE);
+                    CubeGLActivity.playBtn.setVisibility(View.INVISIBLE);
+                    CubeGLActivity.pauseBtn.setVisibility(View.INVISIBLE);
+                    CubeGLActivity.slider.setVisibility(View.INVISIBLE);
                 }
             });
 
@@ -294,6 +300,9 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     PlayingWithScannedCube.solveBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.replayBtn.setVisibility(View.VISIBLE);
                     PlayingWithScannedCube.undoBtn.setVisibility(View.INVISIBLE);
+                    PlayingWithScannedCube.playBtn.setVisibility(View.INVISIBLE);
+                    PlayingWithScannedCube.pauseBtn.setVisibility(View.INVISIBLE);
+                    PlayingWithScannedCube.slider.setVisibility(View.INVISIBLE);
                 }
             });
         }
@@ -324,37 +333,14 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     }
 
     public void saveCubeState() {
-        List<String> colors = new ArrayList<>();
-        List<Part> p = cube.getParts();
-        for (int i = 0; i < p.size(); i++) {
-            switch (p.get(i).getRectangle().getTextureId()) {
-                case 1:
-                    colors.add("white");
-                    break;
-                case 2:
-                    colors.add("yellow");
-                    break;
-                case 3:
-                    colors.add("blue");
-                    break;
-                case 4:
-                    colors.add("green");
-                    break;
-                case 5:
-                    colors.add("red");
-                    break;
-                default:
-                    colors.add("orange");
-                    break;
-            }
-        }
+        List<String> colors = cube.getColors();
         RequestBody formbody = new FormBody.Builder()
                 .add("username", LoginActivity.username.getText().toString())
                 .add("generatedColors", String.join(",", colors))
                 .add("override", "false")
                 .build();
-//        Request request = new Request.Builder().url("http://10.100.102.24:5000/save_cube_state")
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
+        Request request = new Request.Builder().url("http://10.100.102.24:5000/save_cube_state")
+//        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
                 .post(formbody)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {

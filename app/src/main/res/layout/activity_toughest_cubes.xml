@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".db.ToughestCubes"
     android:layoutDirection="ltr"
+    android:orientation="vertical"
     android:background="@color/white">
 
     <TextView

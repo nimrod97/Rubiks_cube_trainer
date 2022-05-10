@@ -56,7 +56,7 @@ public class StatsActivity extends AppCompatActivity {
         toughestCubes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StatsActivity.this, ToughestCubes.class);
+                Intent intent = new Intent(StatsActivity.this, SolvingMethodsList.class);
                 startActivity(intent);
             }
         });

@@ -93,76 +93,62 @@ public class LastGamesOfOthers extends AppCompatActivity {
                                 String[] ordered = res.split("\n");
                                 for (int i = 0; i < ordered.length; i++) {
                                     if (i == 0) {
-                                        if (ordered[i].contains("colors")) {
-                                            first_btn.setVisibility(View.VISIBLE);
-                                            colorsFirst = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        first_btn.setVisibility(View.VISIBLE);
+                                        colorsFirst = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        first.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        first.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3] + '\n' + temp[4]);
 
                                     } else if (i == 1) {
-                                        if (ordered[i].contains("colors")) {
-                                            second_btn.setVisibility(View.VISIBLE);
-                                            colorsSecond = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        second_btn.setVisibility(View.VISIBLE);
+                                        colorsSecond = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        second.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        second.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3] + '\n' + temp[4]);
                                     } else if (i == 2) {
-                                        if (ordered[i].contains("colors")) {
-                                            third_btn.setVisibility(View.VISIBLE);
-                                            colorsThird = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        third_btn.setVisibility(View.VISIBLE);
+                                        colorsThird = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        third.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        third.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3] + '\n' + temp[4]);
                                     } else if (i == 3) {
-                                        if (ordered[i].contains("scanned cube colors")) {
-                                            fourth_btn.setVisibility(View.VISIBLE);
-                                            colorsFourth = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        fourth_btn.setVisibility(View.VISIBLE);
+                                        colorsFourth = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        fourth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        fourth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3] + '\n' + temp[4]);
                                     } else if (i == 4) {
-                                        if (ordered[i].contains("scanned cube colors")) {
-                                            fifth_btn.setVisibility(View.VISIBLE);
-                                            colorsFifth = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        fifth_btn.setVisibility(View.VISIBLE);
+                                        colorsFifth = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        fifth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        fifth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3] + '\n' + temp[4]);
                                     } else if (i == 5) {
-                                        if (ordered[i].contains("scanned cube colors")) {
-                                            sixth_btn.setVisibility(View.VISIBLE);
-                                            colorsSixth = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        sixth_btn.setVisibility(View.VISIBLE);
+                                        colorsSixth = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        sixth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        sixth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3] + '\n' + temp[4]);
                                     } else {
-                                        if (ordered[i].contains("scanned cube colors")) {
-                                            seventh_btn.setVisibility(View.VISIBLE);
-                                            colorsSeventh = ordered[i].split("colors")[1].split(",");
-                                        }
+                                        seventh_btn.setVisibility(View.VISIBLE);
+                                        colorsSeventh = ordered[i].split("colors")[1].split(",");
                                         ordered[i] = ordered[i].replace("'", "");
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        seventh.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
+                                        seventh.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3] + '\n' + temp[4]);
                                     }
                                 }
 

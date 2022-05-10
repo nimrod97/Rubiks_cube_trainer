@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rubikscubetrainer">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -17,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RubiksCubeTrainer"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".db.SolvingMethodsList"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".db.ToughestCubes"
             android:exported="false"

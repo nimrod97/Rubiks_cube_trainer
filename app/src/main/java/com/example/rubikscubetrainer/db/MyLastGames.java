@@ -87,7 +87,7 @@ public class MyLastGames extends AppCompatActivity {
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        first.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        first.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
                                     } else if (i == 1) {
                                         second_btn.setVisibility(View.VISIBLE);
                                         colorsSecond = ordered[i].split("colors")[1].split(",");
@@ -95,7 +95,7 @@ public class MyLastGames extends AppCompatActivity {
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        second.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        second.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
                                     } else if (i == 2) {
                                         third_btn.setVisibility(View.VISIBLE);
                                         colorsThird = ordered[i].split("colors")[1].split(",");
@@ -103,7 +103,7 @@ public class MyLastGames extends AppCompatActivity {
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        third.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        third.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
                                     } else if (i == 3) {
                                         fourth_btn.setVisibility(View.VISIBLE);
                                         colorsFourth = ordered[i].split("colors")[1].split(",");
@@ -111,7 +111,7 @@ public class MyLastGames extends AppCompatActivity {
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        fourth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        fourth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
                                     } else {
                                         fifth_btn.setVisibility(View.VISIBLE);
                                         colorsFifth = ordered[i].split("colors")[1].split(",");
@@ -119,7 +119,7 @@ public class MyLastGames extends AppCompatActivity {
                                         ordered[i] = ordered[i].replace("{", "");
                                         ordered[i] = ordered[i].replace("}", "");
                                         String[] temp = ordered[i].split(",");
-                                        fifth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2]);
+                                        fifth.setText(temp[0] + '\n' + temp[1] + '\n' + temp[2] + '\n' + temp[3]);
                                     }
                                 }
 

@@ -2,10 +2,12 @@ package com.example.rubikscubetrainer;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
@@ -639,10 +641,38 @@ public class Cube {
 		parts.get(id).setSelected(false);
 	}
 
+	public List<String> getColors() {
+		List<String> colors = new ArrayList<>();
+		int length = this.parts.size();
+		for (int i = 0; i < length; i++) {
+			switch (this.parts.get(i).getRectangle().getTextureId()) {
+				case 1:
+					colors.add("w");
+					break;
+				case 2:
+					colors.add("y");
+					break;
+				case 3:
+					colors.add("b");
+					break;
+				case 4:
+					colors.add("g");
+					break;
+				case 5:
+					colors.add("r");
+					break;
+				default:
+					colors.add("o");
+					break;
+			}
+		}
+		return colors;
+	}
+
 	public void beginRotate(String step) {
 		int side = -1;
 		boolean isClockWise = true;
-		switch(step) {
+		switch (step) {
 			case "L":
 				side = 0;
 				isClockWise = true;
@@ -720,7 +750,7 @@ public class Cube {
 		// if the step contains the char 2 we need to perform the step twice
 		if (step.contains("2")) {
 			try {
-				Thread.sleep(500);
+				Thread.sleep(CubeGLActivity.rotationSpeed / 2);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -873,7 +903,7 @@ public class Cube {
 		return str;
 	}
 
-	public String getStringRepresentation() {
+	public String getCubeRepresentationByFaces() {
 		// find the color of each face according to the center part of the face
 		int frontColor = parts.get(4).getRectangle().getTextureId();
 		int leftColor = parts.get(13).getRectangle().getTextureId();
@@ -898,5 +928,52 @@ public class Cube {
 		cubeString.append(backString);
 		return cubeString.toString();
 	}
+
+	/*
+	private StringBuilder buildColorString(List<String> colors, int index) {
+		StringBuilder str = new StringBuilder();
+		for (int i = index; i < index + 9; i++) {
+			String c = colors.get(i);
+			switch(c) {
+				case "white":
+					str.append('w');
+					break;
+				case "yellow":
+					str.append('y');
+					break;
+				case "blue":
+					str.append('b');
+					break;
+				case "green":
+					str.append('g');
+					break;
+				case "red":
+					str.append('r');
+					break;
+				case "orange":
+					str.append('o');
+					break;
+			}
+		}
+		return str;
+	}
+	public String getCubeRepresentationByColors() {
+		List<String> colors = getColors();
+		StringBuilder front = buildColorString(colors, 0);
+		StringBuilder left = buildColorString(colors, 9);
+		StringBuilder back = buildColorString(colors, 18);
+		StringBuilder right = buildColorString(colors, 27);
+		StringBuilder up = buildColorString(colors, 36);
+		StringBuilder down = buildColorString(colors, 45);
+		StringBuilder cubeString = new StringBuilder();
+		cubeString.append(up);
+		cubeString.append(left);
+		cubeString.append(front);
+		cubeString.append(right);
+		cubeString.append(back);
+		cubeString.append(down);
+		return cubeString.toString();
+	}
+	 */
 }
 

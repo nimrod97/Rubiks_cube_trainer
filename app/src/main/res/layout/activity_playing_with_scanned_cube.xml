@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layoutDirection="ltr">
 
     <com.example.rubikscubetrainer.GLView
         android:id="@+id/glview"
@@ -42,6 +43,38 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/btn_undo_icon"
+        android:visibility="invisible"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/play_btn"
+        android:layout_width="82dp"
+        android:layout_height="83dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="53dp"
+        android:layout_marginEnd="276dp"
+        android:layout_marginBottom="92dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/play_button"
+        android:visibility="invisible"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/pause_btn"
+        android:layout_width="80dp"
+        android:layout_height="83dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="277dp"
+        android:layout_marginBottom="90dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/pause_button"
         android:visibility="invisible"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -121,6 +154,23 @@ When it's all ok, press continue"
         android:autoSizeTextType="uniform"
         android:text="Congratulations! you solved the cube without any help!"
         android:textColor="@color/black"
+        android:visibility="invisible" />
+
+    <SeekBar
+        android:id="@+id/slider"
+        android:layout_width="191dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="191dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="93dp"
+        android:max="7"
+        android:min="1"
+        android:progress="4"
+        android:progressTint="@color/black"
+        android:thumbTint="@color/black"
         android:visibility="invisible" />
 
 
