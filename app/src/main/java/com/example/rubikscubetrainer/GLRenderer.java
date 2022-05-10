@@ -339,8 +339,8 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                 .add("generatedColors", String.join(",", colors))
                 .add("override", "false")
                 .build();
-        Request request = new Request.Builder().url("http://10.100.102.24:5000/save_cube_state")
-//        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
+//        Request request = new Request.Builder().url("http://10.100.102.24:5000/save_cube_state")
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
                 .post(formbody)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {

@@ -160,8 +160,8 @@ public class CubeGLActivity extends FragmentActivity {
                         .add("cubeString", cubeString)
                         .add("generatedColors", String.join(",", colors))
                         .build();
-//                request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/get_solving_steps")
-                Request request = new Request.Builder().url("http://10.100.102.24:5000/get_solving_steps")
+                Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/get_solving_steps")
+//                Request request = new Request.Builder().url("http://10.100.102.24:5000/get_solving_steps")
                         .post(formbody)
                         .build();
                 okHttpClient.newCall(request).enqueue(new Callback() {
@@ -213,7 +213,8 @@ public class CubeGLActivity extends FragmentActivity {
                                                 }
                                             })
                                             .show();
-                                }
+                                } else
+                                    Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -242,8 +243,8 @@ public class CubeGLActivity extends FragmentActivity {
                 .add("generatedColors", String.join(",", colors))
                 .add("override", override)
                 .build();
-        Request request = new Request.Builder().url("http://10.100.102.24:5000/save_cube_state")
-//                Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
+//        Request request = new Request.Builder().url("http://10.100.102.24:5000/save_cube_state")
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
                 .post(formbody)
                 .build();
         glview.getGlrenderer().setSaveCubeFlag(true);
@@ -273,8 +274,8 @@ public class CubeGLActivity extends FragmentActivity {
                 .add("generatedColors", String.join(",", colors))
                 .add("method", solvingMethod)
                 .build();
-////                request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solve")
-        Request request = new Request.Builder().url("http://10.100.102.24:5000/solve")
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solve")
+//        Request request = new Request.Builder().url("http://10.100.102.24:5000/solve")
                 .post(formbody)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {
