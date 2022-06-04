@@ -24,17 +24,17 @@ public class SavedCube extends Cube {
         parts = new Vector<Part>();
         int[] texturesID = new int[54];
         for (int i = 0; i < colors.length; i++) {
-            if (colors[i].contains("w"))
+            if (colors[i].contains("W"))
                 texturesID[i] = textures.getTextureIdforResource(GLRenderer.WHITE);
-            else if (colors[i].contains("r"))
+            else if (colors[i].contains("R"))
                 texturesID[i] = textures.getTextureIdforResource(GLRenderer.RED);
-            else if (colors[i].contains("g"))
+            else if (colors[i].contains("G"))
                 texturesID[i] = textures.getTextureIdforResource(GLRenderer.GREEN);
-            else if (colors[i].contains("b"))
+            else if (colors[i].contains("B"))
                 texturesID[i] = textures.getTextureIdforResource(GLRenderer.BLUE);
-            else if (colors[i].contains("y"))
+            else if (colors[i].contains("Y"))
                 texturesID[i] = textures.getTextureIdforResource(GLRenderer.YELLOW);
-            else if (colors[i].contains("o"))
+            else if (colors[i].contains("O"))
                 texturesID[i] = textures.getTextureIdforResource(GLRenderer.ORANGE);
         }
         int id = 1;

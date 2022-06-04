@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.rubikscubetrainer.LoginActivity;
+import com.example.rubikscubetrainer.PlayingOptionsActivity;
 import com.example.rubikscubetrainer.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +54,8 @@ public class SolvedByMyself extends AppCompatActivity {
         third_btn = findViewById(R.id.button_third);
         fourth_btn = findViewById(R.id.button_fourth);
         fifth_btn = findViewById(R.id.button_fifth);
-        String username = LoginActivity.username.getText().toString();
+        String username = PlayingOptionsActivity.username;
+//        String username = LoginActivity.username.getText().toString();
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself?username=" + username).build();
 //        Request request = new Request.Builder().url("http://10.100.102.24:5000/solved_by_myself?username=" + username).build();

@@ -1,0 +1,1 @@
+C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\build\intermediates\cxx\RelWithDebInfo\1d38695m\obj\x86

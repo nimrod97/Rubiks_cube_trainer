@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Rubik's cube trainer"
 include ':app'
+include ':openCVLib'

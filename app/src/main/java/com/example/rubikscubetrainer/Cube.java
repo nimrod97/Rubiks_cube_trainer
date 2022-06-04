@@ -1,5 +1,7 @@
 package com.example.rubikscubetrainer;
 
+import com.example.rubikscubetrainer.scanning.PlayingWithScannedCube;
+
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -647,22 +649,22 @@ public class Cube {
 		for (int i = 0; i < length; i++) {
 			switch (this.parts.get(i).getRectangle().getTextureId()) {
 				case 1:
-					colors.add("w");
+					colors.add("W");
 					break;
 				case 2:
-					colors.add("y");
+					colors.add("Y");
 					break;
 				case 3:
-					colors.add("b");
+					colors.add("B");
 					break;
 				case 4:
-					colors.add("g");
+					colors.add("G");
 					break;
 				case 5:
-					colors.add("r");
+					colors.add("R");
 					break;
 				default:
-					colors.add("o");
+					colors.add("O");
 					break;
 			}
 		}
@@ -750,7 +752,10 @@ public class Cube {
 		// if the step contains the char 2 we need to perform the step twice
 		if (step.contains("2")) {
 			try {
-				Thread.sleep(CubeGLActivity.rotationSpeed / 2);
+				if (CubeGLActivity.rotationSpeed == 0)
+					Thread.sleep(PlayingWithScannedCube.rotationSpeed / 2);
+				else
+					Thread.sleep(CubeGLActivity.rotationSpeed / 2);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

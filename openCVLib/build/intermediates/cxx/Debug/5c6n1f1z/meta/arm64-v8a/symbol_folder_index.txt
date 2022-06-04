@@ -1,0 +1,1 @@
+C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\build\intermediates\cxx\Debug\5c6n1f1z\obj\arm64-v8a

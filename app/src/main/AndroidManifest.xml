@@ -2,8 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front.autofocus"
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera.any"
         android:required="true" />
@@ -16,6 +28,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RubiksCubeTrainer"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".scanning.Scanner"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".db.SolvingMethodsList"
             android:exported="false"
@@ -66,11 +83,11 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".scanning.ScanningActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <!--        <activity-->
+        <!--            android:name=".scanning.ScanningActivity"-->
+        <!--            android:exported="false"-->
+        <!--            android:screenOrientation="portrait"-->
+        <!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
         <activity
             android:name=".PlayingOptionsActivity"
             android:exported="false"

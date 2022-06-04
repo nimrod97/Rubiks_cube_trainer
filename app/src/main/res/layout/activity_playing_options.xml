@@ -6,49 +6,16 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:orientation="vertical"
+    android:background="@color/cardview_dark_background"
     tools:context=".PlayingOptionsActivity">
-
-    <Button
-        android:id="@+id/play_in_the_app_button"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="424dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="119dp"
-        android:text="@string/play_in_the_app"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/stats_button"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="568dp"
-        android:layout_marginEnd="103dp"
-        android:text="statistics"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/scan_button"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="258dp"
-        android:layout_marginEnd="103dp"
-        android:text="@string/scan_your_own_cube"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/username"
         android:layout_width="413dp"
         android:layout_height="198dp"
+        android:autoSizeMaxTextSize="30dp"
+        android:autoSizeMinTextSize="5dp"
+        android:autoSizeTextType="uniform"
         android:text="@string/username"
         android:textAlignment="center"
         android:textSize="35sp"
@@ -58,5 +25,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.019" />
+
+
+    <Button
+        android:id="@+id/play_in_the_app_button"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginEnd="103dp"
+        android:text="@string/play_in_the_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/scan_button"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="103dp"
+        android:text="@string/scan_your_own_cube"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/stats_button"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="484dp"
+        android:layout_marginEnd="103dp"
+        android:text="statistics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="688dp"
+        android:layout_marginEnd="103dp"
+        android:text="Log-out"
+        android:background="@color/red"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

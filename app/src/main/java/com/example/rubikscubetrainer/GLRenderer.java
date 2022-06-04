@@ -307,7 +307,9 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
             });
         }
         RequestBody formbody = new FormBody.Builder()
-                .add("username", LoginActivity.username.getText().toString())
+                .add("username", PlayingOptionsActivity.username)
+
+//                .add("username", LoginActivity.username.getText().toString())
                 .build();
 //        Request request = new Request.Builder().url("http://10.100.102.24:5000/solved_by_myself")
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself")
@@ -335,7 +337,8 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     public void saveCubeState() {
         List<String> colors = cube.getColors();
         RequestBody formbody = new FormBody.Builder()
-                .add("username", LoginActivity.username.getText().toString())
+                .add("username", PlayingOptionsActivity.username)
+//                .add("username", LoginActivity.username.getText().toString())
                 .add("generatedColors", String.join(",", colors))
                 .add("override", "false")
                 .build();
@@ -372,27 +375,27 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                         switch ((int) (chosenColor)) {
                             case 0:
                                 cube.getParts().get(partId).setRectangle(new Rectangle(cube.getQuad(), textures.getTextureIdforResource(GLRenderer.WHITE)));
-                                ScannedCube.allColors.set(partId, "white");
+                                ScannedCube.allColors.set(partId, 'W');
                                 break;
                             case 1:
                                 cube.getParts().get(partId).setRectangle(new Rectangle(cube.getQuad(), textures.getTextureIdforResource(GLRenderer.BLUE)));
-                                ScannedCube.allColors.set(partId, "blue");
+                                ScannedCube.allColors.set(partId, 'B');
                                 break;
                             case 2:
                                 cube.getParts().get(partId).setRectangle(new Rectangle(cube.getQuad(), textures.getTextureIdforResource(GLRenderer.RED)));
-                                ScannedCube.allColors.set(partId, "red");
+                                ScannedCube.allColors.set(partId, 'R');
                                 break;
                             case 3:
                                 cube.getParts().get(partId).setRectangle(new Rectangle(cube.getQuad(), textures.getTextureIdforResource(GLRenderer.GREEN)));
-                                ScannedCube.allColors.set(partId, "green");
+                                ScannedCube.allColors.set(partId, 'G');
                                 break;
                             case 4:
                                 cube.getParts().get(partId).setRectangle(new Rectangle(cube.getQuad(), textures.getTextureIdforResource(GLRenderer.YELLOW)));
-                                ScannedCube.allColors.set(partId, "yellow");
+                                ScannedCube.allColors.set(partId, 'Y');
                                 break;
                             default:
                                 cube.getParts().get(partId).setRectangle(new Rectangle(cube.getQuad(), textures.getTextureIdforResource(GLRenderer.ORANGE)));
-                                ScannedCube.allColors.set(partId, "orange");
+                                ScannedCube.allColors.set(partId, 'O');
                                 break;
                         }
 
