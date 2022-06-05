@@ -83,18 +83,8 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <!--        <activity-->
-        <!--            android:name=".scanning.ScanningActivity"-->
-        <!--            android:exported="false"-->
-        <!--            android:screenOrientation="portrait"-->
-        <!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
         <activity
             android:name=".PlayingOptionsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

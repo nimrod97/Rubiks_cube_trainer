@@ -19,6 +19,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 //import com.example.rubikscubetrainer.scanning.ScanningActivity;
 
 
@@ -28,9 +38,10 @@ public class PlayingOptionsActivity extends AppCompatActivity {
     private Button stats;
     private Button logout;
     GoogleSignInClient mGoogleSignInClient;
-    //    private String username;
     public static String username;
     private TextView text;
+    private OkHttpClient okHttpClient;
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -42,6 +53,7 @@ public class PlayingOptionsActivity extends AppCompatActivity {
         stats = findViewById(R.id.stats_button);
         logout = findViewById(R.id.logout);
         text = findViewById(R.id.username);
+        okHttpClient = new OkHttpClient();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -49,10 +61,36 @@ public class PlayingOptionsActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null)
             username = account.getDisplayName();
-
-//        username = LoginActivity.username.getText().toString();
-//        text = findViewById(R.id.username);
         text.setText("Welcome, " + username + "!");
+        RequestBody formbody = new FormBody.Builder()
+                .add("username", username)
+                .build();
+//                Request request= new Request.Builder().url("http://10.100.102.24:5000/register_to_DB")
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/register_to_DB")
+                .post(formbody)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        response.close();
+                    }
+                });
+            }
+        });
+
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,14 +1,14 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:2:1-4:12
-INJECTED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:2:1-4:12
-INJECTED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:2:1-4:12
+ADDED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:2:1-43
+INJECTED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:2:1-43
+INJECTED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:2:1-43
 	package
-		ADDED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:3:7-27
+		ADDED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:2:11-31
 		INJECTED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml
 		INJECTED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml:2:1-43
 uses-sdk
 INJECTED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\nimro\AndroidStudioProjects\Rubik's cube trainer\openCVLib\java\AndroidManifest.xml
