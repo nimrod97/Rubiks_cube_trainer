@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="ltr">
+
+    <com.example.rubikscubetrainer.GLView
+        android:id="@+id/glview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp" />
+
+    <Button
+        android:id="@+id/replay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="159dp"
+        android:layout_marginTop="690dp"
+        android:layout_marginRight="155dp"
+        android:clickable="true"
+        android:text="Replay"
+        android:textAlignment="center"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/undo_btn"
+        android:layout_width="84dp"
+        android:layout_height="102dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="7dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/btn_undo_icon"
+        android:visibility="invisible"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/play_btn"
+        android:layout_width="82dp"
+        android:layout_height="83dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="214dp"
+        android:layout_marginBottom="84dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/play_button"
+        android:visibility="invisible"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/pause_btn"
+        android:layout_width="80dp"
+        android:layout_height="83dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="217dp"
+        android:layout_marginBottom="85dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/pause_button"
+        android:visibility="invisible"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/undo_btn2"
+        android:layout_width="80dp"
+        android:layout_height="76dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginBottom="87dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/btn_undo_icon"
+        android:visibility="invisible"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/solve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginRight="155dp"
+        android:clickable="true"
+        android:text="Solve"
+        android:visibility="invisible"
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/Continue"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="833dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/Continue"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/instructions_text"
+        android:layout_width="wrap_content"
+        android:layout_height="104dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="832dp"
+        android:autoSizeTextType="uniform"
+        android:text="Check the generated cube, if there are some mismatches
+in the cubies colors, you can tap on the specific cubie and choose your desired color.
+When it's all ok, press continue"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/solve_notations"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="17dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:visibility="invisible"
+        android:autoSizeMinTextSize="5sp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeTextType="uniform" />
+
+    <TextView
+        android:id="@+id/solve_alone_greeting"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="738dp"
+        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeMinTextSize="5sp"
+        android:autoSizeTextType="uniform"
+        android:text="Congratulations! you solved the cube without any help!"
+        android:textColor="@color/black"
+        android:visibility="invisible" />
+
+    <SeekBar
+        android:id="@+id/slider"
+        android:layout_width="191dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="214dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="93dp"
+        android:max="7"
+        android:min="1"
+        android:progress="4"
+        android:progressTint="@color/black"
+        android:thumbTint="@color/black"
+        android:visibility="invisible" />
+
+
+</RelativeLayout>

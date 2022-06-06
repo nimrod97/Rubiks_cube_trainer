@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:background="@color/cardview_dark_background"
+    tools:context=".db.SolvingMethodsList">
+
+
+    <Button
+        android:id="@+id/cfop"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="424dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="119dp"
+        android:text="CFOP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/kociemba"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="568dp"
+        android:layout_marginEnd="103dp"
+        android:text="Kociemba"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/beginner"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="258dp"
+        android:layout_marginEnd="103dp"
+        android:text="Beginner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="392dp"
+        android:layout_height="109dp"
+        android:text="Pick a solving method and see the toughest cubes in it"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
