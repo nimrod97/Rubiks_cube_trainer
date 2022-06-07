@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,9 +14,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/replay"
@@ -24,86 +26,106 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="159dp"
-        android:layout_marginTop="690dp"
-        android:layout_marginRight="155dp"
         android:clickable="true"
         android:text="Replay"
         android:textAlignment="center"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/glview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.86" />
 
     <ImageView
         android:id="@+id/undo_btn"
-        android:layout_width="84dp"
-        android:layout_height="102dp"
+        android:layout_width="80dp"
+        android:layout_height="85dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="7dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/btn_undo_icon"
         android:visibility="invisible"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/play_btn"
-        android:layout_width="82dp"
-        android:layout_height="83dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="214dp"
-        android:layout_marginBottom="84dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/play_button"
-        android:visibility="invisible"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/pause_btn"
-        android:layout_width="80dp"
-        android:layout_height="83dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="217dp"
-        android:layout_marginBottom="85dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/pause_button"
-        android:visibility="invisible"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/undo_btn2"
-        android:layout_width="80dp"
-        android:layout_height="76dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginBottom="87dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/btn_undo_icon"
-        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/glview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.018"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/solve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="95dp"
+        android:layout_height="56dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="280dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginRight="155dp"
         android:clickable="true"
         android:text="Solve"
+        android:textAlignment="center"
         android:visibility="invisible"
-        android:textAlignment="center" />
+        app:layout_constraintBottom_toBottomOf="@+id/glview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <ImageView
+        android:id="@+id/play_btn"
+        android:layout_width="56dp"
+        android:layout_height="58dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/play_button"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/glview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.292"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.848"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/pause_btn"
+        android:layout_width="56dp"
+        android:layout_height="58dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/pause_button"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.292"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/glview"
+        app:layout_constraintVertical_bias="0.848"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/undo_btn2"
+        android:layout_width="56dp"
+        android:layout_height="58dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/btn_undo_icon"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.848"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/Continue"
@@ -112,12 +134,14 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="833dp"
-        android:layout_marginEnd="142dp"
-        android:layout_marginBottom="10dp"
         android:text="@string/Continue"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/solve_notations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/glview"
+        app:layout_constraintVertical_bias="0.87" />
 
     <TextView
         android:id="@+id/instructions_text"
@@ -125,48 +149,57 @@
         android:layout_height="104dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-2dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="832dp"
+        android:autoSizeTextType="uniform"
         android:text="Check the generated cube, if there are some mismatches
 in the cubies colors, you can tap on the specific cubie and choose your desired color.
 When it's all ok, press continue"
-        android:autoSizeTextType="uniform"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/glview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002" />
 
     <TextView
         android:id="@+id/solve_notations"
-        android:layout_width="wrap_content"
-        android:layout_height="63dp"
+        android:layout_width="392dp"
+        android:layout_height="98dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="17dp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="5sp"
+        android:autoSizeTextType="uniform"
         android:text="TextView"
         android:textColor="@color/black"
         android:visibility="invisible"
-        android:autoSizeMinTextSize="5sp"
-        android:autoSizeMaxTextSize="20sp"
-        android:autoSizeTextType="uniform" />
+        app:layout_constraintBottom_toBottomOf="@+id/glview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/solve_alone_greeting"
-        android:layout_width="wrap_content"
-        android:layout_height="63dp"
+        android:layout_width="408dp"
+        android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginBottom="738dp"
         android:autoSizeMaxTextSize="40sp"
         android:autoSizeMinTextSize="5sp"
         android:autoSizeTextType="uniform"
         android:text="Congratulations! you solved the cube without any help!"
         android:textColor="@color/black"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/glview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.193" />
 
     <SeekBar
         android:id="@+id/slider"
@@ -175,15 +208,18 @@ When it's all ok, press continue"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="191dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="93dp"
         android:max="7"
         android:min="1"
         android:progress="4"
         android:progressTint="@color/black"
         android:thumbTint="@color/black"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/solve_notations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/glview"
+        app:layout_constraintVertical_bias="0.854" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
