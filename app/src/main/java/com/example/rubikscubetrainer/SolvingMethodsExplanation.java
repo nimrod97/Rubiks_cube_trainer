@@ -4,11 +4,12 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SolvingMethods extends AppCompatActivity {
+public class SolvingMethodsExplanation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_solving_methods_explanation);
     }
 
 }
