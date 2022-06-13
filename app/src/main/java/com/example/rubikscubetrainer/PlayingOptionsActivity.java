@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.rubikscubetrainer.db.HelpActivity;
 import com.example.rubikscubetrainer.db.StatsActivity;
 import com.example.rubikscubetrainer.scanning.Scanner;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;

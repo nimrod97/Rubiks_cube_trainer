@@ -7,31 +7,33 @@
     android:layoutDirection="ltr"
     android:orientation="vertical"
     android:background="@color/cardview_dark_background"
-    tools:context=".db.HelpActivity">
+    tools:context=".HelpActivity">
 
     <Button
         android:id="@+id/solvingMethods"
         android:layout_width="275dp"
         android:layout_height="49dp"
-        android:layout_marginBottom="250dp"
         android:backgroundTint="@color/black"
         android:text="solving methods"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.627" />
 
     <Button
         android:id="@+id/notations"
         android:layout_width="275dp"
         android:layout_height="49dp"
-        android:layout_marginBottom="400dp"
         android:backgroundTint="@color/black"
         android:text="notations"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.393" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

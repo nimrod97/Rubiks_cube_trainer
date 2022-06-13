@@ -28,14 +28,16 @@
         android:layout_height="123dp"
         android:layout_marginTop="179dp"
         android:layout_marginBottom="16dp"
+        android:background="@android:color/white"
         android:scaleType="fitCenter"
-        android:src="@android:drawable/ic_menu_camera"
+        android:src="@drawable/ic_take_picture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.876" />
+        app:layout_constraintVertical_bias="0.876"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
     <!--    <androidx.constraintlayout.widget.Guideline-->

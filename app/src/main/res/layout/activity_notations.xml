@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:fitsSystemWindows="true"
-    tools:context=".db.NotationsActivity">
+    tools:context=".NotationsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
@@ -217,11 +217,12 @@
             android:id="@+id/rotation_d_text"
             android:layout_width="270dp"
             android:layout_height="35dp"
+            android:layout_marginBottom="44dp"
             android:text="D - Turn the bottom (down) face clockwise."
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.398"
+            app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toEndOf="@id/rotation_d_id"
-            tools:layout_editor_absoluteY="390dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -229,9 +230,9 @@
             android:layout_width="270dp"
             android:layout_height="35dp"
             android:text="D' - Turn the bottom (down) face counter-clockwise."
-            tools:layout_editor_absoluteX="145dp"
-            tools:layout_editor_absoluteY="470dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="117dp"
+            tools:layout_editor_absoluteY="526dp" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group"

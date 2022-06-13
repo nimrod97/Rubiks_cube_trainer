@@ -288,6 +288,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     CubeGLActivity.undoBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.playBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.pauseBtn.setVisibility(View.INVISIBLE);
+                    CubeGLActivity.undoLastSolveStepBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.slider.setVisibility(View.INVISIBLE);
                 }
             });
@@ -302,6 +303,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     PlayingWithScannedCube.undoBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.playBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.pauseBtn.setVisibility(View.INVISIBLE);
+                    PlayingWithScannedCube.undoLastSolveStepBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.slider.setVisibility(View.INVISIBLE);
                 }
             });

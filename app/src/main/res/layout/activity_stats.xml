@@ -7,7 +7,7 @@
     android:background="@color/cardview_dark_background"
     android:layoutDirection="ltr"
     android:orientation="vertical"
-    tools:context=".db.HelpActivity">
+    tools:context=".db.StatsActivity">
 
 
     <TextView

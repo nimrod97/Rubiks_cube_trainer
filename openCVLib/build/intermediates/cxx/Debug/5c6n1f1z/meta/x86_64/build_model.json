@@ -125,7 +125,7 @@
         "rootBuildGradleFolder": "C:\\Users\\nimro\\AndroidStudioProjects\\Rubik\u0027s cube trainer",
         "sdkFolder": "C:\\Users\\nimro\\AppData\\Local\\Android\\Sdk",
         "isBuildOnlyTargetAbiEnabled": true,
-        "ideBuildTargetAbi": "x86_64,arm64-v8a",
+        "ideBuildTargetAbi": "x86_64,x86",
         "isCmakeBuildCohabitationEnabled": false,
         "isPrefabEnabled": false
       },

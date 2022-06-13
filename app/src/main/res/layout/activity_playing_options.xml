@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
     android:layoutDirection="ltr"
     android:orientation="vertical"
-    android:background="@color/cardview_dark_background"
     tools:context=".PlayingOptionsActivity">
 
     <Button
@@ -14,48 +14,56 @@
         android:layout_width="224dp"
         android:layout_height="62dp"
         android:layout_marginStart="102dp"
-        android:layout_marginTop="144dp"
         android:layout_marginEnd="103dp"
         android:text="@string/help"
+        app:layout_constraintBottom_toTopOf="@+id/scan_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintVertical_bias="0.193" />
 
     <Button
         android:id="@+id/stats_button"
         android:layout_width="224dp"
         android:layout_height="62dp"
         android:layout_marginStart="102dp"
-        android:layout_marginTop="504dp"
         android:layout_marginEnd="103dp"
         android:text="statistics"
+        app:layout_constraintBottom_toTopOf="@+id/logout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/play_in_the_app_button"
+        app:layout_constraintVertical_bias="0.646" />
 
     <Button
         android:id="@+id/play_in_the_app_button"
         android:layout_width="224dp"
         android:layout_height="62dp"
         android:layout_marginStart="102dp"
-        android:layout_marginTop="384dp"
         android:layout_marginEnd="103dp"
         android:text="@string/play_in_the_app"
+        app:layout_constraintBottom_toTopOf="@+id/stats_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/scan_button"
+        app:layout_constraintVertical_bias="0.481" />
 
     <Button
         android:id="@+id/scan_button"
         android:layout_width="224dp"
         android:layout_height="62dp"
         android:layout_marginStart="102dp"
-        android:layout_marginTop="264dp"
         android:layout_marginEnd="103dp"
         android:text="@string/scan_your_own_cube"
+        app:layout_constraintBottom_toTopOf="@+id/play_in_the_app_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/help_button"
+        app:layout_constraintVertical_bias="0.324" />
 
     <Button
         android:id="@+id/logout"
@@ -63,14 +71,16 @@
         android:layout_height="62dp"
         android:layout_alignParentTop="true"
         android:layout_marginStart="102dp"
-        android:layout_marginTop="624dp"
         android:layout_marginEnd="103dp"
         android:background="@color/red"
         android:text="Log-out"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/stats_button"
+        app:layout_constraintVertical_bias="0.805" />
 
     <TextView
         android:id="@+id/username"

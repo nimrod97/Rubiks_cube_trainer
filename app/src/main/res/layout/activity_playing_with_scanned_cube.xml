@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
+        app:layout_constraintVertical_bias="0.905" />
 
     <ImageView
         android:id="@+id/undo_btn"
@@ -72,61 +72,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.033" />
 
-    <ImageView
-        android:id="@+id/play_btn"
-        android:layout_width="56dp"
-        android:layout_height="58dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/play_button"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/glview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.292"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.848"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/pause_btn"
-        android:layout_width="56dp"
-        android:layout_height="58dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/pause_button"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.292"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/glview"
-        app:layout_constraintVertical_bias="0.848"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/undo_btn2"
-        android:layout_width="56dp"
-        android:layout_height="58dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/btn_undo_icon"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.848"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <Button
         android:id="@+id/Continue"
         android:layout_width="127dp"
@@ -163,12 +108,12 @@ When it's all ok, press continue"
 
     <TextView
         android:id="@+id/solve_notations"
-        android:layout_width="392dp"
-        android:layout_height="98dp"
+        android:layout_width="390dp"
+        android:layout_height="128dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMaxTextSize="50sp"
         android:autoSizeMinTextSize="5sp"
         android:autoSizeTextType="uniform"
         android:text="TextView"
@@ -202,8 +147,8 @@ When it's all ok, press continue"
 
     <SeekBar
         android:id="@+id/slider"
-        android:layout_width="191dp"
-        android:layout_height="54dp"
+        android:layout_width="190dp"
+        android:layout_height="55dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -215,10 +160,65 @@ When it's all ok, press continue"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/solve_notations"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/glview"
-        app:layout_constraintVertical_bias="0.854" />
+        app:layout_constraintVertical_bias="0.099" />
+
+    <ImageView
+        android:id="@+id/pause_btn"
+        android:layout_width="68dp"
+        android:layout_height="71dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_pause_btn"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.279"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/glview"
+        app:layout_constraintVertical_bias="0.087"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/play_btn"
+        android:layout_width="68dp"
+        android:layout_height="71dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_play_btn"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/glview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.279"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.087"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/undo_btn2"
+        android:layout_width="68dp"
+        android:layout_height="71dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/btn_undo_icon"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.064"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.087"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
