@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.rubikscubetrainer.db.HelpActivity;
 import com.example.rubikscubetrainer.db.StatsActivity;
 import com.example.rubikscubetrainer.scanning.Scanner;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -37,6 +38,7 @@ public class PlayingOptionsActivity extends AppCompatActivity {
     private Button play;
     private Button stats;
     private Button logout;
+    private Button help;
     GoogleSignInClient mGoogleSignInClient;
     public static String username;
     private TextView text;
@@ -52,6 +54,7 @@ public class PlayingOptionsActivity extends AppCompatActivity {
         play = findViewById(R.id.play_in_the_app_button);
         stats = findViewById(R.id.stats_button);
         logout = findViewById(R.id.logout);
+        help = findViewById(R.id.help_button);
         text = findViewById(R.id.username);
         okHttpClient = new OkHttpClient();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -119,6 +122,13 @@ public class PlayingOptionsActivity extends AppCompatActivity {
                 if (v.getId() == R.id.logout) {
                     logOut();
                 }
+            }
+        });
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlayingOptionsActivity.this, HelpActivity.class);
+                startActivity(intent);
             }
         });
 

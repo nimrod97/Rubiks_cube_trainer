@@ -136,5 +136,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), PlayingOptionsActivity.class);
             startActivity(intent);
         }
+//        Intent intent = new Intent(this, PlayingOptionsActivity.class);
+//        startActivity(intent);
     }
 }

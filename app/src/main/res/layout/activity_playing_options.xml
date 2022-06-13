@@ -9,11 +9,73 @@
     android:background="@color/cardview_dark_background"
     tools:context=".PlayingOptionsActivity">
 
+    <Button
+        android:id="@+id/help_button"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="103dp"
+        android:text="@string/help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/stats_button"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="504dp"
+        android:layout_marginEnd="103dp"
+        android:text="statistics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/play_in_the_app_button"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="384dp"
+        android:layout_marginEnd="103dp"
+        android:text="@string/play_in_the_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/scan_button"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="264dp"
+        android:layout_marginEnd="103dp"
+        android:text="@string/scan_your_own_cube"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="224dp"
+        android:layout_height="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="624dp"
+        android:layout_marginEnd="103dp"
+        android:background="@color/red"
+        android:text="Log-out"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/username"
-        android:layout_width="404dp"
-        android:layout_height="128dp"
+        android:layout_width="409dp"
+        android:layout_height="113dp"
         android:autoSizeMaxTextSize="30dp"
         android:autoSizeMinTextSize="5dp"
         android:autoSizeTextType="uniform"
@@ -22,64 +84,10 @@
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.02" />
-
-    <Button
-        android:id="@+id/play_in_the_app_button"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginEnd="103dp"
-        android:text="@string/play_in_the_app"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.433" />
-
-    <Button
-        android:id="@+id/scan_button"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginEnd="103dp"
-        android:text="@string/scan_your_own_cube"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.267" />
-
-    <Button
-        android:id="@+id/stats_button"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginEnd="103dp"
-        android:text="statistics"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605" />
-
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="102dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="84dp"
-        android:background="@color/red"
-        android:text="Log-out"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintVertical_bias="0.019" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

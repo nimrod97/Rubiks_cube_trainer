@@ -30,4 +30,13 @@
     <string name="title_activity_most_play">MostPlay</string>
     <string name="username_table"><u><b>Username</b></u></string>
     <string name="number_of_games_table"><u><b>Number of games</b></u></string>
+    <string name="help">help</string>
+    <string name="title_activity_notations">NotationsActivity</string>
+    <string name="notations_text">
+        "Solving the cube involves following a set of moves."
+        "To illustrate the moves we will use cube notations as listed below."
+        "Each of these moves is a 90 degree turn of the relevant pieces."
+        "Each move also has a corresponding opposite move which is denoted with an apostrophe ( ' )."
+    </string>
+    <string name="action_settings">Settings</string>
 </resources>

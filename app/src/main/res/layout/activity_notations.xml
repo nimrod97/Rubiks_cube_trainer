@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:fitsSystemWindows="true"
+    tools:context=".db.NotationsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/welcome_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoSizeTextType="uniform"
+            android:text="Rubik's Cube Notations"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/notations_explanation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/notations_explanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="@string/notations_text"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_u_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_message" />
+
+        <ImageView
+            android:id="@+id/rotation_u_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_ui_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notations_explanation"
+            app:layout_constraintVertical_bias="0"
+            app:srcCompat="@drawable/rotation_u_150" />
+
+        <ImageView
+            android:id="@+id/rotation_ui_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_d_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_u_id"
+            app:srcCompat="@drawable/rotation_ui_150"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <ImageView
+            android:id="@+id/rotation_d_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_di_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_ui_id"
+            app:srcCompat="@drawable/rotation_d_150"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="434dp" />
+
+        <ImageView
+            android:id="@+id/rotation_di_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_r_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_d_id"
+            app:srcCompat="@drawable/rotation_di_150"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="434dp" />
+
+        <ImageView
+            android:id="@+id/rotation_r_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_ri_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_di_id"
+            app:srcCompat="@drawable/rotation_r_150"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="604dp" />
+
+        <ImageView
+            android:id="@+id/rotation_ri_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_l_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_r_id"
+            app:srcCompat="@drawable/rotation_ri_150"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="666dp" />
+
+        <ImageView
+            android:id="@+id/rotation_l_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_li_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_ri_id"
+            app:srcCompat="@drawable/rotation_l_150"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="751dp" />
+
+        <ImageView
+            android:id="@+id/rotation_li_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_f_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_l_id"
+            app:srcCompat="@drawable/rotation_li_150" />
+
+        <ImageView
+            android:id="@+id/rotation_f_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_fi_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_li_id"
+            app:srcCompat="@drawable/rotation_f_150"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="921dp" />
+
+        <ImageView
+            android:id="@+id/rotation_fi_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_b_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_f_id"
+            app:srcCompat="@drawable/rotation_fi_150"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="1006dp" />
+
+        <ImageView
+            android:id="@+id/rotation_b_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toTopOf="@+id/rotation_bi_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_fi_id"
+            app:srcCompat="@drawable/rotation_b_150"
+            tools:layout_editor_absoluteX="19dp"
+            tools:layout_editor_absoluteY="1091dp" />
+
+        <ImageView
+            android:id="@+id/rotation_bi_id"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_b_id"
+            app:srcCompat="@drawable/rotation_bi_150" />
+
+        <TextView
+            android:id="@+id/rotation_u_text"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:text="U - Turn the top (up) face clockwise."
+            app:layout_constraintBottom_toTopOf="@+id/rotation_ui_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toEndOf="@id/rotation_u_id"
+            app:layout_constraintTop_toBottomOf="@+id/notations_explanation" />
+
+        <TextView
+            android:id="@+id/rotation_ui_text"
+            android:layout_width="270dp"
+            android:layout_height="35dp"
+            android:text="U' - Turn the top (up) face counter-clockwise."
+            app:layout_constraintBottom_toTopOf="@+id/rotation_d_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.398"
+            app:layout_constraintStart_toEndOf="@id/rotation_ui_id"
+            app:layout_constraintTop_toBottomOf="@+id/rotation_u_text" />
+
+        <TextView
+            android:id="@+id/rotation_d_text"
+            android:layout_width="270dp"
+            android:layout_height="35dp"
+            android:text="D - Turn the bottom (down) face clockwise."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.398"
+            app:layout_constraintStart_toEndOf="@id/rotation_d_id"
+            tools:layout_editor_absoluteY="390dp"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="270dp"
+            android:layout_height="35dp"
+            android:text="D' - Turn the bottom (down) face counter-clockwise."
+            tools:layout_editor_absoluteX="145dp"
+            tools:layout_editor_absoluteY="470dp"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="rotation_r_id,rotation_ri_id,rotation_ui_id,rotation_d_id,rotation_l_id,rotation_li_id,rotation_fi_id,rotation_di_id,rotation_f_id,rotation_u_id,rotation_b_id,rotation_bi_id" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
