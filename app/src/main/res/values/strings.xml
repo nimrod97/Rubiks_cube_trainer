@@ -32,11 +32,49 @@
     <string name="number_of_games_table"><u><b>Number of games</b></u></string>
     <string name="help">help</string>
     <string name="title_activity_notations">NotationsActivity</string>
+    <string name="action_settings">Settings</string>
     <string name="notations_text">
         "Solving the cube involves following a set of moves."
-        "To illustrate the moves we will use cube notations as listed below."
+        "To illustrate the moves we will use cube notations as listed below.\n"
         "Each of these moves is a 90 degree turn of the relevant pieces."
         "Each move also has a corresponding opposite move which is denoted with an apostrophe ( ' )."
+        "In addition, a 180 degree turn of a face denoted with '2'. "
+        "For example, a 180 degree turn of a the up face is denoted as 'U2'."
     </string>
-    <string name="action_settings">Settings</string>
+    <string name="beginner_algorithm_text">
+        <b><u>"The Beginner algorithm - "</u></b>
+        "The Beginner or Layer by Layer algorithm (LBL) divides the cube into layers and you solve each layer by using specific algorithms.\n"
+        "Compared to other methods there are only a few algorithms to memorize, and they are relatively intuitive.\n"
+        "This technique is perfect for beginners since it is the most accessible."
+        "On the other hand, this method is not efficient for speedcubing. "
+        "An average LBL solve is around 130 moves. "
+        "If you want to achieve speeds under one minute it is recommended to learn additional methods."
+    </string>
+    <string name="cfop_algorithm_text">
+        <b><u>"The CFOP algorithm - "</u></b>
+        "The CFOP (short for Cross - first 2 layers - orientation of the last layer - permutation of the last layer) "
+        "method, also known as the Fridrich method, is the natural progression for many cubers after mastering the Layer by Layer method. \n"
+        "An average CFOP solve is around 60 moves. The logic is simple to learn and it is possible to achieve incredibly fast times. \n"
+        "This method is similar to LBL algorithm, however, "
+        "when solving the second layer you pair pieces up before placing them into the first and second layer. "
+        "The last layer is solved with two extra steps. "
+        "This method relies heavily on predicting the next steps and some intuition.  "
+        "Although CFOP contains over a hundred algorithms to memorize, it is easy to modify them to make them easier to remember.
+    </string>
+    <string name="koecimba_algorithm_text">
+        <b><u>"The Koecimba algorithm - "</u></b>
+        "Also called the Two-Phase Algorithm. Like its name the algorithm solves the Cube in two phases "
+        "and can solve it in 29 moves or less. \n"
+        "In the first phase, the algorithm looks for maneuvers which will transform a scrambled cube to G1 group. "
+        "This group is a subset of all possible cubes that we get if we turn the faces of a solved cube "
+        "and don't use the moves that turn the right, left, front and back faces 90 degrees "
+        "(but can move these faces 180 degrees). "
+        "In this subset, pieces in the middle layer will stay in the middle layer without flipping, "
+        "and pieces in the top and bottom layers can only exchange between those layers without twisting or flipping\n"
+        "In the second phase the algorithm restores the cube in the subgroup G1, using only moves of this subgroup. "
+        "It restores the permutation of the 8 corners, the permutation of the 8 edges of the Up-face and Down-face "
+        "and the permutation of the 4 UD-slice edges (the edges between the Up-face and Down-face).\n"
+        "The algorithm doesn't stop when a first solution is found but continues to search for shorter solutions "
+        "by carrying out phase 2 from suboptimal solutions of phase 1."
+    </string>
 </resources>

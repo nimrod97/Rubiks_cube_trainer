@@ -20,7 +20,7 @@ public class HelpActivity extends AppCompatActivity {
         solvingMethods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HelpActivity.this, SolvingMethodsExplanation.class);
+                Intent intent = new Intent(HelpActivity.this, SolvingMethodsExplanationActivity.class);
                 startActivity(intent);
             }
         });

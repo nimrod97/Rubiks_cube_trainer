@@ -37,15 +37,15 @@
         android:theme="@style/Theme.RubiksCubeTrainer"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".SolvingMethodsExplanation"
+            android:name=".SolvingMethodsExplanationActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".NotationsActivity"
             android:exported="false"
-            android:label="@string/title_activity_notations"
-            android:theme="@style/Theme.RubiksCubeTrainer.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".scanning.Scanner"
             android:exported="false"
