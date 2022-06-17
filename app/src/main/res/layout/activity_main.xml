@@ -11,7 +11,7 @@
 
 
     <TextView
-        android:id="@+id/title_notation"
+        android:id="@+id/welcome_message"
         android:layout_width="393dp"
         android:layout_height="206dp"
         android:layout_marginStart="12dp"
@@ -33,7 +33,7 @@
         android:id="@+id/cube_pic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title_notation"
+        android:layout_below="@+id/welcome_message"
         android:layout_marginTop="4dp"
         android:src="@drawable/play_store_512"
         android:visibility="invisible"

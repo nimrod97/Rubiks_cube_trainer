@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        welcomeMessage = findViewById(R.id.title_notation);
+        welcomeMessage = findViewById(R.id.welcome_message);
         signInMessage = findViewById(R.id.signin_text);
         signInButton = findViewById(R.id.signin);
         img = findViewById(R.id.cube_pic);
