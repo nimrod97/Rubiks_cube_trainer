@@ -48,12 +48,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     private boolean solvedByMyselfFlag = false;
 
 
-//    public float tx, ty; // Touch coords
-//    private float sHeight;
-
     //-------------------ARCBALL--------------------------
-//    private float[] mModelview = new float[16];
-//    private float[] mProjection = new float[16];
     private Matrix4f LastRot = new Matrix4f();
     private Matrix4f ThisRot = new Matrix4f();
     private final Object matrixLock = new Object();
@@ -117,30 +112,8 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-//        float[] lightAmbient = {1.0f, 1.0f, 1.0f, 1.0f};
-//        float[] lightDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
-//        float[] matSpecular = {1.0f, 1.0f, 1.0f, 1.0f};
-//        float[] matShines = {5.0f};
-//        float[] matAmbient = {1.0f, 1.0f, 1.0f, 1.0f};
-//        float[] matDiffuse = {1.0f, 1.0f, 1.0f, 1.0f};
-//        float[] lightPost = {0.0f, 5.0f, 10.0f, 1.0f};
         gl.glClearColor(0.8f, 0.8f, 0.8f, 1.0f);  // Set the background's color
-//        gl.glClearDepthf(1.0f);            // Set depth's clear-value to farthest
         gl.glEnable(GL10.GL_DEPTH_TEST);   // Enables depth-buffer for hidden surface removal
-//        gl.glDepthFunc(GL10.GL_LEQUAL);    // The type of depth testing to do
-//        gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_NICEST);  // nice perspective view
-//        gl.glShadeModel(GL10.GL_SMOOTH);   // Enable smooth shading of color
-        // enable smooth shading
-
-//        gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_SPECULAR, matSpecular, 0);
-//        gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_SHININESS, matShines, 0);
-//        gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_AMBIENT, matAmbient, 0);
-        //   gl.glMaterialfv(GL10.GL_FRONT, GL10.GL_DIFFUSE, matDiffuse, 0);
-//        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_POSITION, lightPost, 0);
-//        gl.glEnable(GL10.GL_LIGHTING);
-//        gl.glEnable(GL10.GL_LIGHT0);
-//        gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_AMBIENT, lightAmbient, 0);
-        //  gl.glLightfv(GL10.GL_LIGHT0, GL10.GL_DIFFUSE, lightDiffuse, 0);
         textures = new GLTextures(gl, context);
         textures.add(WHITE);
         textures.add(YELLOW);
@@ -190,7 +163,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     }
 
     public void mix() {
-        cube.startRandomRotating(10 * cube.getCubeSize());
+        cube.startRandomRotating(20);
     }
 
     public void cancelMove() {
@@ -198,7 +171,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     }
 
 
-    //    float[] cl = new float[4];
     public int nScreenWidth, nScreenHeight;
     public float fFOV = 45f;
     public float aspect;
@@ -229,6 +201,10 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
 
     public void setMode(int mode) {
         this.mode = mode;
+    }
+
+    public boolean getSolveFlag() {
+        return solveFlag;
     }
 
     public void setSolveFlag(boolean flag) {
@@ -289,7 +265,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     CubeGLActivity.undoBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.playBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.pauseBtn.setVisibility(View.INVISIBLE);
-                    CubeGLActivity.undoLastSolveStepBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.slider.setVisibility(View.INVISIBLE);
                 }
             });
@@ -305,7 +280,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     PlayingWithScannedCube.undoBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.playBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.pauseBtn.setVisibility(View.INVISIBLE);
-                    PlayingWithScannedCube.undoLastSolveStepBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.slider.setVisibility(View.INVISIBLE);
                 }
             });
@@ -470,6 +444,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                 || Helper.hitWithTriangle(p.polygon[2], p.polygon[3], p.polygon[0], collisionPointS, collisionPointE)
                 || Helper.hitWithTriangle(p.polygon[3], p.polygon[0], p.polygon[1], collisionPointS, collisionPointE);
     }
+
     MatrixGrabber mg = new MatrixGrabber();
 
     public float[] getViewRay(float x, float y) {
