@@ -33,7 +33,7 @@
     <string name="help">help</string>
     <string name="title_activity_notations">NotationsActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="solving_methods"><u>Solving Methods</u></string>
+    <string name="title_solving_methods">Solving Methods</string>
     <string name="notations_text">
         "Solving the cube involves following a set of moves."
         "To illustrate the moves we will use cube notations as listed below.\n"
@@ -49,18 +49,23 @@
         "This technique is perfect for beginners since it is the most accessible."
         "On the other hand, this method is not efficient for speedcubing. "
         "An average LBL solve is around 130 moves. "
-        "If you want to achieve speeds under one minute, it is recommended to learn additional methods."
+        "If you want to achieve speeds under one minute, it is recommended to learn additional methods.\n"
+        "You can read more information about the method in this"
+        <a href="https://ruwix.com/the-rubiks-cube/how-to-solve-the-rubiks-cube-beginners-method/">link</a>
     </string>
     <string name="cfop_algorithm_text">
         <b><u><font color='#FFBB86FC'>"The CFOP algorithm\n"</font></u></b>
-        "The CFOP method (short for Cross - first 2 layers - orientation of the last layer - permutation of the last layer), "
-        "also known as the Fridrich method, is the natural progression for many cubers after mastering the Layer by Layer method.\n"
-        "An average CFOP solve is around 60 moves. The logic is simple to learn and it is possible to achieve incredibly fast times.\n"
-        "This method is similar to LBL algorithm, however, "
-        "when solving the second layer you pair pieces up before placing them into the first and second layer. "
-        "The last layer is solved with two extra steps. "
-        "This method relies heavily on predicting the next steps and some intuition.  "
-        "Although CFOP contains over a hundred algorithms to memorize, it is easy to modify them to make them easier to remember."
+        "The most popular Speedsolving method is the CFOP (Cross, First 2 layers, Orientation of last layer, Permutation of last layer) ,"
+        "also known as the Fridrich method. "
+        "Unlike The beginner's method, the Speedsolving method focuses mainly about solving the Rubik's cube in the fastest "
+        "and most efficient way, rather than the easiest way.\n"
+        "The CFOP method average number of moves for a complete solution is ~56 moves."
+        "This method is similar to the Beginner algorithm, however, it combines some of the steps, solving more of the cube at once.\n"
+        "The method works on a layer-by-layer system, first solving a cross typically on the bottom, "
+        "continuing to solve the first two layers (F2L), orienting the last layer (OLL), "
+        "and finally permuting the last layer (PLL).\n"
+        "You can read more information about the method in this"
+        <a href="https://denzeltl.github.io/rubiks-cube-solution/">link</a>
     </string>
     <string name="koecimba_algorithm_text">
         <b><u><font color='#FFBB86FC'>"The Koecimba algorithm\n"</font></u></b>
@@ -76,6 +81,8 @@
         "It restores the permutation of the 8 corners, the permutation of the 8 edges of the Up-face and Down-face "
         "and the permutation of the 4 UD-slice edges (the edges between the Up-face and Down-face).\n"
         "The algorithm doesn't stop when a first solution is found but continues to search for shorter solutions "
-        "by carrying out phase 2 from suboptimal solutions of phase 1."
+        "by carrying out phase 2 from suboptimal solutions of phase 1.\n"
+        "You can read more information about the method in this"
+        <a href="https://www.speedsolving.com/wiki/index.php/Kociemba%27s_Algorithm">link</a>
     </string>
 </resources>
