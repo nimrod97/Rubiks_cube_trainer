@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rubikscubetrainer.db.StatsActivity;
-import com.example.rubikscubetrainer.scanning.Scanner;
+import com.example.rubikscubetrainer.scanning.ScanningActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -99,7 +99,7 @@ public class PlayingOptionsActivity extends AppCompatActivity {
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PlayingOptionsActivity.this, Scanner.class);
+                Intent intent = new Intent(PlayingOptionsActivity.this, ScanningActivity.class);
 //                Intent intent = new Intent(PlayingOptionsActivity.this, ScanningActivity.class);
                 startActivity(intent);
             }

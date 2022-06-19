@@ -284,6 +284,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     CubeGLActivity.solveAloneGreeting.setVisibility(View.VISIBLE);
                     CubeGLActivity.solveBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.replayBtn.setVisibility(View.VISIBLE);
+                    CubeGLActivity.backToHomeBtn.setVisibility(View.VISIBLE);
                     CubeGLActivity.shuffleBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.undoBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.playBtn.setVisibility(View.INVISIBLE);
@@ -300,6 +301,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     PlayingWithScannedCube.solveAloneGreeting.setVisibility(View.VISIBLE);
                     PlayingWithScannedCube.solveBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.replayBtn.setVisibility(View.VISIBLE);
+                    PlayingWithScannedCube.backToHomeBtn.setVisibility(View.VISIBLE);
                     PlayingWithScannedCube.undoBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.playBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.pauseBtn.setVisibility(View.INVISIBLE);
@@ -310,8 +312,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
         }
         RequestBody formbody = new FormBody.Builder()
                 .add("username", PlayingOptionsActivity.username)
-
-//                .add("username", LoginActivity.username.getText().toString())
                 .build();
 //        Request request = new Request.Builder().url("http://10.100.102.24:5000/solved_by_myself")
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself")
@@ -424,7 +424,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
         for (int i = 0; i < parts.size(); i++) {
             Part p = parts.get(i);
             if (collision(p, ray)) {
-                //pps.add(p);
                 if (selectedPart == null) {
                     selectedPart = p;
                     selId = i;
@@ -439,7 +438,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
         }
         if (selectedPart != null) {
             if (!selectedPart.isSelected() && !selectedParts.contains(selId)) {
-                //		Log.i("selected part is: ", String.valueOf(selId));
                 selectedParts.add(selId);
                 if (selectedParts.size() >= 2) {
                     if (cube.checkSidesForRotating(selectedParts)) {
@@ -452,7 +450,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
         return selectedPart != null;
     }
 
-    float[] collisionPoint = {0f, 0f, 0f};
     float[] collisionPointS = {0f, 0f, 0f};
     float[] collisionPointE = {0.0f, 0.0f, 0.0f};
     private static int RAY_ITERATIONS = 1000;
@@ -473,16 +470,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                 || Helper.hitWithTriangle(p.polygon[2], p.polygon[3], p.polygon[0], collisionPointS, collisionPointE)
                 || Helper.hitWithTriangle(p.polygon[3], p.polygon[0], p.polygon[1], collisionPointS, collisionPointE);
     }
-
-    public float distance(float[] a, float[] b) {
-        float abx = b[0] - a[0];
-        float aby = b[1] - a[1];
-        float abz = b[2] - a[2];
-        float distance = (float) Math.sqrt(abx * abx + aby * aby + abz * abz);
-
-        return distance;
-    }
-
     MatrixGrabber mg = new MatrixGrabber();
 
     public float[] getViewRay(float x, float y) {

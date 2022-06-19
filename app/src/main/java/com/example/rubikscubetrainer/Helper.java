@@ -5,17 +5,6 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 public class Helper {
-
-    /**
-     * convert degrees to radians based on ios code from: http://blog.nova-box.com/2010/05/iphone-ray-picking-glunproject-sample.html
-     *
-     * @param deg
-     * @return
-     */
-    public static double degToRadians(float deg) {
-        return deg / 180.0 * Math.PI;
-    }
-
     /**
      * create a Floatbuffer for a given Array
      *
@@ -82,20 +71,5 @@ public class Helper {
         return pd0 < 0 && pd1 < 0 && pd2 < 0;
     }
 
-    /**
-     * check if a given point in space collides with a given object center  with a given radius
-     * based on ios code from: http://blog.nova-box.com/2010/05/iphone-ray-picking-glunproject-sample.html
-     *
-     * @param point  point to check for collision with object x,y,z
-     * @param center center of the object x,y,z
-     * @param radius
-     * @return true on collision, false on no collision
-     */
-    public static Boolean poinSphereCollision(float[] point, float[] center, float radius) {
-
-        return ((point[0] - center[0]) * (point[0] - center[0]) +
-                (point[1] - center[1]) * (point[1] - center[1]) +
-                (point[2] - center[2]) * (point[2] - center[2]) < (radius * radius));
-    }
 
 }

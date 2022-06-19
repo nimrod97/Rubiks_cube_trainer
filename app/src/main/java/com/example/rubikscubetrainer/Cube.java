@@ -153,29 +153,28 @@ public class Cube {
 		parts = new Vector<Part>();
 		Rectangle rectWhite =
 				new Rectangle(quad, textures.getTextureIdforResource(GLRenderer.WHITE));
-		int id = 1;
 		for (int i = 0; i < size * size; i++)
-			parts.add(new Part(MyOpenGL.white, id++, rectWhite));
+			parts.add(new Part(rectWhite));
 		Rectangle rectBlue =
 				new Rectangle(quad, textures.getTextureIdforResource(GLRenderer.BLUE));
 		for (int i = 0; i < size * size; i++)
-			parts.add(new Part(MyOpenGL.red, id++, rectBlue));
+			parts.add(new Part(rectBlue));
 		Rectangle rectYellow =
 				new Rectangle(quad, textures.getTextureIdforResource(GLRenderer.YELLOW));
 		for (int i = 0; i < size * size; i++)
-			parts.add(new Part(MyOpenGL.yellow, id++, rectYellow));
+			parts.add(new Part(rectYellow));
 		Rectangle rectGreen =
 				new Rectangle(quad, textures.getTextureIdforResource(GLRenderer.GREEN));
 		for (int i = 0; i < size * size; i++)
-			parts.add(new Part(MyOpenGL.orange, id++, rectGreen));
+			parts.add(new Part(rectGreen));
 		Rectangle rectRed =
 				new Rectangle(quad, textures.getTextureIdforResource(GLRenderer.RED));
 		for (int i = 0; i < size * size; i++)
-			parts.add(new Part(MyOpenGL.green, id++, rectRed));
+			parts.add(new Part(rectRed));
 		Rectangle rectOrange =
 				new Rectangle(quad, textures.getTextureIdforResource(GLRenderer.ORANGE));
 		for (int i = 0; i < size * size; i++)
-			parts.add(new Part(MyOpenGL.blue, id++, rectOrange));
+			parts.add(new Part(rectOrange));
 	}
 
 	private void createFaces(int size) {
@@ -469,7 +468,6 @@ public class Cube {
 				parts.removeElementAt(swaps.get(rotSide).get(i).getFirst());
 				parts.add(swaps.get(rotSide).get(i).getFirst(),
 						partsTmp.get(swaps.get(rotSide).get(i).getSecond()));
-				//parts[swaps[rotSide][i].first] = partsTmp[swaps[rotSide][i].second];
 			}
 		}
 	}
@@ -544,11 +542,8 @@ public class Cube {
 		sides = new Vector<Integer>();
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < dimOfCube * dimOfCube; j++) {
-				//tmp.add(current++);
 				sides.add(i);
 			}
-			//	sidesIDColors.push_back(tmp);
-			//tmp.clear();
 		}
 		madeMoves = new Stack<Pair<Integer, Boolean>>();
 		movingSides = new Vector<Pair<Integer, Boolean>>();
@@ -629,18 +624,6 @@ public class Cube {
 
 	public float[] getQuad() {
 		return quad;
-	}
-
-	public boolean isSelected(int id) {
-		return parts.get(id).isSelected();
-	}
-
-	public void selectPart(int id) {
-		parts.get(id).setSelected(true);
-	}
-
-	public void deselectPart(int id) {
-		parts.get(id).setSelected(false);
 	}
 
 	public List<String> getColors() {
@@ -767,28 +750,18 @@ public class Cube {
 
 	public void beginRotate(int side, boolean isClockWise) {
 		if (status != 'R' && side > -1 && side < 9) {
-			if (status == 'A' || status == 'C') {
-//				status = 'A';
-//				movingSides.remove(movingSides.size() - 1);
-//			} else if (status == 'C') {
-//				status = 'C';
+			if (status == 'A' || status == 'C')
 				movingSides.remove(movingSides.size() - 1);
-			} else {
+			else
 				status = 'R';
-			}
 			rotateAngle = 0;
 			rotSide = side;
 			this.isClockWise = isClockWise;
 		}
 	}
 
-	public boolean checkCollision(float tx, float ty) {
-		return true;
-	}
-
 	public boolean checkSidesForRotating(Vector<Integer> setOf) {
 		Vector<Integer> setOfSides = new Vector<Integer>(setOf);
-		////////
 		// first int is element, another pair is i of element and its number
 
 		if (setOfSides.size() < 2 || status != 'N') return false;
@@ -824,9 +797,6 @@ public class Cube {
 			} else {
 				mp.put(oSides.get(setOfSides.get(i)).getSecond(), 1);
 			}
-			/*
-			 * mp[oSides[ setOfSides[i] ].first]++;
-				mp[oSides[ setOfSides[i] ].second]++;*/
 		}
 		Iterator<Entry<Integer, Integer>> iter = mp.entrySet().iterator();
 		while (iter.hasNext()) {
@@ -836,14 +806,6 @@ public class Cube {
 				iSide = mEntry.getKey();
 			}
 		}
-		/*for (map<int, int>::iterator it = mp.begin(); it != mp.end(); it++)
-		{
-			if (it->second > maxSide)
-			{
-				maxSide = it->second;
-				iSide = it->first;
-			}
-		}*/
 		for (int i = setOfSides.size() - 1; i >= 0; i--) {
 			if (oSides.get(setOfSides.get(i)).getFirst() != iSide
 					&& oSides.get(setOfSides.get(i)).getSecond() != iSide)
@@ -934,51 +896,5 @@ public class Cube {
 		return cubeString.toString();
 	}
 
-	/*
-	private StringBuilder buildColorString(List<String> colors, int index) {
-		StringBuilder str = new StringBuilder();
-		for (int i = index; i < index + 9; i++) {
-			String c = colors.get(i);
-			switch(c) {
-				case "white":
-					str.append('w');
-					break;
-				case "yellow":
-					str.append('y');
-					break;
-				case "blue":
-					str.append('b');
-					break;
-				case "green":
-					str.append('g');
-					break;
-				case "red":
-					str.append('r');
-					break;
-				case "orange":
-					str.append('o');
-					break;
-			}
-		}
-		return str;
-	}
-	public String getCubeRepresentationByColors() {
-		List<String> colors = getColors();
-		StringBuilder front = buildColorString(colors, 0);
-		StringBuilder left = buildColorString(colors, 9);
-		StringBuilder back = buildColorString(colors, 18);
-		StringBuilder right = buildColorString(colors, 27);
-		StringBuilder up = buildColorString(colors, 36);
-		StringBuilder down = buildColorString(colors, 45);
-		StringBuilder cubeString = new StringBuilder();
-		cubeString.append(up);
-		cubeString.append(left);
-		cubeString.append(front);
-		cubeString.append(right);
-		cubeString.append(back);
-		cubeString.append(down);
-		return cubeString.toString();
-	}
-	 */
 }
 

@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class Scanner extends Activity implements CvCameraViewListener2 {
+public class ScanningActivity extends Activity implements CvCameraViewListener2 {
     private JavaCameraView camera;
     private BaseLoaderCallback baseLoaderCallback;
     private Mat mRgba;
@@ -56,7 +56,7 @@ public class Scanner extends Activity implements CvCameraViewListener2 {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_scanner);
+        setContentView(R.layout.activity_scanning);
         saveFaceButton = findViewById(R.id.saveFaceButton);
         camera = findViewById(R.id.javaCameraView);
         camera.setCameraPermissionGranted();
@@ -180,7 +180,7 @@ public class Scanner extends Activity implements CvCameraViewListener2 {
         faces.put(key, temp);
         index++;
         if (index == 6) {
-            Intent intent = new Intent(Scanner.this, PlayingWithScannedCube.class);
+            Intent intent = new Intent(ScanningActivity.this, PlayingWithScannedCube.class);
             startActivity(intent);
             finish();
         }

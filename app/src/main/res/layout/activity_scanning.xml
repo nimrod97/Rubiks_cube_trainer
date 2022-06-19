@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:layoutDirection="rtl"
-    tools:context=".scanning.Scanner">
+    tools:context=".scanning.ScanningActivity">
 
     <org.opencv.android.JavaCameraView
         android:id="@+id/javaCameraView"

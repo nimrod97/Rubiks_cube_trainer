@@ -18,6 +18,12 @@ import javax.microedition.khronos.opengles.GL10;
  * @author Tasos Kleisas
  */
 public class GLTextures {
+    private java.util.HashMap<String, Integer> textureMap;
+    private String[] textureFiles;
+    private GL10 gl;
+    private Context context;
+    private int[] textures;
+
     public GLTextures(GL10 gl, Context context) {
         this.gl = gl;
         this.context = context;
@@ -41,7 +47,7 @@ public class GLTextures {
         gl.glGenTextures(textureFiles.length, tmp_tex, 0);
         textures = tmp_tex;
         for (int i = 0; i < textureFiles.length; i++) {
-            Bitmap bmp = getBitmapFromAsset(textureFiles[i]);//BitmapFactory.decodeResource(context.getResources(),textureFiles[i]);
+            Bitmap bmp = getBitmapFromAsset(textureFiles[i]);
             this.textureMap.put(textureFiles[i], new Integer(i));
             int tex = tmp_tex[i];
 
@@ -58,16 +64,6 @@ public class GLTextures {
                     , GL10.GL_CLAMP_TO_EDGE);
             gl.glEnable(GL10.GL_TEXTURE_2D);
 
-        }
-    }
-
-    public void setTexture(int id) {
-        try {
-            int textureid = this.textureMap.get(new Integer(id)).intValue();
-            gl.glBindTexture(GL10.GL_TEXTURE_2D, this.textures[textureid]);
-
-        } catch (Exception e) {
-            return;
         }
     }
 
@@ -90,9 +86,4 @@ public class GLTextures {
         }
     }
 
-    private java.util.HashMap<String, Integer> textureMap;
-    private String[] textureFiles;
-    private GL10 gl;
-    private Context context;
-    private int[] textures;
 }

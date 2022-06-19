@@ -36,6 +36,7 @@ public class CubeGLActivity extends FragmentActivity {
     public static Button shuffleBtn;
     public static Button solveBtn;
     public static Button replayBtn;
+    public static Button backToHomeBtn;
     public static ImageView playBtn;
     public static ImageView pauseBtn;
     public static SeekBar slider;
@@ -60,6 +61,7 @@ public class CubeGLActivity extends FragmentActivity {
         shuffleBtn = findViewById(R.id.shuffle);
         solveBtn = findViewById(R.id.solve);
         replayBtn = findViewById(R.id.replay);
+        backToHomeBtn = findViewById(R.id.back_to_home_screen);
         playBtn = findViewById(R.id.play_btn);
         pauseBtn = findViewById(R.id.pause_btn);
         slider = findViewById(R.id.slider);
@@ -280,6 +282,15 @@ public class CubeGLActivity extends FragmentActivity {
         replayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(CubeGLActivity.this, CubeGLActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        backToHomeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(CubeGLActivity.this, PlayingOptionsActivity.class);
                 startActivity(intent);
                 finish();
@@ -413,6 +424,7 @@ public class CubeGLActivity extends FragmentActivity {
                     public void run() {
                         solvingNotations.setVisibility(View.INVISIBLE);
                         replayBtn.setVisibility(View.VISIBLE);
+                        backToHomeBtn.setVisibility(View.VISIBLE);
                         solveBtn.setVisibility(View.INVISIBLE);
                         shuffleBtn.setVisibility(View.INVISIBLE);
                         playBtn.setVisibility(View.INVISIBLE);

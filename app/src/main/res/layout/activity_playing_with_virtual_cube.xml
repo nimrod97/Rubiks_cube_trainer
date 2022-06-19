@@ -23,6 +23,24 @@
     </com.example.rubikscubetrainer.GLView>
 
     <Button
+        android:id="@+id/back_to_home_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:text="Back to home screen"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/solve_notations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/replay"
+        app:layout_constraintVertical_bias="0.939" />
+
+    <Button
         android:id="@+id/replay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,10 +51,11 @@
         android:text="Replay"
         android:textAlignment="center"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/glview"
+        app:layout_constraintBottom_toTopOf="@+id/back_to_home_screen"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/glview"
         app:layout_constraintVertical_bias="0.882" />
 
     <ImageView

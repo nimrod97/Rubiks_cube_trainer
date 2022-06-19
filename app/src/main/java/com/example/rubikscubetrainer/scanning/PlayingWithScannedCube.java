@@ -43,6 +43,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
     private OkHttpClient okHttpClient;
     private Button continueBtn;
     public static Button replayBtn;
+    public static Button backToHomeBtn;
     public static ImageView playBtn;
     public static ImageView pauseBtn;
     public static SeekBar slider;
@@ -68,6 +69,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
         okHttpClient = new OkHttpClient();
         continueBtn = findViewById(R.id.Continue);
         replayBtn = findViewById(R.id.replay);
+        backToHomeBtn = findViewById(R.id.back_to_home_screen);
         playBtn = findViewById(R.id.play_btn);
         pauseBtn = findViewById(R.id.pause_btn);
         slider = findViewById(R.id.slider);
@@ -315,6 +317,15 @@ public class PlayingWithScannedCube extends FragmentActivity {
         replayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(PlayingWithScannedCube.this, PlayingWithScannedCube.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        backToHomeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(PlayingWithScannedCube.this, PlayingOptionsActivity.class);
                 startActivity(intent);
                 finish();
@@ -413,6 +424,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
                     public void run() {
                         solvingNotations.setVisibility(View.INVISIBLE);
                         replayBtn.setVisibility(View.VISIBLE);
+                        backToHomeBtn.setVisibility(View.VISIBLE);
                         solveBtn.setVisibility(View.INVISIBLE);
                         playBtn.setVisibility(View.INVISIBLE);
                         pauseBtn.setVisibility(View.INVISIBLE);

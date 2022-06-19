@@ -87,17 +87,6 @@ public class MainActivity extends AppCompatActivity {
                         signInButton.setVisibility(View.VISIBLE);
                     }
                 });
-//                try {
-//                    Thread.sleep(3000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                signInButton = findViewById(R.id.signin);
-
-////                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                Intent intent = new Intent(MainActivity.this, PlayingOptionsActivity.class);
-//                startActivity(intent);
-//                finish();
             }
         });
     }
@@ -136,7 +125,5 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), PlayingOptionsActivity.class);
             startActivity(intent);
         }
-//        Intent intent = new Intent(this, PlayingOptionsActivity.class);
-//        startActivity(intent);
     }
 }
