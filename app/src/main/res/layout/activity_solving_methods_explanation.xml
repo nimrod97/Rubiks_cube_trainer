@@ -14,14 +14,13 @@
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <TextView
             android:id="@+id/title_solving_methods"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:autoSizeTextType="uniform"
-            android:text="@string/solving_methods"
+            android:text="@string/title_solving_methods"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="40dp"

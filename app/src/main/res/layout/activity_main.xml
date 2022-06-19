@@ -33,7 +33,7 @@
         android:id="@+id/cube_pic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/welcome_message"
+        android:layout_below="@id/welcome_message"
         android:layout_marginTop="4dp"
         android:src="@drawable/play_store_512"
         android:visibility="invisible"
