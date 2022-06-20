@@ -177,7 +177,9 @@ public class PlayingOptionsActivity extends AppCompatActivity
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
             closeDrawer();
-        else
+        else {
+            mToolBar.setTitle("Home");
             super.onBackPressed();
+        }
     }
 }
