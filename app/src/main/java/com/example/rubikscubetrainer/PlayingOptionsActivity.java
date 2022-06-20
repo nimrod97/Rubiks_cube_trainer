@@ -116,7 +116,7 @@ public class PlayingOptionsActivity extends AppCompatActivity
 
     private void setUpToolBarMenu() {
         mToolBar = findViewById(R.id.toolbar);
-        mToolBar.setTitle("Home");
+//        mToolBar.setTitle("Home");
     }
 
     private void setUpNavigationDrawerMenu() {
@@ -148,17 +148,17 @@ public class PlayingOptionsActivity extends AppCompatActivity
         Intent intent;
         switch (item.getItemId()) {
             case R.id.home_id:
-                mToolBar.setTitle("Home");
+//                mToolBar.setTitle("Home");
                 intent = new Intent(this, PlayingOptionsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.learn_id:
-                mToolBar.setTitle("Learn More");
+//                mToolBar.setTitle("Learn More");
                 intent = new Intent(this, HelpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.stats_id:
-                mToolBar.setTitle("Statistics");
+//                mToolBar.setTitle("Statistics");
                 intent = new Intent(this, StatsActivity.class);
                 startActivity(intent);
                 break;
@@ -178,7 +178,7 @@ public class PlayingOptionsActivity extends AppCompatActivity
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
             closeDrawer();
         else {
-            mToolBar.setTitle("Home");
+//            mToolBar.setTitle("Home");
             super.onBackPressed();
         }
     }

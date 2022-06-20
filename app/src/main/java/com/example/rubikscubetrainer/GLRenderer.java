@@ -314,7 +314,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
         List<String> colors = cube.getColors();
         RequestBody formbody = new FormBody.Builder()
                 .add("username", PlayingOptionsActivity.username)
-//                .add("username", LoginActivity.username.getText().toString())
                 .add("generatedColors", String.join(",", colors))
                 .add("override", "false")
                 .build();
@@ -444,7 +443,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                 || Helper.hitWithTriangle(p.polygon[2], p.polygon[3], p.polygon[0], collisionPointS, collisionPointE)
                 || Helper.hitWithTriangle(p.polygon[3], p.polygon[0], p.polygon[1], collisionPointS, collisionPointE);
     }
-
     MatrixGrabber mg = new MatrixGrabber();
 
     public float[] getViewRay(float x, float y) {
