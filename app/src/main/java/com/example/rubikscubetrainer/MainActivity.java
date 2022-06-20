@@ -77,11 +77,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                welcomeMessage.setText(response.body().string());
-                response.close();
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        try {
+                            welcomeMessage.setText(response.body().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        response.close();
                         img.setVisibility(View.VISIBLE);
                         signInMessage.setVisibility(View.VISIBLE);
                         signInButton.setVisibility(View.VISIBLE);

@@ -85,4 +85,6 @@
         "You can read more information about the method in this"
         <a href="https://www.speedsolving.com/wiki/index.php/Kociemba%27s_Algorithm">link</a>
     </string>
+    <string name="close">close</string>
+    <string name="open">open</string>
 </resources>

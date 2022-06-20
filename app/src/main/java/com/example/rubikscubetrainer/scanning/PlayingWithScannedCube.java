@@ -307,12 +307,8 @@ public class PlayingWithScannedCube extends FragmentActivity {
                                 }
                             }
                         });
-
-
                     }
                 });
-
-
             }
         });
         replayBtn.setOnClickListener(new View.OnClickListener() {

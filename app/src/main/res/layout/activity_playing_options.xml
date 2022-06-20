@@ -1,104 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
     android:layoutDirection="ltr"
-    android:orientation="vertical"
     tools:context=".PlayingOptionsActivity">
 
-    <!--    <Button-->
-    <!--        android:id="@+id/help_button"-->
-    <!--        android:layout_width="224dp"-->
-    <!--        android:layout_height="62dp"-->
-    <!--        android:layout_marginStart="102dp"-->
-    <!--        android:layout_marginEnd="103dp"-->
-    <!--        android:text="@string/help"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/scan_button"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.5"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/username"-->
-    <!--        app:layout_constraintVertical_bias="0.193" />-->
-
-    <ImageView
-        android:id="@+id/help_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="44dp"
-        android:src="@drawable/ic_help"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/username"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:autoSizeMaxTextSize="30dp"
-        android:autoSizeMinTextSize="5dp"
-        android:autoSizeTextType="uniform"
-        android:text="@string/username"
-        android:textAlignment="center"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034" />
+        android:layout_height="match_parent"
+        android:background="@color/cardview_dark_background"
+        android:layoutDirection="ltr"
+        android:orientation="vertical"
+        tools:context=".PlayingOptionsActivity">
 
-    <Button
-        android:id="@+id/play_in_the_app_button"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:text="@string/play_in_the_app"
-        app:layout_constraintBottom_toTopOf="@+id/stats_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scan_button" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="#515151"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.Toolbar>
 
-    <Button
-        android:id="@+id/stats_button"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:text="statistics"
-        app:layout_constraintBottom_toTopOf="@+id/logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/play_in_the_app_button" />
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:autoSizeMaxTextSize="30dp"
+            android:autoSizeMinTextSize="5dp"
+            android:autoSizeTextType="uniform"
+            android:text="@string/username"
+            android:textAlignment="center"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintVertical_bias="0.034" />
 
-    <Button
-        android:id="@+id/scan_button"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="232dp"
-        android:text="@string/scan_your_own_cube"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/username" />
+        <Button
+            android:id="@+id/play_in_the_app_button"
+            android:layout_width="224dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/custom_button"
+            android:minWidth="80dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="@string/play_in_the_app"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scan_button" />
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="224dp"
-        android:layout_height="62dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/red"
-        android:text="Log-out"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stats_button" />
+        <Button
+            android:id="@+id/scan_button"
+            android:layout_width="224dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="180dp"
+            android:background="@drawable/custom_button"
+            android:minWidth="80dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="@string/scan_your_own_cube"
+            app:layout_constraintBottom_toTopOf="@+id/play_in_the_app_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_header_menu"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
