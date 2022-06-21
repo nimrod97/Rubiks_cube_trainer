@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.rubikscubetrainer.GLView;
-import com.example.rubikscubetrainer.PlayingOptionsActivity;
+import com.example.rubikscubetrainer.activities.PlayingOptionsActivity;
 import com.example.rubikscubetrainer.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -46,6 +46,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
     public static ImageView playBtn;
     public static ImageView pauseBtn;
     public static SeekBar slider;
+    public static TextView sliderText;
     private TextView instructionText;
     private boolean isPaused;
     private String solvingMethod;
@@ -71,6 +72,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
         playBtn = findViewById(R.id.play_btn);
         pauseBtn = findViewById(R.id.pause_btn);
         slider = findViewById(R.id.slider);
+        sliderText = findViewById(R.id.slider_text);
         instructionText = findViewById(R.id.instructions_text);
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -368,6 +370,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
                         public void run() {
                             playBtn.setVisibility(View.VISIBLE);
                             slider.setVisibility(View.VISIBLE);
+                            sliderText.setVisibility(View.VISIBLE);
                             undoBtn.setVisibility(View.INVISIBLE);
                             solveBtn.setVisibility(View.INVISIBLE);
                             solvingNotations.setText(Arrays.toString(steps));
@@ -420,6 +423,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
                         playBtn.setVisibility(View.INVISIBLE);
                         pauseBtn.setVisibility(View.INVISIBLE);
                         slider.setVisibility(View.INVISIBLE);
+                        sliderText.setVisibility(View.INVISIBLE);
                     }
                 });
 

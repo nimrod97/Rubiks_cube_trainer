@@ -128,13 +128,13 @@
         android:text="Check the generated cube. if there are some mismatches
 in the cubies colors, you can tap on the specific cubie and choose your desired color.
 When it's all ok, press continue"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/glview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.002" />
+        android:layout_marginTop="40dp" />
 
     <TextView
         android:id="@+id/solve_notations"
@@ -188,12 +188,29 @@ When it's all ok, press continue"
         android:progressTint="@color/black"
         android:thumbTint="@color/black"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/solve_notations"
+        app:layout_constraintBottom_toBottomOf="@+id/glview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/glview"
-        app:layout_constraintVertical_bias="0.019" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <TextView
+        android:id="@+id/slider_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:text="speed rotation"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/slider"
+        android:layout_marginTop="-10dp"/>
 
     <ImageView
         android:id="@+id/play_btn"

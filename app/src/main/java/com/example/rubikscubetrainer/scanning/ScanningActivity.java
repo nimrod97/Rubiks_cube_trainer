@@ -126,7 +126,9 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
         }
 
         // guiding the user which face he has to scan right now
-        arrowDrawPoint = new Point(mRgba.width() - 200, mRgba.height() - 300);
+        float x = findViewById(R.id.saveFaceButton).getX() - 180;
+        float y = findViewById(R.id.saveFaceButton).getY() - 150;
+        arrowDrawPoint = new Point(x, y);
         if (index == 0) {
             putText(mRgba, "front", arrowDrawPoint, font, 2, colorTextBorder, 10);
             putText(mRgba, "front", arrowDrawPoint, font, 2, colorText, 5);
@@ -146,8 +148,6 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
             putText(mRgba, "bottom", arrowDrawPoint, font, 2, colorTextBorder, 10);
             putText(mRgba, "bottom", arrowDrawPoint, font, 2, colorText, 5);
         }
-
-
     }
 
     // save each scanned face in the dictionary

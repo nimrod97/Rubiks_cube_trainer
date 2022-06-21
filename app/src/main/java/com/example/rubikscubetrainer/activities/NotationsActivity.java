@@ -1,8 +1,10 @@
-package com.example.rubikscubetrainer;
+package com.example.rubikscubetrainer.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.rubikscubetrainer.R;
 
 public class NotationsActivity extends AppCompatActivity {
 

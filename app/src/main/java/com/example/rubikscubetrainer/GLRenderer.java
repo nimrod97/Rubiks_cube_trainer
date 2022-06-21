@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.rubikscubetrainer.activities.CubeGLActivity;
+import com.example.rubikscubetrainer.activities.PlayingOptionsActivity;
 import com.example.rubikscubetrainer.db.SavedCube;
 import com.example.rubikscubetrainer.matrix.MatrixGrabber;
 import com.example.rubikscubetrainer.scanning.PlayingWithScannedCube;
@@ -266,6 +268,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     CubeGLActivity.playBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.pauseBtn.setVisibility(View.INVISIBLE);
                     CubeGLActivity.slider.setVisibility(View.INVISIBLE);
+                    CubeGLActivity.sliderText.setVisibility(View.INVISIBLE);
                 }
             });
 
@@ -281,6 +284,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     PlayingWithScannedCube.playBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.pauseBtn.setVisibility(View.INVISIBLE);
                     PlayingWithScannedCube.slider.setVisibility(View.INVISIBLE);
+                    PlayingWithScannedCube.sliderText.setVisibility(View.INVISIBLE);
                 }
             });
         }

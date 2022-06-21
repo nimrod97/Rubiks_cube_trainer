@@ -1,11 +1,8 @@
-package com.example.rubikscubetrainer;
+package com.example.rubikscubetrainer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.rubikscubetrainer.db.StatsActivity;
-import com.example.rubikscubetrainer.scanning.ScanningActivity;
+import com.example.rubikscubetrainer.R;
+import com.example.rubikscubetrainer.fragments.HomeFragment;
+import com.example.rubikscubetrainer.fragments.LearnFragment;
+import com.example.rubikscubetrainer.fragments.StatsFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -38,16 +37,15 @@ import okhttp3.Response;
 
 public class PlayingOptionsActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
-    private Button scan;
-    private Button play;
+
 
     GoogleSignInClient mGoogleSignInClient;
-    public static String username;
-    private TextView text;
     private OkHttpClient okHttpClient;
 
     private androidx.appcompat.widget.Toolbar mToolBar;
     private DrawerLayout mDrawerLayout;
+
+    public static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +55,6 @@ public class PlayingOptionsActivity extends AppCompatActivity
         setUpToolBarMenu();
         setUpNavigationDrawerMenu();
 
-        scan = findViewById(R.id.scan_button);
-        play = findViewById(R.id.play_in_the_app_button);
-        text = findViewById(R.id.username);
         okHttpClient = new OkHttpClient();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -68,7 +63,7 @@ public class PlayingOptionsActivity extends AppCompatActivity
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null)
             username = account.getDisplayName();
-        text.setText("Welcome, " + username + "!");
+
         RequestBody formbody = new FormBody.Builder()
                 .add("username", username)
                 .build();
@@ -98,32 +93,19 @@ public class PlayingOptionsActivity extends AppCompatActivity
             }
         });
 
-        scan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PlayingOptionsActivity.this, ScanningActivity.class);
-                startActivity(intent);
-            }
-        });
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PlayingOptionsActivity.this, CubeGLActivity.class);
-                startActivity(intent);
-            }
-        });
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new HomeFragment()).commit();
     }
 
     private void setUpToolBarMenu() {
         mToolBar = findViewById(R.id.toolbar);
-//        mToolBar.setTitle("Home");
+        mToolBar.setTitle("Home");
     }
 
     private void setUpNavigationDrawerMenu() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navView);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView.setNavigationItemSelectedListener(this);
-
 
         ActionBarDrawerToggle menuToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolBar, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(menuToggle);
@@ -148,19 +130,25 @@ public class PlayingOptionsActivity extends AppCompatActivity
         Intent intent;
         switch (item.getItemId()) {
             case R.id.home_id:
-//                mToolBar.setTitle("Home");
-                intent = new Intent(this, PlayingOptionsActivity.class);
-                startActivity(intent);
+                if (mToolBar.getTitle().charAt(0) != 'H') {
+                    mToolBar.setTitle("Home");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new HomeFragment()).commit();
+                }
                 break;
             case R.id.learn_id:
-//                mToolBar.setTitle("Learn More");
-                intent = new Intent(this, HelpActivity.class);
-                startActivity(intent);
+                if (mToolBar.getTitle().charAt(0) != 'L') {
+                    mToolBar.setTitle("Learn More");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new LearnFragment()).commit();
+                }
                 break;
             case R.id.stats_id:
-//                mToolBar.setTitle("Statistics");
-                intent = new Intent(this, StatsActivity.class);
-                startActivity(intent);
+                if (mToolBar.getTitle().charAt(0) != 'S') {
+                    mToolBar.setTitle("Statistics");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new StatsFragment()).commit();
+                }
                 break;
             case R.id.logout_id:
                 logOut();

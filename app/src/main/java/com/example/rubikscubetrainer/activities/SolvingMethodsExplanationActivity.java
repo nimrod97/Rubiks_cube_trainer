@@ -1,10 +1,12 @@
-package com.example.rubikscubetrainer;
+package com.example.rubikscubetrainer.activities;
 
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.rubikscubetrainer.R;
 
 public class SolvingMethodsExplanationActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.rubikscubetrainer;
+package com.example.rubikscubetrainer.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
+
+import com.example.rubikscubetrainer.GLView;
+import com.example.rubikscubetrainer.R;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +42,7 @@ public class CubeGLActivity extends FragmentActivity {
     public static ImageView playBtn;
     public static ImageView pauseBtn;
     public static SeekBar slider;
+    public static TextView sliderText;
     private TextView solvingNotations;
     public static TextView solveAloneGreeting;
     private OkHttpClient okHttpClient;
@@ -63,6 +67,7 @@ public class CubeGLActivity extends FragmentActivity {
         playBtn = findViewById(R.id.play_btn);
         pauseBtn = findViewById(R.id.pause_btn);
         slider = findViewById(R.id.slider);
+        sliderText = findViewById(R.id.slider_text);
         solvingNotations = findViewById(R.id.solve_notations);
         solveAloneGreeting = findViewById(R.id.solve_alone_greeting);
         okHttpClient = new OkHttpClient();
@@ -365,6 +370,7 @@ public class CubeGLActivity extends FragmentActivity {
                         public void run() {
                             playBtn.setVisibility(View.VISIBLE);
                             slider.setVisibility(View.VISIBLE);
+                            sliderText.setVisibility(View.VISIBLE);
                             undoBtn.setVisibility(View.INVISIBLE);
                             shuffleBtn.setVisibility(View.INVISIBLE);
                             solveBtn.setVisibility(View.INVISIBLE);
@@ -420,10 +426,11 @@ public class CubeGLActivity extends FragmentActivity {
                         playBtn.setVisibility(View.INVISIBLE);
                         pauseBtn.setVisibility(View.INVISIBLE);
                         slider.setVisibility(View.INVISIBLE);
+                        sliderText.setVisibility(View.INVISIBLE);
                     }
                 });
-
             }
         });
     }
+
 }

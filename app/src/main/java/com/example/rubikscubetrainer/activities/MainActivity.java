@@ -1,4 +1,4 @@
-package com.example.rubikscubetrainer;
+package com.example.rubikscubetrainer.activities;
 
 
 import android.annotation.SuppressLint;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.rubikscubetrainer.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;

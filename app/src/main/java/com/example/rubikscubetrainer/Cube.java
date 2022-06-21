@@ -1,5 +1,6 @@
 package com.example.rubikscubetrainer;
 
+import com.example.rubikscubetrainer.activities.CubeGLActivity;
 import com.example.rubikscubetrainer.scanning.PlayingWithScannedCube;
 
 import org.json.JSONException;

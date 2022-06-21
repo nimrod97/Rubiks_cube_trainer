@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.rubikscubetrainer.PlayingOptionsActivity;
+import com.example.rubikscubetrainer.activities.PlayingOptionsActivity;
 import com.example.rubikscubetrainer.R;
 
 import org.jetbrains.annotations.NotNull;
