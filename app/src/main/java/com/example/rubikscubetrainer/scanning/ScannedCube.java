@@ -15,9 +15,7 @@ import java.util.Map;
 import java.util.Vector;
 
 public class ScannedCube extends Cube {
-    //    private Map<String, JSONArray> faces;
     private Map<String, List<Character>> faces;
-    //    public static List<String> allColors;
     public static List<Character> allColors;
 
     public ScannedCube(GLTextures textures) throws JSONException {

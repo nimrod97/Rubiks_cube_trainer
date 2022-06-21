@@ -32,7 +32,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-//import com.example.rubikscubetrainer.scanning.ScanningActivity;
 
 
 public class PlayingOptionsActivity extends AppCompatActivity
@@ -67,7 +66,6 @@ public class PlayingOptionsActivity extends AppCompatActivity
         RequestBody formbody = new FormBody.Builder()
                 .add("username", username)
                 .build();
-//                Request request= new Request.Builder().url("http://10.100.102.24:5000/register_to_DB")
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/register_to_DB")
                 .post(formbody)
                 .build();
@@ -166,7 +164,6 @@ public class PlayingOptionsActivity extends AppCompatActivity
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
             closeDrawer();
         else {
-//            mToolBar.setTitle("Home");
             super.onBackPressed();
         }
     }

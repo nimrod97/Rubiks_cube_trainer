@@ -74,7 +74,6 @@ public class MatrixTrackingGL implements GL, GL10, GL10Ext, GL11, GL11Ext {
         mCurrent = mModelView;
         mMatrixMode = GL10.GL_MODELVIEW;
     }
-    // ---------------------------------------------------------------------
     // GL10 methods:
 
     public void glActiveTexture(int texture) {

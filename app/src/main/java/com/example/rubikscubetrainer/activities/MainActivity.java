@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         OkHttpClient okHttpClient = new OkHttpClient();
-//        Request request = new Request.Builder().url("http://10.100.102.19:5000/").build();
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app").build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override

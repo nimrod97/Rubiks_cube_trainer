@@ -16,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.rubikscubetrainer.GLView;
-import com.example.rubikscubetrainer.activities.PlayingOptionsActivity;
 import com.example.rubikscubetrainer.R;
+import com.example.rubikscubetrainer.activities.PlayingOptionsActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -87,7 +87,6 @@ public class PlayingWithScannedCube extends FragmentActivity {
                         .add("colorsVector", String.join(",", glview.getGlrenderer().getCube().getColors()))
                         .add("username", PlayingOptionsActivity.username)
                         .build();
-//                Request request=new Request.Builder().url("http://10.100.102.19:5000/save_cube_state")
                 Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
                         .post(formbody)
                         .build();
@@ -249,7 +248,6 @@ public class PlayingWithScannedCube extends FragmentActivity {
                         .add("generatedColors", String.join(",", colors))
                         .build();
                 Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/get_solving_steps")
-//                Request request = new Request.Builder().url("http://10.100.102.24:5000/get_solving_steps")
                         .post(formbody)
                         .build();
                 okHttpClient.newCall(request).enqueue(new Callback() {
@@ -342,7 +340,6 @@ public class PlayingWithScannedCube extends FragmentActivity {
                 .add("method", solvingMethod)
                 .build();
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solve")
-//        Request request = new Request.Builder().url("http://10.100.102.24:5000/solve")
                 .post(formbody)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {

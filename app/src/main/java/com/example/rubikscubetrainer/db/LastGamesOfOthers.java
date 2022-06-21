@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.rubikscubetrainer.activities.PlayingOptionsActivity;
 import com.example.rubikscubetrainer.R;
+import com.example.rubikscubetrainer.activities.PlayingOptionsActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -66,9 +66,7 @@ public class LastGamesOfOthers extends AppCompatActivity {
         sixth_btn = findViewById(R.id.button_sixth);
         seventh_btn = findViewById(R.id.button_seventh);
         String username = PlayingOptionsActivity.username;
-//        String username = LoginActivity.username.getText().toString();
         OkHttpClient okHttpClient = new OkHttpClient();
-//        Request request = new Request.Builder().url("http://10.100.102.24:5000/lastGamesOfOthers?username=" + username).build();
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/lastGamesOfOthers?username=" + username).build();
 
         okHttpClient.newCall(request).enqueue(new Callback() {

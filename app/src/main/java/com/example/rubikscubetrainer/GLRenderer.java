@@ -63,7 +63,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     // 1- verify scanned colors
     // 2- showing one of the scanned cubes from the db
     // 3- playing with scanned cube after verifying the colors
-    //-----------------------------------------------------
 
     public static final String BLUE = "blueside.png";
     public static final String GREEN = "greenside.png";
@@ -72,7 +71,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     public static final String WHITE = "whiteside.png";
     public static final String YELLOW = "yellowside.png";
 
-    // constructor
     public GLRenderer(float width, float height, Context context, int mode) {
         super();
         // Start Of User Initialization
@@ -87,12 +85,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
 
     }
 
-    void reset() {
-        synchronized (matrixLock) {
-            LastRot.setIdentity();   // Reset Rotation
-            ThisRot.setIdentity();   // Reset Rotation
-        }
-    }
 
     void startDrag(Point2f MousePt) {
         synchronized (matrixLock) {
@@ -291,7 +283,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
         RequestBody formbody = new FormBody.Builder()
                 .add("username", PlayingOptionsActivity.username)
                 .build();
-//        Request request = new Request.Builder().url("http://10.100.102.24:5000/solved_by_myself")
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself")
                 .post(formbody)
                 .build();
@@ -321,7 +312,6 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                 .add("generatedColors", String.join(",", colors))
                 .add("override", "false")
                 .build();
-//        Request request = new Request.Builder().url("http://10.100.102.24:5000/save_cube_state")
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
                 .post(formbody)
                 .build();
@@ -447,6 +437,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                 || Helper.hitWithTriangle(p.polygon[2], p.polygon[3], p.polygon[0], collisionPointS, collisionPointE)
                 || Helper.hitWithTriangle(p.polygon[3], p.polygon[0], p.polygon[1], collisionPointS, collisionPointE);
     }
+
     MatrixGrabber mg = new MatrixGrabber();
 
     public float[] getViewRay(float x, float y) {

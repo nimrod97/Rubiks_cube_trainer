@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.rubikscubetrainer.R;
 
@@ -40,6 +41,7 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
     private Scalar colorTextBorder = new Scalar(255, 255, 255, 255);
     private int font = FONT_HERSHEY_SIMPLEX;
     private ImageButton saveFaceButton;
+    private TextView faceText;
 
     private int thicknessRect = 13, sizeRect = 125;
     private ArrayList<Square> squares;
@@ -58,6 +60,7 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_scanning);
         saveFaceButton = findViewById(R.id.saveFaceButton);
+        faceText = findViewById(R.id.face_text);
         camera = findViewById(R.id.javaCameraView);
         camera.setCameraPermissionGranted();
         camera.setCvCameraViewListener(this);
@@ -126,27 +129,18 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
         }
 
         // guiding the user which face he has to scan right now
-        float x = findViewById(R.id.saveFaceButton).getX() - 180;
-        float y = findViewById(R.id.saveFaceButton).getY() - 150;
-        arrowDrawPoint = new Point(x, y);
         if (index == 0) {
-            putText(mRgba, "front", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "front", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("front");
         } else if (index == 1) {
-            putText(mRgba, "left", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "left", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("left");
         } else if (index == 2) {
-            putText(mRgba, "back", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "back", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("back");
         } else if (index == 3) {
-            putText(mRgba, "right", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "right", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("right");
         } else if (index == 4) {
-            putText(mRgba, "top", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "top", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("top");
         } else {
-            putText(mRgba, "bottom", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "bottom", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("bottom");
         }
     }
 
