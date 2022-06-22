@@ -4,22 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
     android:layoutDirection="ltr"
     android:orientation="vertical"
-    android:background="@color/cardview_dark_background"
     tools:context=".activities.MainActivity">
 
 
     <TextView
         android:id="@+id/welcome_message"
         android:layout_width="match_parent"
-        android:layout_height="206dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="83dp"
+        android:layout_height="wrap_content"
         android:autoSizeMaxTextSize="40dp"
         android:autoSizeMinTextSize="5dp"
         android:autoSizeTextType="uniform"
         android:minWidth="390dp"
+        android:minHeight="100dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textStyle="bold"
@@ -35,15 +34,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/welcome_message"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="96dp"
         android:src="@drawable/rubik"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/signin_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_message"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -52,33 +49,33 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/cube_pic"
         android:layout_centerVertical="true"
-        android:layout_marginTop="10dp"
         android:text="Click to Sign-in"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/signin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcome_message"
-        app:layout_constraintVertical_bias="0.867" />
+        app:layout_constraintTop_toBottomOf="@+id/cube_pic" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/signin_text"
-        android:layout_marginTop="12dp"
         android:textAlignment="center"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signin_text"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintVertical_bias="0.634">
+
+
+    </com.google.android.gms.common.SignInButton>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
