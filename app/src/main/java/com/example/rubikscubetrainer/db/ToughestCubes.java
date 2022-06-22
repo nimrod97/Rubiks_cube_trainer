@@ -21,6 +21,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+// In this activity the users can see the 5 toughest cubes ever that solved by this specific
+// solving method.
+// Each bullet shows the username, game time, number of steps,
+// the cube itself and if the cube was scanned or not.
+//The suitable layout for it is the 'activity_toughest_cubes'
+
 public class ToughestCubes extends AppCompatActivity {
     private TextView first;
     private TextView second;

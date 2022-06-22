@@ -22,6 +22,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+// This activity is responsible for showing the current user the last 5 cubes the were solved
+// by himself without getting any help from the app (did not use any solving method).
+// Each bullet shows the game time, the cube itself and if the cube was scanned or not.
+//The suitable layout for it is the 'activity_solved_by_myself'
+
 public class SolvedByMyself extends AppCompatActivity {
     private TextView first;
     private TextView second;

@@ -19,6 +19,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+// This activity is responsible for showing the users who are the top-3 users that play
+// the most games in the app.
+//The suitable layout for it is the 'activity_most_play'
+
+
 public class MostPlay extends AppCompatActivity {
     private TextView first;
     private TextView second;

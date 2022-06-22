@@ -15,14 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="206dp"
         android:layout_marginTop="10dp"
-        android:minWidth="390dp"
+        android:layout_marginBottom="83dp"
         android:autoSizeMaxTextSize="40dp"
         android:autoSizeMinTextSize="5dp"
         android:autoSizeTextType="uniform"
+        android:minWidth="390dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cube_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,14 +36,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/welcome_message"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="96dp"
         android:src="@drawable/rubik"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/signin_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.546" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/signin_text"
@@ -60,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/welcome_message"
         app:layout_constraintVertical_bias="0.867" />
 
     <com.google.android.gms.common.SignInButton
@@ -68,14 +70,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/signin_text"
+        android:layout_marginTop="12dp"
         android:textAlignment="center"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.946" />
+        app:layout_constraintTop_toBottomOf="@+id/signin_text"
+        app:layout_constraintVertical_bias="0.111" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

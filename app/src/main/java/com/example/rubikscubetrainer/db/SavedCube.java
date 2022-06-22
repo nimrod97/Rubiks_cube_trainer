@@ -10,6 +10,9 @@ import org.json.JSONException;
 
 import java.util.Vector;
 
+// This class is responsible for building 3D cube from the string of colors that saved in the db.
+// it extents the cube class and override the 'fillParts' method
+
 public class SavedCube extends Cube {
     private String[] colors;
 

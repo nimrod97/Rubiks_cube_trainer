@@ -22,6 +22,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+// This activity is responsible for showing the current user that is using the app the
+// last 7 games that played by other users.
+// Each bullet shows the username, game time, number of steps to solve (by the solving method that they chose -
+// - if they chose), the solving method, the cube itself and if the cube was scanned or not.
+//The suitable layout for it is the 'activity_last_games_of_others'
+
 public class LastGamesOfOthers extends AppCompatActivity {
 
     private TextView first;

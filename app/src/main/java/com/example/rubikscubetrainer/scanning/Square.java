@@ -4,6 +4,8 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 
+// In this class we create the squares that will be shown as templates
+// for cubbies in the camera when scanning
 
 public class Square {
     private Scalar colorRgb;

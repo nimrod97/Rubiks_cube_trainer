@@ -5,14 +5,19 @@ import static org.opencv.imgproc.Imgproc.FONT_HERSHEY_SIMPLEX;
 import static org.opencv.imgproc.Imgproc.putText;
 import static org.opencv.imgproc.Imgproc.rectangle;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.rubikscubetrainer.R;
 
@@ -31,6 +36,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+// This activity is responsible for scanning the cube face after face
+// it draws 9 cubbies templates that make it easier for the user to see if he
+// scans correctly or needs to be in more light room, etc.
+// The suitable layout for it is the 'activity_scanning'
 
 public class ScanningActivity extends Activity implements CvCameraViewListener2 {
     private JavaCameraView camera;
@@ -61,26 +71,29 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
         setContentView(R.layout.activity_scanning);
         saveFaceButton = findViewById(R.id.saveFaceButton);
         faceText = findViewById(R.id.face_text);
-        camera = findViewById(R.id.javaCameraView);
-        camera.setCameraPermissionGranted();
-        camera.setCvCameraViewListener(this);
-        baseLoaderCallback = new BaseLoaderCallback(this) {
-            @Override
-            public void onManagerConnected(int status) {
-                switch (status) {
-                    case LoaderCallbackInterface.SUCCESS: {
-                        Log.d("OPENCV", "OPENCV loaded successfully");
-                        camera.enableView();
+
+        if (isPermitted()) { // got the permission from the user
+            camera = findViewById(R.id.javaCameraView);
+            camera.setCameraPermissionGranted();
+            camera.setCvCameraViewListener(this);
+            baseLoaderCallback = new BaseLoaderCallback(this) {
+                @Override
+                public void onManagerConnected(int status) {
+                    switch (status) {
+                        case LoaderCallbackInterface.SUCCESS: {
+                            Log.d("OPENCV", "OPENCV loaded successfully");
+                            camera.enableView();
+                        }
+                        break;
+                        default: {
+                            super.onManagerConnected(status);
+                            Log.d("OPENCV", "OPENCV not loaded");
+                        }
+                        break;
                     }
-                    break;
-                    default: {
-                        super.onManagerConnected(status);
-                        Log.d("OPENCV", "OPENCV not loaded");
-                    }
-                    break;
                 }
-            }
-        };
+            };
+        }
         saveFaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,7 +216,7 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
             case "W":
                 showColor = new Scalar(255, 255, 255);
                 break;
-            default: //case "n"
+            default: //case "n" - none
                 showColor = new Scalar(0, 0, 0);
                 break;
         }
@@ -240,6 +253,15 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
             Log.d("OPENCV", "Error in loading OpenCV");
         }
 
+    }
+
+    private boolean isPermitted() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 50);
+        } else {
+            return true;
+        }
+        return false;
     }
 
 

@@ -12,12 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.rubikscubetrainer.R;
-
 import com.example.rubikscubetrainer.db.LastGamesOfOthers;
 import com.example.rubikscubetrainer.db.MostPlay;
 import com.example.rubikscubetrainer.db.MyLastGames;
 import com.example.rubikscubetrainer.db.SolvedByMyself;
 import com.example.rubikscubetrainer.db.SolvingMethodsList;
+
+// In this fragment the users can choose between all the stats activities
+// (it's a part of a tool bar)
 
 public class StatsFragment extends Fragment {
     private Button myGames;

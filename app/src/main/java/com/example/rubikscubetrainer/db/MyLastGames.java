@@ -22,6 +22,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+// This activity is responsible for showing the current user that is using the app the
+// last 5 games that he played.
+// Each bullet shows the game time, number of steps to solve (by the solving method that they chose - if they chose),
+// the solving method, the cube itself and if the cube was scanned or not.
+//The suitable layout for it is the 'activity_my_last_games'
+
 public class MyLastGames extends AppCompatActivity {
     private TextView first;
     private TextView second;

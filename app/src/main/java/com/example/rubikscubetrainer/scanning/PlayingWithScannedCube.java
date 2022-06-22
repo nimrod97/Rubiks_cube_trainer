@@ -33,6 +33,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+// This activity is responsible for all the functionalities that related to
+// playing with cube that was scanned by the user
+// and the suitable layout for it is the 'activity_playing_with_scanned_cube'
+
 public class PlayingWithScannedCube extends FragmentActivity {
     private GLView glview;
     public static ImageView undoBtn;

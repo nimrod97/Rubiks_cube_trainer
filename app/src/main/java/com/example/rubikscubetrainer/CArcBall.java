@@ -1,8 +1,8 @@
 package com.example.rubikscubetrainer;
 
-/*
-The class is in charge to rotate the cube
- */
+
+//This class is responsible for the rotation of the cube
+
 class CArcBall {
     private static final float Epsilon = 1.0e-5f;
 
@@ -39,7 +39,7 @@ class CArcBall {
             vector.z = 0.0f;
         } else    //Else it's on the inside
         {
-            // Return a vector to a point mapped inside the sphere 
+            // Return a vector to a point mapped inside the sphere
             // sqrt(radius squared - length)
             vector.x = tempPoint.x;
             vector.y = tempPoint.y;
@@ -77,12 +77,12 @@ class CArcBall {
             // Compute the length of the perpendicular vector
             if (Perp.length() > Epsilon)    //if its non-zero
             {
-                // We're ok, so return the perpendicular vector as the transform 
+                // We're ok, so return the perpendicular vector as the transform
                 // after all
                 NewRot.x = Perp.x;
                 NewRot.y = Perp.y;
                 NewRot.z = Perp.z;
-                // In the quaternion values, w is cosine (theta / 2), 
+                // In the quaternion values, w is cosine (theta / 2),
                 // where theta is rotation angle
                 NewRot.w = Vector3f.dot(StVec, EnVec);
             } else                                    //if its zero

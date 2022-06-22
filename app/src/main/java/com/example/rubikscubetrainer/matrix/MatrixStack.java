@@ -21,16 +21,9 @@ import android.opengl.Matrix;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-/**
- * A matrix stack, similar to OpenGL ES's internal matrix stack.
- */
 public class MatrixStack {
     public MatrixStack() {
         commonInit(DEFAULT_MAX_DEPTH);
-    }
-
-    public MatrixStack(int maxDepth) {
-        commonInit(maxDepth);
     }
 
     private void commonInit(int maxDepth) {
