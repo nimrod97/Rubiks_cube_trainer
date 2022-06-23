@@ -1,5 +1,8 @@
 package com.example.rubikscubetrainer;
 
+// The class is responsible to represent a vector of 3 floats.
+// In addition, the class contains math functions to manipulate these vectors.
+
 class Vector3f {
     public float x, y, z;
 

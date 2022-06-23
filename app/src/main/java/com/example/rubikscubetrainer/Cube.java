@@ -18,6 +18,9 @@ import java.util.Vector;
 
 import javax.microedition.khronos.opengles.GL10;
 
+
+// This class is responsible to represent the cube that we see in the screen
+
 public class Cube {
 
 	private int mode; // GL_SELECT - selection mode
@@ -29,9 +32,10 @@ public class Cube {
 	private boolean isClockWise;
 	private int rotSide;
 	private int dimOfCube; // the dimension of the cube
-	private Vector<Integer> sides;
-	protected Vector<Part> parts;
-	private Vector<Vector<Float>> dxyz; // translating of parts. has size (HZ,3)
+	private Vector<Integer> sides; // Vector of integers, each int represent side of a cubie
+	protected Vector<Part> parts; // Vector of parts that represen all the cubies in the cube
+	private Vector<Vector<Float>> dxyz; // translating of parts. has size (HZ,3). the coord of each part
+	// In 3-D we see 3 faces each time, so we want to represent the faces that we see to draw them.
 	private Vector<Vector<Integer>> faceFirst;
 	private Vector<Vector<Integer>> faceSecond;
 	private Vector<Vector<Integer>> faceThird;

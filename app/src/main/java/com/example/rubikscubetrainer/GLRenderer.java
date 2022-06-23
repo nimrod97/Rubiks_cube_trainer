@@ -38,6 +38,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+// The class is responsible to render the cube that we represent to a gui and draw the gui.
+// For this, the class uses the openGL library.
+
 public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     private Cube cube;
     public static GLRenderer instance;

@@ -1,7 +1,7 @@
 package com.example.rubikscubetrainer;
 
 
-//This class is responsible for the rotation of the cube
+// This class is responsible for the rotation of the cube
 
 class CArcBall {
     private static final float Epsilon = 1.0e-5f;

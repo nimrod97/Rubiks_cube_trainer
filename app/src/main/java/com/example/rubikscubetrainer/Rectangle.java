@@ -6,6 +6,9 @@ import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
+// The class is responsible to represent a rectangle for the cubies in the cube.
+// Each rectangle has a vertices and texture the we use for drawing the cubies on the screen.
+
 public class Rectangle {
     private FloatBuffer vertexBuffer;  // Buffer for vertex-array
     private int textureId;

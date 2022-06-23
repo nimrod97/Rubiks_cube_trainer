@@ -4,6 +4,7 @@ import com.example.rubikscubetrainer.matrix.MatrixGrabber;
 
 import javax.microedition.khronos.opengles.GL10;
 
+// This class represents a cubie (part) in the cube.
 
 public class Part implements Comparable<Part> {
     private Rectangle rect;

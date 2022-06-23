@@ -1,7 +1,7 @@
 package com.example.rubikscubetrainer;
 
+// This class is responsible to represent a matrix that we use for the rotation of the cube.
 class Matrix4f {
-
     private float[][] matrix;
 
     public float[][] getMatrix() {
