@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rubikscubetrainer.R;
@@ -27,9 +28,15 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+
+// This activity is responsible for the opening screen of the app and the users
+// log in to the app via in this activity.
+// The suitable layout for it is the 'activity_main'
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private ImageView img;
     private static final int RC_SIGN_IN = 0;
+    private String username;
+    private OkHttpClient okHttpClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         signInMessage = findViewById(R.id.signin_text);
         signInButton = findViewById(R.id.signin);
         img = findViewById(R.id.cube_pic);
+        okHttpClient = new OkHttpClient();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -60,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        OkHttpClient okHttpClient = new OkHttpClient();
-//        Request request = new Request.Builder().url("http://10.100.102.19:5000/").build();
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app").build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -114,7 +122,37 @@ public class MainActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Toast.makeText(this, "Sign-in Successfully", Toast.LENGTH_SHORT).show();
+            if (account != null)
+                username = account.getDisplayName();
+            RequestBody formbody = new FormBody.Builder()
+                    .add("username", username)
+                    .build();
+            Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/register_to_DB")
+                    .post(formbody)
+                    .build();
+            okHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            response.body().close();
+                        }
+                    });
+                }
+            });
             Intent intent = new Intent(this, PlayingOptionsActivity.class);
+            intent.putExtra("username", username);
             startActivity(intent);
         } catch (ApiException e) {
             Log.w("Error", "signInResult:failed code=" + e.getStatusCode());
@@ -126,9 +164,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
+            username = account.getDisplayName();
             Toast.makeText(this, "User already Signed-in", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), PlayingOptionsActivity.class);
+            intent.putExtra("username", username);
             startActivity(intent);
         }
     }
+
 }

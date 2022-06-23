@@ -21,6 +21,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+// In this activity the users can see the 5 toughest cubes ever that solved by this specific
+// solving method.
+// Each bullet shows the username, game time, number of steps,
+// the cube itself and if the cube was scanned or not.
+//The suitable layout for it is the 'activity_toughest_cubes'
+
 public class ToughestCubes extends AppCompatActivity {
     private TextView first;
     private TextView second;
@@ -54,7 +60,6 @@ public class ToughestCubes extends AppCompatActivity {
         fifth_btn = findViewById(R.id.button_fifth);
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/toughest_cubes?method=" + SolvingMethodsList.chosenMethod).build();
-//        Request request = new Request.Builder().url("http://10.100.102.24:5000/toughest_cubes?method=" + SolvingMethodsList.chosenMethod).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {

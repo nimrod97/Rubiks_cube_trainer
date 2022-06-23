@@ -14,10 +14,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+// This class is responsible for building 3D cube that already scanned by the user
+// from the string of colors.
+// it extents the cube class and override the 'fillParts' method
+
 public class ScannedCube extends Cube {
-    //    private Map<String, JSONArray> faces;
     private Map<String, List<Character>> faces;
-    //    public static List<String> allColors;
     public static List<Character> allColors;
 
     public ScannedCube(GLTextures textures) throws JSONException {

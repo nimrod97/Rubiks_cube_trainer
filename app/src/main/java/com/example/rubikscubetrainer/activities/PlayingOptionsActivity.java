@@ -16,31 +16,22 @@ import com.example.rubikscubetrainer.fragments.HomeFragment;
 import com.example.rubikscubetrainer.fragments.LearnFragment;
 import com.example.rubikscubetrainer.fragments.StatsFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-//import com.example.rubikscubetrainer.scanning.ScanningActivity;
-
+// This activity is the main menu of the app when the user can decide which type
+// of game he wants to play - playing by scanning his own cube or play in the app
+// with virtual cube.
+//The suitable layout for it is the 'activity_playing_options'
 
 public class PlayingOptionsActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
 
     GoogleSignInClient mGoogleSignInClient;
-    private OkHttpClient okHttpClient;
 
     private androidx.appcompat.widget.Toolbar mToolBar;
     private DrawerLayout mDrawerLayout;
@@ -54,44 +45,11 @@ public class PlayingOptionsActivity extends AppCompatActivity
 
         setUpToolBarMenu();
         setUpNavigationDrawerMenu();
-
-        okHttpClient = new OkHttpClient();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null)
-            username = account.getDisplayName();
-
-        RequestBody formbody = new FormBody.Builder()
-                .add("username", username)
-                .build();
-//                Request request= new Request.Builder().url("http://10.100.102.24:5000/register_to_DB")
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/register_to_DB")
-                .post(formbody)
-                .build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        response.close();
-                    }
-                });
-            }
-        });
+        username = getIntent().getExtras().getString("username");
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).commit();
@@ -127,7 +85,6 @@ public class PlayingOptionsActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         closeDrawer();
-        Intent intent;
         switch (item.getItemId()) {
             case R.id.home_id:
                 if (mToolBar.getTitle().charAt(0) != 'H') {
@@ -166,8 +123,8 @@ public class PlayingOptionsActivity extends AppCompatActivity
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
             closeDrawer();
         else {
-//            mToolBar.setTitle("Home");
             super.onBackPressed();
         }
     }
+
 }

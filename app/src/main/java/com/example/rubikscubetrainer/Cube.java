@@ -32,9 +32,9 @@ public class Cube {
 	private Vector<Integer> sides;
 	protected Vector<Part> parts;
 	private Vector<Vector<Float>> dxyz; // translating of parts. has size (HZ,3)
-	private Vector<Vector<Integer>> faceFirst; // second - number of parts which make the whole cube
-	private Vector<Vector<Integer>> faceSecond; // ---- //
-	private Vector<Vector<Integer>> faceThird;  // ---- //
+	private Vector<Vector<Integer>> faceFirst;
+	private Vector<Vector<Integer>> faceSecond;
+	private Vector<Vector<Integer>> faceThird;
 	private Vector<Vector<Pair<Integer, Integer>>> swaps; // swaping parts during i rotating
 	private Vector<Pair<Integer, Integer>> oSides; // rotating sides that contain i-part
 	private Vector<Pair<Integer, Boolean>> movingSides; // the moves that we want to do
@@ -81,7 +81,6 @@ public class Cube {
 
 	protected void fillDXYZ(int size) {
 		sizeOfQuad = 1.0f;
-//		sizeGl=1.0f;
 		sizeGl = (sizeOfQuad * size) / 2.0f;
 		// Fill White side[0]
 		float dx, dy, dz;

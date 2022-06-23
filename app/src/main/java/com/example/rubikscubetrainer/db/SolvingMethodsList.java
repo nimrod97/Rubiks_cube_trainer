@@ -10,6 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rubikscubetrainer.R;
 
+// In this activity the users can choose which solving method they want to observe for
+// seeing the toughest cubes that it solved.
+//The suitable layout for it is the 'activity_solving_methods_list'
+
+
 public class SolvingMethodsList extends AppCompatActivity {
     private Button beginner;
     private Button cfop;

@@ -5,13 +5,19 @@ import static org.opencv.imgproc.Imgproc.FONT_HERSHEY_SIMPLEX;
 import static org.opencv.imgproc.Imgproc.putText;
 import static org.opencv.imgproc.Imgproc.rectangle;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.rubikscubetrainer.R;
 
@@ -31,6 +37,11 @@ import java.util.List;
 import java.util.Map;
 
 
+// This activity is responsible for scanning the cube face after face
+// it draws 9 cubbies templates that make it easier for the user to see if he
+// scans correctly or needs to be in more light room, etc.
+// The suitable layout for it is the 'activity_scanning'
+
 public class ScanningActivity extends Activity implements CvCameraViewListener2 {
     private JavaCameraView camera;
     private BaseLoaderCallback baseLoaderCallback;
@@ -40,6 +51,7 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
     private Scalar colorTextBorder = new Scalar(255, 255, 255, 255);
     private int font = FONT_HERSHEY_SIMPLEX;
     private ImageButton saveFaceButton;
+    private TextView faceText;
 
     private int thicknessRect = 13, sizeRect = 125;
     private ArrayList<Square> squares;
@@ -58,26 +70,30 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_scanning);
         saveFaceButton = findViewById(R.id.saveFaceButton);
-        camera = findViewById(R.id.javaCameraView);
-        camera.setCameraPermissionGranted();
-        camera.setCvCameraViewListener(this);
-        baseLoaderCallback = new BaseLoaderCallback(this) {
-            @Override
-            public void onManagerConnected(int status) {
-                switch (status) {
-                    case LoaderCallbackInterface.SUCCESS: {
-                        Log.d("OPENCV", "OPENCV loaded successfully");
-                        camera.enableView();
+        faceText = findViewById(R.id.face_text);
+
+        if (isPermitted()) { // got the permission from the user
+            camera = findViewById(R.id.javaCameraView);
+            camera.setCameraPermissionGranted();
+            camera.setCvCameraViewListener(this);
+            baseLoaderCallback = new BaseLoaderCallback(this) {
+                @Override
+                public void onManagerConnected(int status) {
+                    switch (status) {
+                        case LoaderCallbackInterface.SUCCESS: {
+                            Log.d("OPENCV", "OPENCV loaded successfully");
+                            camera.enableView();
+                        }
+                        break;
+                        default: {
+                            super.onManagerConnected(status);
+                            Log.d("OPENCV", "OPENCV not loaded");
+                        }
+                        break;
                     }
-                    break;
-                    default: {
-                        super.onManagerConnected(status);
-                        Log.d("OPENCV", "OPENCV not loaded");
-                    }
-                    break;
                 }
-            }
-        };
+            };
+        }
         saveFaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,27 +142,18 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
         }
 
         // guiding the user which face he has to scan right now
-        float x = findViewById(R.id.saveFaceButton).getX() - 180;
-        float y = findViewById(R.id.saveFaceButton).getY() - 150;
-        arrowDrawPoint = new Point(x, y);
         if (index == 0) {
-            putText(mRgba, "front", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "front", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("front");
         } else if (index == 1) {
-            putText(mRgba, "left", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "left", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("left");
         } else if (index == 2) {
-            putText(mRgba, "back", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "back", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("back");
         } else if (index == 3) {
-            putText(mRgba, "right", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "right", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("right");
         } else if (index == 4) {
-            putText(mRgba, "top", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "top", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("top");
         } else {
-            putText(mRgba, "bottom", arrowDrawPoint, font, 2, colorTextBorder, 10);
-            putText(mRgba, "bottom", arrowDrawPoint, font, 2, colorText, 5);
+            faceText.setText("bottom");
         }
     }
 
@@ -209,7 +216,7 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
             case "W":
                 showColor = new Scalar(255, 255, 255);
                 break;
-            default: //case "n"
+            default: //case "n" - none
                 showColor = new Scalar(0, 0, 0);
                 break;
         }
@@ -246,6 +253,15 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
             Log.d("OPENCV", "Error in loading OpenCV");
         }
 
+    }
+
+    private boolean isPermitted() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 50);
+        } else {
+            return true;
+        }
+        return false;
     }
 
 

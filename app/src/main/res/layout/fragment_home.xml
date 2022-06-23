@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/cardview_dark_background"
     android:layoutDirection="ltr"
-    android:orientation="vertical">
-    tools:context=".db.HomeFragment">
+    android:orientation="vertical"
+    tools:context=".fragments.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

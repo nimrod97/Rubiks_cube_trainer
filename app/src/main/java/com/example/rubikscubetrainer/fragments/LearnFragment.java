@@ -11,9 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.rubikscubetrainer.activities.NotationsActivity;
 import com.example.rubikscubetrainer.R;
+import com.example.rubikscubetrainer.activities.NotationsActivity;
 import com.example.rubikscubetrainer.activities.SolvingMethodsExplanationActivity;
+
+// In this fragment the users can choose if they want to learn about the solving methods or about
+// the solving notations of the cube
+// (it's a part of a tool bar)
 
 public class LearnFragment extends Fragment {
     private Button solvingMethods;

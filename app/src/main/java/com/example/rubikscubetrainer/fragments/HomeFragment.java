@@ -1,7 +1,5 @@
 package com.example.rubikscubetrainer.fragments;
 
-import static com.example.rubikscubetrainer.activities.PlayingOptionsActivity.username;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,9 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.rubikscubetrainer.activities.CubeGLActivity;
 import com.example.rubikscubetrainer.R;
+import com.example.rubikscubetrainer.activities.CubeGLActivity;
+import com.example.rubikscubetrainer.activities.PlayingOptionsActivity;
 import com.example.rubikscubetrainer.scanning.ScanningActivity;
+
+// This fragment is responsible for direct users to the playingOptionsActivity activity
+// (it's a part of a tool bar)
 
 public class HomeFragment extends Fragment {
     private Button scan;
@@ -32,7 +34,7 @@ public class HomeFragment extends Fragment {
         scan = view.findViewById(R.id.scan_button);
         play = view.findViewById(R.id.play_in_the_app_button);
         text = view.findViewById(R.id.username);
-        text.setText("Welcome, " + username + "!");
+        text.setText("Welcome, " + PlayingOptionsActivity.username + "!");
 
         scan.setOnClickListener(new View.OnClickListener() {
             @Override

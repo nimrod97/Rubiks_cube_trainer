@@ -19,6 +19,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+// This activity is responsible for showing the users who are the top-3 users that play
+// the most games in the app.
+//The suitable layout for it is the 'activity_most_play'
+
+
 public class MostPlay extends AppCompatActivity {
     private TextView first;
     private TextView second;
@@ -38,7 +43,6 @@ public class MostPlay extends AppCompatActivity {
         num2 = findViewById(R.id.num2);
         num3 = findViewById(R.id.num3);
         OkHttpClient okHttpClient = new OkHttpClient();
-//        Request request = new Request.Builder().url("http://10.100.102.24:5000/mostPlay").build();
         Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/mostPlay").build();
 
         okHttpClient.newCall(request).enqueue(new Callback() {

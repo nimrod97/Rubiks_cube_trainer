@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rubikscubetrainer.R;
 
+// This activity is responsible for explaining the users each solving method that used by the app
+//The suitable layout for it is the 'activity_solving_methods_explanation'
+
 public class SolvingMethodsExplanationActivity extends AppCompatActivity {
 
     @Override
