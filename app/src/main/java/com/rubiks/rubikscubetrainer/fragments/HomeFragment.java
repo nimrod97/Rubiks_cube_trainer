@@ -1,0 +1,55 @@
+package com.rubiks.rubikscubetrainer.fragments;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.rubiks.rubikscubetrainer.R;
+import com.rubiks.rubikscubetrainer.activities.CubeGLActivity;
+import com.rubiks.rubikscubetrainer.activities.PlayingOptionsActivity;
+import com.rubiks.rubikscubetrainer.scanning.ScanningActivity;
+
+// This fragment is responsible for direct users to the playingOptionsActivity activity
+// (it's a part of a tool bar)
+
+public class HomeFragment extends Fragment {
+    private Button scan;
+    private Button play;
+    private TextView text;
+    private View view;
+
+    @Override
+    @Nullable
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+        scan = view.findViewById(R.id.scan_button);
+        play = view.findViewById(R.id.play_in_the_app_button);
+        text = view.findViewById(R.id.username);
+        text.setText("Welcome, " + PlayingOptionsActivity.username + "!");
+
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ScanningActivity.class);
+                startActivity(intent);
+            }
+        });
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), CubeGLActivity.class);
+                startActivity(intent);
+            }
+        });
+        return view;
+    }
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rubikscubetrainer">
+    package="com.rubiks.rubikscubetrainer">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -21,13 +21,12 @@
         android:name="android.hardware.camera.any"
         android:required="true" />
 
-
     <supports-screens
-        android:smallScreens="true"
-        android:normalScreens="true"
+        android:anyDensity="true"
         android:largeScreens="true"
-        android:xlargeScreens="true"
-        android:anyDensity="true" />
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <application
         android:allowBackup="true"
@@ -37,77 +36,78 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RubiksCubeTrainer"
         android:usesCleartextTraffic="true">
+
         <activity
-            android:name="com.example.rubikscubetrainer.activities.SolvingMethodsExplanationActivity"
+            android:name=".activities.SolvingMethodsExplanationActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.activities.NotationsActivity"
+            android:name=".activities.NotationsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.scanning.ScanningActivity"
+            android:name=".scanning.ScanningActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.db.SolvingMethodsList"
+            android:name=".db.SolvingMethodsList"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.db.ToughestCubes"
+            android:name=".db.ToughestCubes"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.db.SolvedByMyself"
+            android:name=".db.SolvedByMyself"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.activities.CubeGLActivity"
+            android:name=".activities.CubeGLActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.db.MostPlay"
+            android:name=".db.MostPlay"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.db.LastGamesOfOthers"
+            android:name=".db.LastGamesOfOthers"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.db.CubeFromDB"
+            android:name=".db.CubeFromDB"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.db.MyLastGames"
+            android:name=".db.MyLastGames"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.scanning.PlayingWithScannedCube"
+            android:name=".scanning.PlayingWithScannedCube"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.activities.PlayingOptionsActivity"
+            android:name=".activities.PlayingOptionsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name="com.example.rubikscubetrainer.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

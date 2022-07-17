@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-
 }
 
 apply plugin: 'kotlin-android'
@@ -12,10 +11,10 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.rubikscubetrainer"
+        applicationId "com.rubiks.rubikscubetrainer"
         minSdk 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 9
+        versionName "4.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         minSdkVersion 26
@@ -35,7 +34,7 @@ android {
     buildFeatures {
         viewBinding true
     }
-    namespace 'com.example.rubikscubetrainer'
+    namespace 'com.rubiks.rubikscubetrainer'
     sourceSets {
         main {
             jni {
@@ -55,8 +54,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.7'
     implementation 'androidx.annotation:annotation:1.4.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
     implementation project(path: ':openCVLib')
     testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -12,13 +12,13 @@
     <TextView
         android:id="@+id/first"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lines="4"
+        android:layout_height="0dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/second"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,43 +27,29 @@
     <TextView
         android:id="@+id/second"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lines="4"
+        android:layout_height="0dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/third"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/first"
         app:layout_constraintVertical_bias="0.306" />
 
-    <TextView
-        android:id="@+id/fifth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lines="4"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.105"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fourth"
-        app:layout_constraintVertical_bias="0.869" />
 
     <TextView
         android:id="@+id/third"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lines="4"
+        android:layout_height="0dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/fourth"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/second" />
@@ -71,26 +57,42 @@
     <TextView
         android:id="@+id/fourth"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:lines="4"
+        android:layout_height="0dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/fifth"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/third"
         app:layout_constraintVertical_bias="0.686" />
 
+    <TextView
+        android:id="@+id/fifth"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fourth"
+        app:layout_constraintVertical_bias="0.869" />
+
     <Button
         android:id="@+id/button_first"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/cube"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/button_second"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
         app:layout_constraintHorizontal_bias="0.913"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -99,11 +101,12 @@
     <Button
         android:id="@+id/button_second"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/cube"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/button_third"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
         app:layout_constraintHorizontal_bias="0.913"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_first"
@@ -112,40 +115,43 @@
     <Button
         android:id="@+id/button_third"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/cube"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/button_fourth"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
         app:layout_constraintHorizontal_bias="0.913"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_second" />
 
     <Button
-        android:id="@+id/button_fifth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cube"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.913"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_fourth"
-        app:layout_constraintVertical_bias="0.873" />
-
-    <Button
         android:id="@+id/button_fourth"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/cube"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/button_fifth"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
         app:layout_constraintHorizontal_bias="0.913"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_third"
         app:layout_constraintVertical_bias="0.685" />
+
+    <Button
+        android:id="@+id/button_fifth"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/cube"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
+        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_fourth"
+        app:layout_constraintVertical_bias="0.873" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
     android:layoutDirection="ltr"
     android:orientation="vertical">
 
-    <com.example.rubikscubetrainer.GLView
+    <com.rubiks.rubikscubetrainer.GLView
         android:id="@+id/glview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
