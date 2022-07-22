@@ -5,19 +5,14 @@ import static org.opencv.imgproc.Imgproc.FONT_HERSHEY_SIMPLEX;
 import static org.opencv.imgproc.Imgproc.putText;
 import static org.opencv.imgproc.Imgproc.rectangle;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.rubiks.rubikscubetrainer.R;
 
@@ -71,29 +66,9 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
         setContentView(R.layout.activity_scanning);
         saveFaceButton = findViewById(R.id.saveFaceButton);
         faceText = findViewById(R.id.face_text);
-
-        if (isPermitted()) { // got the permission from the user
-            camera = findViewById(R.id.javaCameraView);
-            camera.setCameraPermissionGranted();
-            camera.setCvCameraViewListener(this);
-            baseLoaderCallback = new BaseLoaderCallback(this) {
-                @Override
-                public void onManagerConnected(int status) {
-                    switch (status) {
-                        case LoaderCallbackInterface.SUCCESS: {
-                            Log.d("OPENCV", "OPENCV loaded successfully");
-                            camera.enableView();
-                        }
-                        break;
-                        default: {
-                            super.onManagerConnected(status);
-                            Log.d("OPENCV", "OPENCV not loaded");
-                        }
-                        break;
-                    }
-                }
-            };
-        }
+        camera = findViewById(R.id.javaCameraView);
+        camera.setCameraPermissionGranted();
+        camera.setCvCameraViewListener(this);
         saveFaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -248,20 +223,28 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
         super.onResume();
         if (OpenCVLoader.initDebug()) {
             Log.d("OPENCV", "OpenCV loaded successfully");
+            baseLoaderCallback = new BaseLoaderCallback(this) {
+                @Override
+                public void onManagerConnected(int status) {
+                    switch (status) {
+                        case LoaderCallbackInterface.SUCCESS: {
+                            Log.d("OPENCV", "OPENCV loaded successfully");
+                            camera.enableView();
+                        }
+                        break;
+                        default: {
+                            super.onManagerConnected(status);
+                            Log.d("OPENCV", "OPENCV not loaded");
+                        }
+                        break;
+                    }
+                }
+            };
             baseLoaderCallback.onManagerConnected(BaseLoaderCallback.SUCCESS);
         } else {
             Log.d("OPENCV", "Error in loading OpenCV");
         }
 
-    }
-
-    private boolean isPermitted() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 50);
-        } else {
-            return true;
-        }
-        return false;
     }
 
 

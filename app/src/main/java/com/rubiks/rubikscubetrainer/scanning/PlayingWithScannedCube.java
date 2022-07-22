@@ -81,35 +81,52 @@ public class PlayingWithScannedCube extends FragmentActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                instructionText.setVisibility(View.INVISIBLE);
-                v.setVisibility(View.INVISIBLE);
-                solveBtn.setVisibility(View.VISIBLE);
-                undoBtn.setVisibility(View.VISIBLE);
-                glview.setMode(3);
-//                // saving the colors of the faces in the order: front,left,back,right,top,bottom faces in the db
-//                RequestBody formbody = new FormBody.Builder()
-//                        .add("colorsVector", String.join(",", glview.getGlrenderer().getCube().getColors()))
-//                        .add("username", PlayingOptionsActivity.username)
-//                        .build();
-//                Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
-//                        .post(formbody)
-//                        .build();
-//                okHttpClient.newCall(request).enqueue(new Callback() {
-//                    @Override
-//                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                    }
-//
-//                    @Override
-//                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-//                        response.close();
-//                    }
-//                });
+                // check if the cube is valid
+                String cubeString = glview.getGlrenderer().getCube().getCubeRepresentationByFaces();
+                List<String> colors = glview.getGlrenderer().getCube().getColors();
+                String[] result = new String[1];
+                RequestBody formbody = new FormBody.Builder()
+                        .add("cubeString", cubeString)
+                        .add("generatedColors", String.join(",", colors))
+                        .build();
+                Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/get_solving_steps")
+                        .post(formbody)
+                        .build();
+                okHttpClient.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    result[0] = response.body().string();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                response.close();
+                                if (!result[0].equals("error")) {
+                                    instructionText.setVisibility(View.INVISIBLE);
+                                    v.setVisibility(View.INVISIBLE);
+                                    solveBtn.setVisibility(View.VISIBLE);
+                                    undoBtn.setVisibility(View.VISIBLE);
+                                    saveCubeState(colors);
+                                    glview.setMode(3);
+                                } else
+                                    Toast.makeText(getApplicationContext(), "error, not a valid cube", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
 
             }
         });
@@ -277,30 +294,6 @@ public class PlayingWithScannedCube extends FragmentActivity {
                                 }
                                 response.close();
                                 if (!result[0].equals("error")) {
-                                    // saving the colors of the faces in the order: front,left,back,right,top,bottom faces in the db
-                                    RequestBody formbody = new FormBody.Builder()
-                                            .add("colorsVector", String.join(",", glview.getGlrenderer().getCube().getColors()))
-                                            .add("username", PlayingOptionsActivity.username)
-                                            .build();
-                                    Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
-                                            .post(formbody)
-                                            .build();
-                                    okHttpClient.newCall(request).enqueue(new Callback() {
-                                        @Override
-                                        public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                        }
-
-                                        @Override
-                                        public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                                            response.close();
-                                        }
-                                    });
                                     String[] numOfSteps = result[0].split("\n");
                                     String[] algorithms = new String[]{"Beginner, steps: " + numOfSteps[0], "CFOP, steps: " + numOfSteps[1], "Kociemba, steps: " + numOfSteps[2]};
                                     new AlertDialog.Builder(PlayingWithScannedCube.this)
@@ -321,17 +314,24 @@ public class PlayingWithScannedCube extends FragmentActivity {
                                                             break;
                                                     }
                                                     glview.getGlrenderer().setSolveFlag(true);
+                                                    saveCubeState(colors);
+                                                    try {
+                                                        Thread.sleep(1000);
+                                                    } catch (InterruptedException e) {
+                                                        e.printStackTrace();
+                                                    }
                                                     startSolving(cubeString, colors);
                                                 }
                                             })
                                             .show();
+//                                  }
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "error, not valid cube", Toast.LENGTH_SHORT).show();
-                                    glview.setMode(1);
-                                    continueBtn.setVisibility(View.VISIBLE);
-                                    instructionText.setVisibility(View.VISIBLE);
-                                    solveBtn.setVisibility(View.INVISIBLE);
-                                    undoBtn.setVisibility(View.INVISIBLE);
+                                    Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
+//                                    glview.setMode(1);
+//                                    continueBtn.setVisibility(View.VISIBLE);
+//                                    instructionText.setVisibility(View.VISIBLE);
+//                                    solveBtn.setVisibility(View.INVISIBLE);
+//                                    undoBtn.setVisibility(View.INVISIBLE);
                                 }
                             }
                         });
@@ -357,6 +357,37 @@ public class PlayingWithScannedCube extends FragmentActivity {
             }
         });
 
+    }
+
+    public void saveCubeState(List<String> colors) {
+        String override = "true";
+        if (!glview.getGlrenderer().getSolveFlag())
+            override = "false";
+        // saving the colors of the faces in the order: front,left,back,right,top,bottom faces in the db
+        RequestBody formbody = new FormBody.Builder()
+                .add("colorsVector", String.join(",", colors))
+                .add("username", PlayingOptionsActivity.username)
+                .add("override", override)
+                .build();
+        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
+                .post(formbody)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                response.close();
+            }
+        });
     }
 
     public void startSolving(String cubeString, List<String> colors) {
@@ -456,4 +487,5 @@ public class PlayingWithScannedCube extends FragmentActivity {
         });
 
     }
+
 }

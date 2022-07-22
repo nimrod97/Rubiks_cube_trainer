@@ -249,62 +249,64 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     }
 
     public void solvedByMyself() {
-        solvedByMyselfFlag = true;
-        if (mode == 0) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    CubeGLActivity.solveAloneGreeting.setVisibility(View.VISIBLE);
-                    CubeGLActivity.solveBtn.setVisibility(View.INVISIBLE);
-                    CubeGLActivity.replayBtn.setVisibility(View.VISIBLE);
-                    CubeGLActivity.backToHomeBtn.setVisibility(View.VISIBLE);
-                    CubeGLActivity.shuffleBtn.setVisibility(View.INVISIBLE);
-                    CubeGLActivity.undoBtn.setVisibility(View.INVISIBLE);
-                    CubeGLActivity.playBtn.setVisibility(View.INVISIBLE);
-                    CubeGLActivity.pauseBtn.setVisibility(View.INVISIBLE);
-                    CubeGLActivity.slider.setVisibility(View.INVISIBLE);
-                    CubeGLActivity.sliderText.setVisibility(View.INVISIBLE);
-                }
-            });
-
-        } else if (mode == 3) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    PlayingWithScannedCube.solveAloneGreeting.setVisibility(View.VISIBLE);
-                    PlayingWithScannedCube.solveBtn.setVisibility(View.INVISIBLE);
-                    PlayingWithScannedCube.replayBtn.setVisibility(View.VISIBLE);
-                    PlayingWithScannedCube.backToHomeBtn.setVisibility(View.VISIBLE);
-                    PlayingWithScannedCube.undoBtn.setVisibility(View.INVISIBLE);
-                    PlayingWithScannedCube.playBtn.setVisibility(View.INVISIBLE);
-                    PlayingWithScannedCube.pauseBtn.setVisibility(View.INVISIBLE);
-                    PlayingWithScannedCube.slider.setVisibility(View.INVISIBLE);
-                    PlayingWithScannedCube.sliderText.setVisibility(View.INVISIBLE);
-                }
-            });
-        }
-        RequestBody formbody = new FormBody.Builder()
-                .add("username", PlayingOptionsActivity.username)
-                .build();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself")
-                .post(formbody)
-                .build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+        if (!solveFlag) {
+            solvedByMyselfFlag = true;
+            if (mode == 0) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(context, "server down", Toast.LENGTH_SHORT).show();
+                        CubeGLActivity.solveAloneGreeting.setVisibility(View.VISIBLE);
+                        CubeGLActivity.solveBtn.setVisibility(View.INVISIBLE);
+                        CubeGLActivity.replayBtn.setVisibility(View.VISIBLE);
+                        CubeGLActivity.backToHomeBtn.setVisibility(View.VISIBLE);
+                        CubeGLActivity.shuffleBtn.setVisibility(View.INVISIBLE);
+                        CubeGLActivity.undoBtn.setVisibility(View.INVISIBLE);
+                        CubeGLActivity.playBtn.setVisibility(View.INVISIBLE);
+                        CubeGLActivity.pauseBtn.setVisibility(View.INVISIBLE);
+                        CubeGLActivity.slider.setVisibility(View.INVISIBLE);
+                        CubeGLActivity.sliderText.setVisibility(View.INVISIBLE);
+                    }
+                });
+
+            } else if (mode == 3) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        PlayingWithScannedCube.solveAloneGreeting.setVisibility(View.VISIBLE);
+                        PlayingWithScannedCube.solveBtn.setVisibility(View.INVISIBLE);
+                        PlayingWithScannedCube.replayBtn.setVisibility(View.VISIBLE);
+                        PlayingWithScannedCube.backToHomeBtn.setVisibility(View.VISIBLE);
+                        PlayingWithScannedCube.undoBtn.setVisibility(View.INVISIBLE);
+                        PlayingWithScannedCube.playBtn.setVisibility(View.INVISIBLE);
+                        PlayingWithScannedCube.pauseBtn.setVisibility(View.INVISIBLE);
+                        PlayingWithScannedCube.slider.setVisibility(View.INVISIBLE);
+                        PlayingWithScannedCube.sliderText.setVisibility(View.INVISIBLE);
                     }
                 });
             }
+            RequestBody formbody = new FormBody.Builder()
+                    .add("username", PlayingOptionsActivity.username)
+                    .build();
+            Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself")
+                    .post(formbody)
+                    .build();
+            okHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, "server down", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
 
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                response.close();
-            }
-        });
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    response.close();
+                }
+            });
+        }
 
     }
 
