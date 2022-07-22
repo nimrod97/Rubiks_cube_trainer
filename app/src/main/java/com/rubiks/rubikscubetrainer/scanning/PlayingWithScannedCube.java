@@ -324,14 +324,8 @@ public class PlayingWithScannedCube extends FragmentActivity {
                                                 }
                                             })
                                             .show();
-//                                  }
                                 } else {
                                     Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
-//                                    glview.setMode(1);
-//                                    continueBtn.setVisibility(View.VISIBLE);
-//                                    instructionText.setVisibility(View.VISIBLE);
-//                                    solveBtn.setVisibility(View.INVISIBLE);
-//                                    undoBtn.setVisibility(View.INVISIBLE);
                                 }
                             }
                         });
