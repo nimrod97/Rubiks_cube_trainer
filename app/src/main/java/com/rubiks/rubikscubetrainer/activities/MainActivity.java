@@ -25,6 +25,7 @@ import com.rubiks.rubikscubetrainer.R;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         signInMessage = findViewById(R.id.signin_text);
         signInButton = findViewById(R.id.signin);
         img = findViewById(R.id.cube_pic);
-        okHttpClient = new OkHttpClient();
+        okHttpClient = new OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS).readTimeout(15, TimeUnit.SECONDS).build();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -70,38 +71,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app").build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                runOnUiThread(new Runnable() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, "server down", Toast.LENGTH_SHORT).show();
-                        welcomeMessage.setText("error connecting to the server");
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            welcomeMessage.setText(response.body().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
+        // single http request for waking the server up
+        if (getIntent().getExtras() == null) {
+            Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/").build();
+            okHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    runOnUiThread(new Runnable() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, "server down", Toast.LENGTH_SHORT).show();
                         }
-                        response.close();
-                        img.setVisibility(View.VISIBLE);
-                        signInMessage.setVisibility(View.VISIBLE);
-                        signInButton.setVisibility(View.VISIBLE);
-                    }
-                });
-            }
-        });
+                    });
+                }
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            response.close();
+                        }
+                    });
+                }
+            });
+        }
     }
 
     private void signIn() {
@@ -127,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             RequestBody formbody = new FormBody.Builder()
                     .add("username", username)
                     .build();
-            Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/register_to_DB")
+            Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/register_to_DB")
                     .post(formbody)
                     .build();
             okHttpClient.newCall(request).enqueue(new Callback() {
@@ -169,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), PlayingOptionsActivity.class);
             intent.putExtra("username", username);
             startActivity(intent);
+        } else {
+            welcomeMessage.setVisibility(View.VISIBLE);
+            img.setVisibility(View.VISIBLE);
+            signInMessage.setVisibility(View.VISIBLE);
+            signInButton.setVisibility(View.VISIBLE);
         }
     }
 

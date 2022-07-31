@@ -40,7 +40,7 @@
         "Each of these moves is a 90 degree turn of the relevant pieces."
         "Each move also has a corresponding opposite move which is denoted with an apostrophe ( ' )."
         "In addition, a 180 degree turn of a face denoted with '2'. "
-        "For example, a 180 degree turn of a the up face is denoted as 'U2'."
+        "For example, a 180 degree turn of the up face is denoted as 'U2'."
     </string>
     <string name="beginner_algorithm_text">
         <b><u><font color='#FFBB86FC'>"The Beginner algorithm\n"</font></u></b>
@@ -87,5 +87,5 @@
     </string>
     <string name="close">close</string>
     <string name="open">open</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="SERVER_URL">"https://rubikscubeserver.herokuapp.com"</string>
 </resources>

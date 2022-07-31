@@ -43,7 +43,7 @@ public class MostPlay extends AppCompatActivity {
         num2 = findViewById(R.id.num2);
         num3 = findViewById(R.id.num3);
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/mostPlay").build();
+        Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/mostPlay").build();
 
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override

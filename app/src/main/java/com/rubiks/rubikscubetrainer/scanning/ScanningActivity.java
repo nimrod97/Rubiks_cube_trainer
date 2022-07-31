@@ -1,7 +1,6 @@
 package com.rubiks.rubikscubetrainer.scanning;
 
 import static org.opencv.core.Core.mean;
-import static org.opencv.imgproc.Imgproc.FONT_HERSHEY_SIMPLEX;
 import static org.opencv.imgproc.Imgproc.putText;
 import static org.opencv.imgproc.Imgproc.rectangle;
 
@@ -43,8 +42,6 @@ public class ScanningActivity extends Activity implements CvCameraViewListener2 
     private Mat mRgba;
     private Point textDrawPoint, arrowDrawPoint;
     private Scalar colorText = new Scalar(0, 0, 0, 255);
-    private Scalar colorTextBorder = new Scalar(255, 255, 255, 255);
-    private int font = FONT_HERSHEY_SIMPLEX;
     private ImageButton saveFaceButton;
     private TextView faceText;
 

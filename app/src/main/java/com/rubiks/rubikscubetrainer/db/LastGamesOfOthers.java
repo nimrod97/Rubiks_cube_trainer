@@ -73,7 +73,7 @@ public class LastGamesOfOthers extends AppCompatActivity {
         seventh_btn = findViewById(R.id.button_seventh);
         String username = PlayingOptionsActivity.username;
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/lastGamesOfOthers?username=" + username).build();
+        Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/lastGamesOfOthers?username=" + username).build();
 
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override

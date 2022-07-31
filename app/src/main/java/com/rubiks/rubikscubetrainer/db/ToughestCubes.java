@@ -59,7 +59,7 @@ public class ToughestCubes extends AppCompatActivity {
         fourth_btn = findViewById(R.id.button_fourth);
         fifth_btn = findViewById(R.id.button_fifth);
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/toughest_cubes?method=" + SolvingMethodsList.chosenMethod).build();
+        Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/toughest_cubes?method=" + SolvingMethodsList.chosenMethod).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {

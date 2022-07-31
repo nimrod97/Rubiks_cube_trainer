@@ -13,8 +13,8 @@ android {
     defaultConfig {
         applicationId "com.rubiks.rubikscubetrainer"
         minSdk 26
-        versionCode 9
-        versionName "4.1"
+        versionCode 11
+        versionName "4.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         minSdkVersion 26

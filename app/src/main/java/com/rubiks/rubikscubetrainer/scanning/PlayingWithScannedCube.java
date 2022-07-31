@@ -87,9 +87,8 @@ public class PlayingWithScannedCube extends FragmentActivity {
                 String[] result = new String[1];
                 RequestBody formbody = new FormBody.Builder()
                         .add("cubeString", cubeString)
-                        .add("generatedColors", String.join(",", colors))
                         .build();
-                Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/get_solving_steps")
+                Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/check_if_valid")
                         .post(formbody)
                         .build();
                 okHttpClient.newCall(request).enqueue(new Callback() {
@@ -119,7 +118,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
                                     v.setVisibility(View.INVISIBLE);
                                     solveBtn.setVisibility(View.VISIBLE);
                                     undoBtn.setVisibility(View.VISIBLE);
-                                    saveCubeState(colors);
+                                    saveCubeState(colors, null);
                                     glview.setMode(3);
                                 } else
                                     Toast.makeText(getApplicationContext(), "error, not a valid cube", Toast.LENGTH_SHORT).show();
@@ -268,7 +267,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
                         .add("cubeString", cubeString)
                         .add("generatedColors", String.join(",", colors))
                         .build();
-                Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/get_solving_steps")
+                Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/solve")
                         .post(formbody)
                         .build();
                 okHttpClient.newCall(request).enqueue(new Callback() {
@@ -294,7 +293,8 @@ public class PlayingWithScannedCube extends FragmentActivity {
                                 }
                                 response.close();
                                 if (!result[0].equals("error")) {
-                                    String[] numOfSteps = result[0].split("\n");
+                                    String[] solutions = result[0].split("\n");
+                                    String[] numOfSteps = {String.valueOf(solutions[0].split(",").length), String.valueOf(solutions[1].split(",").length), String.valueOf(solutions[2].split(" ").length)};
                                     String[] algorithms = new String[]{"Beginner, steps: " + numOfSteps[0], "CFOP, steps: " + numOfSteps[1], "Kociemba, steps: " + numOfSteps[2]};
                                     new AlertDialog.Builder(PlayingWithScannedCube.this)
                                             .setTitle("choose a solving method!")
@@ -314,13 +314,8 @@ public class PlayingWithScannedCube extends FragmentActivity {
                                                             break;
                                                     }
                                                     glview.getGlrenderer().setSolveFlag(true);
-                                                    saveCubeState(colors);
-                                                    try {
-                                                        Thread.sleep(1000);
-                                                    } catch (InterruptedException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    startSolving(cubeString, colors);
+                                                    // The solving scene will be called from saveCubeState
+                                                    saveCubeState(colors, solutions);
                                                 }
                                             })
                                             .show();
@@ -353,7 +348,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
 
     }
 
-    public void saveCubeState(List<String> colors) {
+    public void saveCubeState(List<String> colors, String[] solutions) {
         String override = "true";
         if (!glview.getGlrenderer().getSolveFlag())
             override = "false";
@@ -363,7 +358,7 @@ public class PlayingWithScannedCube extends FragmentActivity {
                 .add("username", PlayingOptionsActivity.username)
                 .add("override", override)
                 .build();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
+        Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/save_cube_state")
                 .post(formbody)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -380,24 +375,32 @@ public class PlayingWithScannedCube extends FragmentActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 response.close();
+                if (solutions != null)
+                    startSolving(solutions);
+
             }
         });
     }
 
-    public void startSolving(String cubeString, List<String> colors) {
-        String[] result = new String[1];
+    public void startSolving(String[] solutions) {
+        // update db with the chosen algorithm and its steps to solve
+        if (solvingMethod.equals("Kociemba"))
+            steps = solutions[2].split(" ");
+        else if (solvingMethod.equals("Beginner"))
+            steps = solutions[0].split(",");
+        else
+            steps = solutions[1].split(",");
         RequestBody formbody = new FormBody.Builder()
-                .add("cubeString", cubeString)
                 .add("username", PlayingOptionsActivity.username)
-                .add("generatedColors", String.join(",", colors))
                 .add("method", solvingMethod)
+                .add("numOfSteps", String.valueOf(steps.length))
                 .build();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solve")
+        Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/update_solving_method")
                 .post(formbody)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -407,61 +410,59 @@ public class PlayingWithScannedCube extends FragmentActivity {
             }
 
             @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                result[0] = response.body().string();
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 response.close();
-                if (!result[0].equals("error")) {
-                    if (solvingMethod.equals("Kociemba"))
-                        steps = result[0].split(" ");
-                    else
-                        steps = result[0].split(",");
+            }
+        });
+        // solving scene
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        playBtn.setVisibility(View.VISIBLE);
+                        slider.setVisibility(View.VISIBLE);
+                        sliderText.setVisibility(View.VISIBLE);
+                        undoBtn.setVisibility(View.INVISIBLE);
+                        solveBtn.setVisibility(View.INVISIBLE);
+                        solvingNotations.setText(Arrays.toString(steps));
+                        solvingNotations.setVisibility(View.VISIBLE);
+                    }
+                });
+                stepIndex = 0;
+                while (stepIndex < steps.length) {
+                    if (isPaused)
+                        while (isPaused) {
+                        }
+                    String s = steps[stepIndex];
+                    s = s.replace(" ", "");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            playBtn.setVisibility(View.VISIBLE);
-                            slider.setVisibility(View.VISIBLE);
-                            sliderText.setVisibility(View.VISIBLE);
-                            undoBtn.setVisibility(View.INVISIBLE);
-                            solveBtn.setVisibility(View.INVISIBLE);
-                            solvingNotations.setText(Arrays.toString(steps));
-                            solvingNotations.setVisibility(View.VISIBLE);
+                            StringBuilder s1 = new StringBuilder();
+                            int j;
+                            for (j = 0; j < stepIndex; j++)
+                                s1.append(steps[j]).append(", ");
+                            if (j == steps.length - 1)
+                                s1.append("<b>").append(steps[j]).append("</b>");
+                            else
+                                s1.append("<b>").append(steps[j]).append("</b>").append(", ");
+
+                            for (int k = j + 1; k < steps.length - 1; k++)
+                                s1.append(steps[k]).append(", ");
+                            if (j != steps.length - 1)
+                                s1.append(steps[steps.length - 1]);
+                            solvingNotations.setText(Html.fromHtml(s1.toString()));
                         }
                     });
-                    stepIndex = 0;
-                    while (stepIndex < steps.length) {
-                        if (isPaused)
-                            while (isPaused) {
-                            }
-                        String s = steps[stepIndex];
-                        s = s.replace(" ", "");
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                StringBuilder s1 = new StringBuilder();
-                                int j;
-                                for (j = 0; j < stepIndex; j++)
-                                    s1.append(steps[j]).append(", ");
-                                if (j == steps.length - 1)
-                                    s1.append("<b>").append(steps[j]).append("</b>");
-                                else
-                                    s1.append("<b>").append(steps[j]).append("</b>").append(", ");
-
-                                for (int k = j + 1; k < steps.length - 1; k++)
-                                    s1.append(steps[k]).append(", ");
-                                if (j != steps.length - 1)
-                                    s1.append(steps[steps.length - 1]);
-                                solvingNotations.setText(Html.fromHtml(s1.toString()));
-                            }
-                        });
-                        glview.getGlrenderer().getCube().beginRotate(s);
-                        try {
-                            Thread.sleep(rotationSpeed);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        stepIndex++;
+                    glview.getGlrenderer().getCube().beginRotate(s);
+                    try {
+                        Thread.sleep(rotationSpeed);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-
+                    stepIndex++;
                 }
                 runOnUiThread(new Runnable() {
                     @Override
@@ -476,9 +477,9 @@ public class PlayingWithScannedCube extends FragmentActivity {
                         sliderText.setVisibility(View.INVISIBLE);
                     }
                 });
-
             }
-        });
+        }).start();
+
 
     }
 

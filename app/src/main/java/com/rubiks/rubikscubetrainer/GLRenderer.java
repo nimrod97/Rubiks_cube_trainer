@@ -287,7 +287,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
             RequestBody formbody = new FormBody.Builder()
                     .add("username", PlayingOptionsActivity.username)
                     .build();
-            Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/solved_by_myself")
+            Request request = new Request.Builder().url(context.getString(R.string.SERVER_URL) + "/solved_by_myself")
                     .post(formbody)
                     .build();
             okHttpClient.newCall(request).enqueue(new Callback() {
@@ -317,7 +317,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                 .add("generatedColors", String.join(",", colors))
                 .add("override", "false")
                 .build();
-        Request request = new Request.Builder().url("https://rubiks-cube-server-oh2xye4svq-oa.a.run.app/save_cube_state")
+        Request request = new Request.Builder().url(context.getString(R.string.SERVER_URL) + "/save_cube_state")
                 .post(formbody)
                 .build();
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -326,7 +326,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "server down", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
