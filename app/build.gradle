@@ -13,9 +13,8 @@ android {
     defaultConfig {
         applicationId "com.rubiks.rubikscubetrainer"
         minSdk 26
-        versionCode 11
-        versionName "4.3"
-
+        versionCode 12
+        versionName "4.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         minSdkVersion 26
         targetSdkVersion 32
@@ -47,15 +46,15 @@ android {
 dependencies {
 
     implementation('com.google.android.gms:play-services-auth:20.2.0')
-    implementation ('com.github.bumptech.glide:glide:4.12.0')
-    annotationProcessor ('com.github.bumptech.glide:compiler:4.12.0')
+    implementation('com.github.bumptech.glide:glide:4.12.0')
+    annotationProcessor('com.github.bumptech.glide:compiler:4.12.0')
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.7'
     implementation 'androidx.annotation:annotation:1.4.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation project(path: ':openCVLib')
     testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

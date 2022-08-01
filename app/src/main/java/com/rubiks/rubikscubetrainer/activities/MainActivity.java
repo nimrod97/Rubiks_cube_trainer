@@ -71,32 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        // single http request for waking the server up
-        if (getIntent().getExtras() == null) {
-            Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/").build();
-            okHttpClient.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                    runOnUiThread(new Runnable() {
-                        @SuppressLint("SetTextI18n")
-                        @Override
-                        public void run() {
-                            Toast.makeText(MainActivity.this, "server down", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
 
-                @Override
-                public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            response.close();
-                        }
-                    });
-                }
-            });
-        }
     }
 
     private void signIn() {
@@ -116,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Toast.makeText(this, "Sign-in Successfully", Toast.LENGTH_SHORT).show();
             if (account != null)
                 username = account.getDisplayName();
             RequestBody formbody = new FormBody.Builder()
@@ -146,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
             });
+            Toast.makeText(this, "Sign-in Successfully", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, PlayingOptionsActivity.class);
             intent.putExtra("username", username);
             startActivity(intent);
@@ -157,19 +132,43 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account != null) {
-            username = account.getDisplayName();
-            Toast.makeText(this, "User already Signed-in", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), PlayingOptionsActivity.class);
-            intent.putExtra("username", username);
-            startActivity(intent);
-        } else {
-            welcomeMessage.setVisibility(View.VISIBLE);
-            img.setVisibility(View.VISIBLE);
-            signInMessage.setVisibility(View.VISIBLE);
-            signInButton.setVisibility(View.VISIBLE);
-        }
+        // http request for waking the server up
+        Request request = new Request.Builder().url(getString(R.string.SERVER_URL) + "/").build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "server down", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        response.close();
+                        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+                        if (account != null) {
+                            username = account.getDisplayName();
+                            Toast.makeText(getApplicationContext(), "User already Signed-in", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), PlayingOptionsActivity.class);
+                            intent.putExtra("username", username);
+                            startActivity(intent);
+
+                        } else {
+                            signInMessage.setText("Click to Sign-in");
+                            signInButton.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+            }
+        });
+
     }
 
 }

@@ -78,7 +78,6 @@ public class PlayingOptionsActivity extends AppCompatActivity
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(PlayingOptionsActivity.this, "User logged out successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(PlayingOptionsActivity.this, MainActivity.class);
-                        intent.putExtra("flag", 1);
                         startActivity(intent);
                     }
                 });

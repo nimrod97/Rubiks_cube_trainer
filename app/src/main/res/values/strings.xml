@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Rubik\'s cube trainer</string>
+    <string name="app_name">Rubik\'s Cube Trainer</string>
     <string name="username">Username</string>
     <string name="go">Go!</string>
     <string name="ok">OK</string>
