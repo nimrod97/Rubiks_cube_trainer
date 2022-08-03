@@ -18,7 +18,7 @@
         android:autoSizeMaxTextSize="40dp"
         android:autoSizeMinTextSize="5dp"
         android:autoSizeTextType="uniform"
-        android:text="Welcome to Rubik's cube trainer app!"
+        android:text="Welcome to Rubik's Cube Trainer App!"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textStyle="bold"

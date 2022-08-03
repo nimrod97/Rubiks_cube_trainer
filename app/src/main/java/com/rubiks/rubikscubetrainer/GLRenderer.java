@@ -217,7 +217,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
     }
 
     public void handleTouch(MotionEvent event) {
-        if (cube.getCubeRepresentationByFaces().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && !solvedByMyselfFlag)
+        if (cube.getCubeRepresentationByFaces().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && mode != 2 && !solvedByMyselfFlag)
             solvedByMyself();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -239,7 +239,7 @@ public class GLRenderer extends Activity implements GLSurfaceView.Renderer {
                     drag(new Point2f(event.getX(), event.getY()));
                 break;
             case MotionEvent.ACTION_UP:
-                if (cube.getCubeRepresentationByFaces().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && !solvedByMyselfFlag)
+                if (cube.getCubeRepresentationByFaces().equals("UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB") && !solveFlag && mode != 1 && mode != 2 && !solvedByMyselfFlag)
                     solvedByMyself();
                 isDragged = false;
                 deselectParts();
